@@ -8,7 +8,7 @@
 
 ### Ocultación de la implementación
 
-#### Versión inicial: Lista v0.1
+#### <span style="color:red">Versión inicial: Lista v0.1</span>
 
 __Abstracción__: La clase abstracta `List<T>` diferencia entre el *qué* y el *cómo*: Qué hace la lista vs. cómo se almacenan los elementos
 
@@ -40,6 +40,7 @@ Criticar la implementación siguiente:
 ##### Críticas a Lista v0.1
 
 - `List<T>` aglutina más de una responsabilidad: almacenar y recorrer. Implementación no cohesionada
+- ¿Qué hace `traverse()`? Proporciona una interfaz a los métodos que implementen el recorrido de la lista ¿para hacer qué?
 - ¿Y si hay distintas implementaciones de `traverse()`? Si implementamos varias versiones de la lista, introducimos más dependencias (acoplamiento)
 
 ##### Problemáticas de Lista v0.1
@@ -47,36 +48,9 @@ Criticar la implementación siguiente:
 - Baja __cohesión__
 - Alta __variabilidad__ no bien tratada --> poca __flexibilidad__
 
-#### Implementación alternativa: Lista v0.2
+#### <span style="color:red">Implementación alternativa: Lista v0.2</span>
 
-Delegar funcionalidad hacia las subclases (vía __herencia__).
-
-Criticar la implementación:
-
-```java
-  class ListForward<T> extends List<T> {
-    //...
-    public void traverse() { // recorrer hacia adelante };
-  }
-  class ListBackward<T> extends List<T> {
-    //...
-    public void traverse() { // recorrer hacia atras};
-  }
-```
-
-##### Críticas a Lista v0.2
-
-- ¿Qué operación hace `traverse()` con cada elemento individual (imprimir, sumar, etc.)? ¿Hay que especializar de nuevo para cada tipo de operación? 
-- ¿Y si hay que especializar de nuevo el recorrido: sólo los pares, sólo los impares, etc.? 
-
-##### Problemáticas de Lista v0.2
-
-- Elevada __complejidad__
-- Alta __variabilidad__ no bien tratada --> poca __flexibilidad__, mala __reutilización__
-
-#### Implementación alternativa: Lista v0.3
-
-Ampliamos la interfaz...
+Hay que crear nuevos tipos de recorrido. Ampliamos la interfaz...
 
 ```java
   public interface List<T> {
@@ -98,17 +72,46 @@ Ampliamos la interfaz...
   }
 ```
 
-##### Críticas a Lista v0.3
+##### Críticas a Lista v0.2
 
 - Si hay que cambiar la operación básica que hace `traverse()` con cada elemento (imprimir, sumar, etc.), ¿cuántos métodos hay que cambiar? Hay muchas dependencias
 - Cuanto más variedad de recorridos (la interfaz es mayor), menos flexibilidad para los cambios. Implementación poco flexible
 
-##### Problemáticas de Lista v0.3
+##### Problemáticas de Lista v0.2
 
-- Muchas __dependencias__ --> __acoplamiento__
+- Muchas __dependencias__ (provocadas por el exceso de herencia) --> excesivo __acoplamiento__
 - Poca __flexibilidad__
 
-#### Implementación alternativa: Lista v0.4
+
+#### <span style="color:red">Implementación alternativa: Lista v0.3</span>
+
+Delegar funcionalidad hacia las subclases (vía __herencia__).
+
+Criticar la implementación:
+
+```java
+  class ListForward<T> extends List<T> {
+    //...
+    public void traverse() { // recorrer hacia adelante };
+  }
+  class ListBackward<T> extends List<T> {
+    //...
+    public void traverse() { // recorrer hacia atras};
+  }
+```
+
+##### Críticas a Lista v0.3
+
+- ¿Hay que especializar de nuevo para cada tipo de operación que hace `traverse()` con cada elemento individual (imprimir, sumar, etc.)? 
+- ¿Y si hay que especializar de nuevo el recorrido: sólo los pares, sólo los impares, etc.? 
+
+##### Problemáticas de Lista v0.3
+
+- Elevada __complejidad__. Si hay que crear nuevos tipos de recorrido, se abusará de la [herencia como _estructura_](#ejemplo-herencia-como-estructura)
+- La __variabilidad__ no está bien tratada --> poca __flexibilidad__, mala __reutilización__
+
+
+#### <span style="color:red">Implementación alternativa: Lista v0.4</span>
 
 __Delegar__ hacia otra clase
 
@@ -137,16 +140,19 @@ __Delegar__ hacia otra clase
 ##### Ventajas
 
 - Mayor __cohesión__: Las responsabilidades están ahora separadas: `List` almacena, `Iterator` recorre. `List` está más cohesionada
-- Uso de __delegación__: la responsabilidad de recorrer se ha delegado hacia otro sitio
+- Para hacer `List` más cohesionada, se ha tenido que introducir una __dependencia__ (acoplamiento)
+- Uso de __delegación__ (o _composición_) en lugar de la herencia: la responsabilidad de recorrer se ha delegado hacia otro sitio
 
 ### <span style="color:blue">Ocultar la implementación</span>
 
 <a id="ocultacion"></a>
 
-- __Cohesión__: módulos auto-contenidos, independientes y con un
-    único propósito
-- __Acoplamiento__: minimizar dependencias entre módulos
+Los principios aplicados han sido:
+
 - __Abstracción__: diferenciar el *qué* y el *cómo*
+- __Cohesión__ (maximizar): módulos auto-contenidos, independientes y con un
+    único propósito
+- __Acoplamiento__ (minimizar): dependencias entre módulos
 - __Modularidad__: clases, interfaces y componentes/módulos
 
 #### Alta cohesión, bajo acoplamiento
@@ -179,7 +185,7 @@ Hay diversas técnicas para ocultar la implementación...
     - Todas las operaciones de la clase base están también disponibles en la derivada
 
 - **Redefinir vs. reutilizar el comportamiento**
-    - *Overriding* (redefinición): cambio de comportamiento
+    - *Overriding* (redefinición o sobreescritura): cambio de comportamiento
     - *Overloading* (sobrecarga): cambio de interfaz
 
 - **Herencia pura vs. extensión**
@@ -189,6 +195,22 @@ Hay diversas técnicas para ocultar la implementación...
 > When you inherit, you take an existing class and make a special version of it. In general, this means that you’re taking a general-purpose class and specializing it for a particular need. [...] it would make no sense to compose a car using a vehicle object —a car doesn’t contain a vehicle, it is a vehicle. The _is-a_ relationship is expressed with inheritance, and the _has-a_ relationship is expressed with composition.
 >
 > -- <cite>[Bruce Eckel](bibliografia.md#eckel)</cite>
+
+
+### <span style="color:blue">Polimorfismo</span>
+
+<a id="polimorfismo"></a>
+
+Fenómeno por el que, cuando se llama a una operación de un objeto del que no se sabe su tipo específico, se ejecuta el método adecuado de acuerdo con su tipo.
+
+El polimorfismo se basa en:
+
+- **Enlace dinámico** (_dynamic binding_): se elige el método a ejecutar en tiempo de ejecución, en función de la clase de objeto; es la implementación del *polimorfismo*
+
+- **Moldes** (_casting_)
+    - *Upcasting*: Interpretar un objeto de una clase derivada como del mismo tipo que la clase base
+    - *Downcasting*: Interpretar un objeto de una clase base como del mismo tipo que una clase derivada suya
+
 
 #### Overriding
 
@@ -365,10 +387,10 @@ Hay dos formas de contemplar la herencia:
 
 - Como **tipo**:
     - Las clases son tipos y las subclases son subtipos
-    - Las clases satisfacen la propiedad de __substitución__ (LSP, Liskov Substitution Principle): toda operación que funciona para un objeto de la clase C también debe funcionar para un objeto de una subclase de C
+    - Las clases satisfacen el principio de __sustitución__ de Liskov (LSP, _Liskov Substitution Principle_): toda operación que funciona para un objeto de la clase C también debe funcionar para un objeto de una subclase de C
 
 - Como **estructura**:
-    - La herencia se usa como una forma cualquiera de estructurar programas
+    - La herencia se usa como una forma de estructurar programas
     - Esta visión es **errónea**, pues provoca que no se satisfaga la propiedad LSP
 
 ##### Ejemplo: herencia como estructura
@@ -406,17 +428,3 @@ void f(Account a) {
   //   before + 10-1 = after
 }
 ```
-
-### <span style="color:blue">Polimorfismo</span>
-
-<a id="polimorfismo"></a>
-
-Fenómeno por el que, cuando se llama a una operación de un objeto del que no se sabe su tipo específico, se ejecuta el método adecuado de acuerdo con su tipo.
-
-El polimorfismo se basa en:
-
-- **Enlace dinámico**: se elige el método a ejecutar en tiempo de ejecución, en función de la clase de objeto; es la implementación del *polimorfismo*
-
-- **Moldes (_casting_)**
-    - *Upcasting*: Interpretar un objeto de una clase derivada como del mismo tipo que la clase base
-    - *Downcasting*: Interpretar un objeto de una clase base como del mismo tipo que una clase derivada suya
