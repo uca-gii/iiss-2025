@@ -1,0 +1,44 @@
+top to bottom direction
+scale 1024 width
+scale 650 height
+skinparam linetype ortho
+skinparam classAttributeIconSize 0
+
+class ConsoleWriter {
+  {method} print(str)
+}
+
+class UppercaseWriter {
+  {method} print(str)
+}
+
+class WithSpacesWriter {
+  {method} print(str)
+}
+
+class ChecksumWriter {
+  {method} print(str)
+}
+
+ConsoleWriter <|-- UppercaseWriter
+ConsoleWriter <|-- WithSpacesWriter 
+ConsoleWriter <|-- ChecksumWriter 
+
+UppercaseWriter <|-- UppercaseChecksumWriter
+ChecksumWriter <|.. UppercaseChecksumWriter
+WithSpacesWriter <|-- WithSpacesUppercaseWriter 
+UppercaseWriter <|.. WithSpacesUppercaseWriter 
+ChecksumWriter <|-- ChecksumUppercaseWriter 
+UppercaseWriter <|.. ChecksumUppercaseWriter 
+
+UppercaseChecksumWriter <|-- UppercaseChecksumWithSpacesWriter
+WithSpacesWriter <|.. UppercaseChecksumWithSpacesWriter
+
+WithSpacesWriter <|-- WithSpacesUppercaseWriter 
+UppercaseWriter <|.. WithSpacesUppercaseWriter 
+
+ChecksumUppercaseWriter <|-- ChecksumUppercaseWithSpacesWriter
+WithSpacesWriter <|.. ChecksumUppercaseWithSpacesWriter
+
+hide members
+show methods

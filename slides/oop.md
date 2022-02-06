@@ -610,8 +610,8 @@ Estos métodos producirían las salidas siguientes:
 
 ## Moldes o _casting_
 
-- *Upcasting*: Interpretar un objeto de una clase derivada como del mismo tipo que la clase base
-- *Downcasting*: Interpretar un objeto de una clase base como del mismo tipo que una clase derivada suya
+- *Upcasting:* Interpretar un objeto de una clase derivada como del mismo tipo que la clase base
+- *Downcasting:* Interpretar un objeto de una clase base como del mismo tipo que una clase derivada suya
 
 ---
 
@@ -766,7 +766,7 @@ class AccountWithFee extends VerboseAccount {
 
 ---
 
-- Todos los objetos $a$ de la clase `Account` deben cumplir que si $b=a.getBalance()$ antes de ejecutar $a.transferIn(s)$ y  $b´=a.getBalance()$ después de ejecutar $a.transferIn(s)$, entonces $b+s=b´$.
+- Todos los objetos $a$ de la clase `Account` deben cumplir que si $b=a.getBalance()$ antes de ejecutar $a.transferIn(s)$ y  $b'=a.getBalance()$ después de ejecutar $a.transferIn(s)$, entonces $b+s=b'$.
 - Sin embargo, con la estructura `AccountWithFee` < `VerboseAccount` < `Account`, un objeto de tipo `AccountWithFee` no funciona bien cuando se contempla como un objeto `Account`. Considérese la siguiente secuencia:
 
 ```java
@@ -867,6 +867,22 @@ object Test {
 
 ---
 
+¿Y si aparece una nueva forma de imprimir?
+
+```scala
+class ChecksumWriter extends ConsoleWriter {
+  override def print(str: String) = {
+    super.print(MessageDigest.getInstance("MD5").
+                digest(str.getBytes("UTF-8")).
+                map("%02x".format(_)).
+                mkString("[","","] ") +
+                str )
+  }
+}
+```
+
+---
+
 <style scoped>
 p {
   text-align: center;
@@ -879,6 +895,52 @@ p {
 ¡Mal uso de la herencia!
 
 ---
+
+<!--
+
+##### Ejemplo: Herencia fuera de control
+
+@startuml
+
+top to bottom direction
+scale 1024 width
+scale 650 height
+skinparam linetype ortho
+skinparam classAttributeIconSize 0
+skinparam groupInheritance 1
+
+ConsoleWriter <|-- UppercaseWriter
+ConsoleWriter <|-- WithSpacesWriter 
+ConsoleWriter <|-- ChecksumWriter 
+
+UppercaseWriter <|-- UppercaseChecksumWriter
+ChecksumWriter <|.. UppercaseChecksumWriter
+WithSpacesWriter <|-- WithSpacesUppercaseWriter 
+UppercaseWriter <|.. WithSpacesUppercaseWriter 
+
+ChecksumWriter <|-- ChecksumUppercaseWriter 
+UppercaseWriter <|.. ChecksumUppercaseWriter 
+
+ChecksumUppercaseWriter <|-- UppercaseChecksumWithSpacesWriter
+WithSpacesWriter <|.. UppercaseChecksumWithSpacesWriter
+
+ChecksumUppercaseWriter <|-- ChecksumUppercaseWithSpacesWriter
+WithSpacesWriter <|.. ChecksumUppercaseWithSpacesWriter
+
+hide members
+hide methods
+
+hide ChecksumWriter
+hide ChecksumUppercaseWriter
+hide UppercaseChecksumWriter
+hide ChecksumUppercaseWithSpacesWriter
+hide UppercaseChecksumWithSpacesWriter
+
+@enduml
+
+---
+
+-->
 
 ### Ejemplo 2 (Scala): herencia de interfaz (traits)
 
