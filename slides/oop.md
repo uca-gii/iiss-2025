@@ -354,7 +354,7 @@ El polimorfismo se basa en:
 
 ---
 
-#### Ejemplo 1 en Scala
+#### Ejemplo 1: Override en Scala
 
 ```scala hl_lines="4"
 class Complejo(real: Double, imaginaria: Double) {
@@ -371,7 +371,66 @@ class Complejo(real: Double, imaginaria: Double) {
 
 ---
 
-#### Ejemplo en Java
+### Scala Traits
+
+Un __trait__ es una forma de separar las dos principales responsabilidades de una clase: definir el __estado__ de sus instancias y definir su __comportamiento__.
+
+- Las clases y los objetos en Scala pueden extender un `trait`
+- Los `trait`de Scala son similares a las `interface` de Java.
+
+- Los `trait` no pueden instanciarse
+- Los métodos definidos en una clase tienen precedencia sobre los de un `trait`
+- Los `trait` no tienen estado propio, sino el del objeto o la instancia de la clase a la que se aplica
+
+---
+
+#### Ejemplo 2: Un iterador con Scala traits
+
+```scala hl_lines="4"
+trait Iterator[A] {
+  def hasNext: Boolean
+  def next(): A
+}
+
+class IntIterator(to: Int) extends Iterator[Int] {
+  private var current = 0
+  override def hasNext: Boolean = current < to
+  override def next(): Int =  {
+    if (hasNext) {
+      val t = current
+      current += 1
+      t
+    } else 0
+  }
+}
+
+val iterator = new IntIterator(10)
+println(iterator.next())  // prints 0
+println(iterator.next())  // prints 1
+```
+
+---
+
+<style scoped>
+p {
+  text-align: center;
+  font-size: 125%;
+  color: green;
+}
+</style>
+
+¿Y en Java no hay _traits_?
+
+---
+
+### Java default methods
+
+- Desde Java 8, las interfaces pueden incorporar [métodos por defecto](https://www.baeldung.com/java-static-default-methods) que hacen que las interfaces de Java se comporten más como un trait.
+- Sirven para implementar herencia múltiple
+
+---
+
+#### Ejemplo 3: Override en Java
 
 <style scoped>
 h4 {
@@ -480,7 +539,7 @@ Si no se añade `@Override`, podemos llegar a confundirnos y hacer sobrecarga cu
 
 ---
 
-#### Ejemplo en C#
+#### Ejemplo 4: Override en C#
 
 - `DescribeCar` muestra una descripción básica de un coche y llama a `ShowDetails` para información adicional.
 - Cada clase define su propia versión de `ShowDetails`
@@ -615,7 +674,7 @@ Estos métodos producirían las salidas siguientes:
 
 ---
 
-## Ejemplo de casting: Aventura v0.1
+### Ejemplo de casting: Aventura v0.1
 
 ```java
 public class PersonajeDeAccion {
@@ -663,14 +722,14 @@ public class Aventura {
 
 ---
 
-### Críticas a Aventura v0.1
+#### Críticas a Aventura v0.1
 
 - ¿De qué tipos van a ser los personales de acción? $\rightarrow$ problema de _downcasting_
 - Hay que rediseñar la solución por ser insegura
 
 ---
 
-## Ejemplo de casting: Aventura v0.2
+### Ejemplo de casting: Aventura v0.2
 
 ```java
 interface SabeLuchar {
@@ -742,7 +801,7 @@ h2 {
 
 ---
 
-### Ejemplo 1 (Java): herencia como estructura
+### Mal Ejemplo 1 (Java): herencia como estructura
 
 ```java
 class Account {
@@ -782,7 +841,7 @@ void f(Account a) {
 
 ---
 
-### Ejemplo 2 (Scala): herencia de implementación
+### Mal Ejemplo 2 (Scala): herencia de implementación
 
 ```scala
 abstract class Writer {
@@ -944,7 +1003,6 @@ hide UppercaseChecksumWithSpacesWriter
 
 ### Ejemplo 2 (Scala): herencia de interfaz (traits)
 
-
 ```scala
 abstract class Writer {
   def print(str: String): Unit
@@ -985,7 +1043,7 @@ A B C
 ```
 ---
 
-### Scala traits
+### Stackable traits
 
 - En Scala, los `trait` normales son como interfaces, se enlazan en tiempo de ejecución (no tienen acceso a `super`).
 - Se pueden redefinir [_stackable traits_](https://www.artima.com/articles/scalas-stackable-trait-pattern) con `abstract override` para dar acceso a `super`
@@ -993,7 +1051,17 @@ A B C
 
 ---
 
-### Ejemplo 2 (C#): rectángulos versión 0.1
+<style scoped>
+h2 {
+  text-align: center;
+}
+</style>
+
+## Implementación y diseño
+
+---
+
+### Ejemplo 3 (C#): rectángulos versión 0.1
 
 Geométricamente, un cuadrado es un rectángulo, así que usamos herencia pura (*es-un*):
 
@@ -1021,7 +1089,7 @@ public class Square: Rectangle {
 
 ---
 
-#### Problema: cuadrados como rectángulos
+### Problema: cuadrados como rectángulos
 
 - Matemáticamente, un cuadrado puede **ser-un** rectángulo.
 - Pero en Informática un objeto `Square` **no es-un** objeto `Rectangle`
@@ -1032,7 +1100,7 @@ public class Square: Rectangle {
 
 ---
 
-#### Ejemplo: rectángulos versión 0.2
+### Ejemplo: rectángulos versión 0.2
 
 ```csharp
 public class Square: Rectangle {
@@ -1127,7 +1195,7 @@ public class Square: Rectangle
 
 ---
 
-#### Extensión y ocultación de métodos
+### Extensión y ocultación de métodos
 
 - La [diferencia entre `new` y `override` en un método en C#](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/knowing-when-to-use-override-and-new-keywords) es que `new` oculta la implementación de la clase base y `override` la extiende.
 
@@ -1161,6 +1229,23 @@ El autor de `g` asumió que cambiar el ancho de un rectángulo deja intacto el a
 __Violación de LSP__: Si pasamos una instancia de una clase derivada (`Square`), se altera el comportamiento definido por la clase base (`Rectangle`) de forma que `g` deja de funcionar.
 
 ---
+
+<!-- paginate: true -->
+
+<style scoped>
+p {
+  text-align: center;
+  font-size: 125%;
+  color: green;
+}
+</style>
+
+¿Quién tiene la culpa?
+¿Diseño o implementación?
+
+---
+
+### Diseño vs implementación
 
 ¿Quién tiene la culpa?
 
