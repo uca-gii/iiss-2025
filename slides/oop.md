@@ -942,6 +942,40 @@ class ChecksumWriter extends ConsoleWriter {
 
 ---
 
+##### Ejemplo: Herencia fuera de control
+
+@startuml
+
+top to bottom direction
+scale 1024 width
+scale 650 height
+skinparam linetype ortho
+skinparam classAttributeIconSize 0
+skinparam groupInheritance 1
+
+ConsoleWriter <|-- UppercaseWriter
+ConsoleWriter <|-- WithSpacesWriter
+ConsoleWriter <|-- ChecksumWriter
+
+UppercaseWriter <|-- UppercaseChecksumWriter
+ChecksumWriter <|-- UppercaseChecksumWriter
+WithSpacesWriter <|-- UppercaseWithSpacesWriter
+WithSpacesWriter <|-- ChecksumWithSpacesWriter
+ChecksumWriter <|-- ChecksumWithSpacesWriter
+UppercaseWriter <|-- UppercaseWithSpacesWriter
+
+
+UppercaseWithSpacesWriter <|-- UppercaseChecksumWithSpacesWriter
+ChecksumWithSpacesWriter <|-- UppercaseChecksumWithSpacesWriter
+UppercaseChecksumWriter <|-- UppercaseChecksumWithSpacesWriter
+
+hide members
+hide methods
+
+@enduml
+
+---
+
 <style scoped>
 p {
   text-align: center;
@@ -955,51 +989,6 @@ p {
 
 ---
 
-<!--
-
-##### Ejemplo: Herencia fuera de control
-
-@startuml
-
-top to bottom direction
-scale 1024 width
-scale 650 height
-skinparam linetype ortho
-skinparam classAttributeIconSize 0
-skinparam groupInheritance 1
-
-ConsoleWriter <|-- UppercaseWriter
-ConsoleWriter <|-- WithSpacesWriter 
-ConsoleWriter <|-- ChecksumWriter 
-
-UppercaseWriter <|-- UppercaseChecksumWriter
-ChecksumWriter <|.. UppercaseChecksumWriter
-WithSpacesWriter <|-- WithSpacesUppercaseWriter 
-UppercaseWriter <|.. WithSpacesUppercaseWriter 
-
-ChecksumWriter <|-- ChecksumUppercaseWriter 
-UppercaseWriter <|.. ChecksumUppercaseWriter 
-
-ChecksumUppercaseWriter <|-- UppercaseChecksumWithSpacesWriter
-WithSpacesWriter <|.. UppercaseChecksumWithSpacesWriter
-
-ChecksumUppercaseWriter <|-- ChecksumUppercaseWithSpacesWriter
-WithSpacesWriter <|.. ChecksumUppercaseWithSpacesWriter
-
-hide members
-hide methods
-
-hide ChecksumWriter
-hide ChecksumUppercaseWriter
-hide UppercaseChecksumWriter
-hide ChecksumUppercaseWithSpacesWriter
-hide UppercaseChecksumWithSpacesWriter
-
-@enduml
-
----
-
--->
 
 ### Ejemplo 2 (Scala): herencia de interfaz (traits)
 
@@ -1048,6 +1037,7 @@ A B C
 - En Scala, los `trait` normales son como interfaces, se enlazan en tiempo de ejecución (no tienen acceso a `super`).
 - Se pueden redefinir [_stackable traits_](https://www.artima.com/articles/scalas-stackable-trait-pattern) con `abstract override` para dar acceso a `super`
 - `abstract` no es necesario si se redefine un método no abstracto, que ya tiene una implementación
+- En diseño, son una implementación del patrón _Decorator_ pero por composición de clases en vez de por composición de objetos
 
 ---
 

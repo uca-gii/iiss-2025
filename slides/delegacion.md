@@ -169,8 +169,8 @@ Usar polimorfismo. Seguir criticando la implementación...
 
 #### Críticas a la Orquesta v0.2
 
-- __Encapsulación__: método `add`
 - __Encapsulación__: visibilidad de `Orquesta::instrumentos` (en C++ sería `friend`)
+- __Encapsulación__: método `add`
 - __Flexibilidad__: la implementación `Orquesta::instrumentos` puede variar, pero no hay colección (agregado) en quien confíe `Orquesta` por delegación.
 
 ---
@@ -284,9 +284,7 @@ Rehacemos la implementación, aprovechando que aparece una nueva versión del le
 
 ### Implementación alternativa: Orquesta v0.5
 
-Usando delegación + interfaces y el _for each_ de Java 1.5:
-
-Criticar...
+Usando delegación + interfaces y el _for each_ de Java 1.5. Criticar...
 
 ```java
   class Orquesta {
@@ -445,6 +443,8 @@ Construimos un `Map` y lo pasamos.
 
 ```java
       Map sensors = new HashMap();
+      sensors.put(1, new Sensor());
+      sensors.put(2, new Sensor());
       ...
       Sensor s = (Sensor)sensors.get(sensorId);
 ```
@@ -452,14 +452,16 @@ Construimos un `Map` y lo pasamos.
 - JDK >= 5.0:
 
 ```java
-      Map<Sensor> sensors = new HashMap<Sensor>();
+      Map<Integer,Sensor> sensors = new HashMap<Integer,Sensor>();
+      sensors.put(1, new Sensor());
+      sensors.put(2, new Sensor());
       ...
       Sensor s = sensors.get(sensorId);
 ```
 
 ---
 
-__Conclusión__: `Map<Sensor>` ofrece más de lo que necesitamos
+__Conclusión__: `Map<Integer,Sensor>` ofrece más de lo que necesitamos
 
 ```java
       public class Sensors {
@@ -792,7 +794,7 @@ Un __mixin__ es un módulo/clase con métodos disponibles para otros módulos/cl
 - Incluye una __interfaz__ con métodos ya implementados
 - No se heredan sino que se __incluyen__
 - Un mixin es una (sub)clase, luego define un comportamiento y un __estado__
-- Es una forma de implementar el principio de inversión de dependencias (DIP)
+- Es una forma de implementar la __inversión de dependencias__
 
 ¿Qué lenguajes tienen mixins?
 
@@ -927,7 +929,7 @@ p {
 }
 </style>
 
-¿Qué ventajas tiene la opción que usa __Composición__ frente a la que usa __Herencia__ (estática)?
+¿Qué ventajas tienen las implementaciones basadas en __Composición__ frente a las basadas en __Herencia__ (estática)?
 
 ---
 
