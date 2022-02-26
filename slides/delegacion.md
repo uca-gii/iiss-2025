@@ -25,7 +25,7 @@ h2 {
 
 <!-- paginate: true -->
 
-## CASO PRÁCTICO: Implementación de una orquesta
+## CASO PRÁCTICO: Implementación de una orquesta (1)
 
 ---
 
@@ -570,7 +570,7 @@ Delegación _en horizontal_ hacia otras clases cuya interfaz es bien conocida
 
 ---
 
-## CASO PRÁCTICO: implementación de comparadores
+## CASO PRÁCTICO: implementación de comparadores (1)
 
 ---
 

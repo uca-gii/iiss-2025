@@ -32,7 +32,7 @@ p {
 </style>
 
 
-## CASO PRÁCTICO - Orquesta
+## CASO PRÁCTICO: Implementación de una orquesta (2)
 
 ---
 
@@ -171,9 +171,12 @@ Si quisiéramos probar la orquesta con otros instrumentos, tendríamos que modif
 
 ---
 
-Por ejemplo, si programamos casos de prueba unitaria con jUnit:
+Por ejemplo, si programamos **casos de prueba unitaria** con _jUnit_ (versión 3):
 
 ```java
+import junit.framework.TestCase;
+import junit.framework.Assert;
+
 public class OrquestaTest extends junit.framework.TestCase {
   public void testTocar() {
       Orquesta orquesta = new Orquesta();
@@ -186,14 +189,25 @@ public class OrquestaTest extends junit.framework.TestCase {
 }
 ```
 
+---
+
+#### Problemas:
+
 - Problema con la instanciación de instrumentos
 - Cada vez que se prueba `Orquesta`, también se prueban las subclases de `Instrumento`.
-- No se puede pedir a la orquesta que se comporte de otra forma (v.g. devolver null o elevar una excepción)
+- No se puede pedir a la orquesta que se comporte de otra forma (por ejemplo, un conjunto diferente de instrumentos)
 - Tampoco se puede cambiar la partitura que queremos probar
+
+
+### Algunos frameworks de inyección de dependencias
+
+- [Google guice](https://github.com/google/guice/wiki/GettingStarted)
+- [Spring Framework](https://www.vogella.com/tutorials/SpringDependencyInjection/article.html)
+- [Eclipse RCP](https://wiki.eclipse.org/Eclipse4/RCP/Dependency_Injection)
 
 ---
 
-#### Construcción con spring
+#### Construcción con Spring
 
 A través de un fichero de configuración `orquesta.xml` le indicamos los valores inyectables:
 
@@ -240,14 +254,14 @@ La inyección de la dependencia concreta la hace el contenedor (_spring_ en este
 ```java
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
+
 public class PruebaOrquesta {
   public static void main(String[] args) throws Exception {
     BeanFactory factory =
       new XmlBeanFactory(new FileInputStream("orquesta.xml"));
-    Orquesta orquesta =
-      (Orquesta) factory.getBean("cuarteto");
+    Orquesta orquesta = (Orquesta)factory.getBean("cuarteto");
     for (Instrumento i: orquesta)
-           orquesta.afinar(i);
+      orquesta.afinar(i);
     orquesta.tocar();
   }
 }
@@ -257,7 +271,9 @@ public class PruebaOrquesta {
 
 ## Beans
 
-Un _bean_ es una clase/componente reutilizable en Java que tiene una interfaz bien definida, según una especificación estándar de Java, que permite a un contenedor gestionar su _ciclo de vida_ (crearlos, cambiarles valores de sus propiedades, destruirlos, etc.) Los _beans_ son usados por muchos frameworks, entre otros Spring:
+Un _bean_ es una clase/componente reutilizable en Java que tiene una interfaz bien definida, según una especificación estándar de Java, que permite a un contenedor gestionar su _ciclo de vida_ (crearlos, cambiarles valores de sus propiedades, destruirlos, etc.)
+
+Los _beans_ son usados por muchos frameworks, entre otros Spring:
 
 - [Spring Bean](https://www.baeldung.com/spring-bean)
 - [Spring FactoryBean](http://www.baeldung.com/spring-factorybean)
@@ -310,11 +326,54 @@ public class MyPart {
 }
 ```
 
----
-
 La clase `MyPart` sigue usando `new` para ciertos elementos de la interfaz. Esto significa que no pensamos reemplazarlos ni siquiera para hacer pruebas.
 
-¿Es necesario usar la inyección de dependencias para especificar las partituras con que deben funcionar los instrumentos de la orquesta?
+---
+
+### Otra manera de inyectar dependencias
+
+jUnit 4 usa anotaciones para programar casos de prueba:
+
+```java
+import org.junit.*;
+import static org.junit.Assert.*;
+
+public class OrquestaTest { // no hace falta extends
+  private Orquesta orquesta;
+  @Before
+  protected void setUp() {
+      Orquesta orquesta = new Orquesta();
+      orquesta.addInstrumento(new Viento("trompeta"));
+      orquesta.addInstrumento(new Cuerda("guitarra"));
+      orquesta.addInstrumento(new Percusion("tambor"));
+  }
+  @After
+  protected void tearDown() {
+      orquesta = null;
+  }
+  @Test
+  public void testTocar() {
+      assertNotNull(orquesta.tocar());
+      assertsEquals(orquesta.tocar(),"GD7CD7G");
+  }
+}
+```
+
+---
+
+<style scoped>
+p {
+  text-align: center;
+  font-size: 125%;
+  color: green;
+}
+</style>
+
+¿Es necesario usar la inyección de dependencias para especificar las _partituras_ con las que deben funcionar los instrumentos de la _orquesta_?
+
+---
+
+## CASO PRÁCTICO: Implementación de comparadores (2)
 
 ---
 
@@ -322,10 +381,13 @@ La clase `MyPart` sigue usando `new` para ciertos elementos de la interfaz. Esto
 
 Supongamos que queremos obtener un listado ordenado por fecha de creación de todas las cuentas bancarias.
 
-¿Cómo afecta este cambio a la versión de `BankAccount` ya implementada con JDK 1.5? 
-Resolver mediante inyección de dependencias...
+¿Cómo afecta este cambio a la versión de `BankAccount` ya implementada con JDK 1.5?
+
+Resolvemos mediante inyección de dependencias...
 
 ---
+
+#### Con herencia de interfaz y delegación
 
 `BankAcccount.java`:
 
@@ -343,15 +405,12 @@ public final class BankAccount implements Comparable<BankAccount> {
     this.id = number;
     comparator = new BankAccountComparatorById();
   }
-
   public LocalDate getCreationDate() {
     return creationDate;
   }
-
   public void setCreationDate(LocalDate date) {
     this.creationDate = date;
   }
-
   public String getId() {
     return id;
   }
@@ -363,7 +422,6 @@ public final class BankAccount implements Comparable<BankAccount> {
   public void setComparator(Comparator cmp) {
     comparator = cmp;
   }
-
   @Override
   public int compareTo(BankAccount other) {
     if (this == other)
@@ -371,7 +429,6 @@ public final class BankAccount implements Comparable<BankAccount> {
     assert this.equals(other) : "compareTo inconsistent with equals.";
     return comparator.compare(this, other);
   }
-
   @Override
   public boolean equals(Object other) {
     if (this == other)
@@ -381,7 +438,6 @@ public final class BankAccount implements Comparable<BankAccount> {
     BankAccount that = (BankAccount) other;
     return this.id.equals(that.getId());
   }
-
   @Override
   public String toString() {
     return id.toString();
@@ -417,12 +473,25 @@ class BankAccountComparatorByCreationDate implements Comparator<BankAccount> {
 
 ---
 
-### Creación de anotaciones
+#### Con inyección de dependencias
+
+El motor de inyección de dependencias (por ejemplo, Spring) inyectaría la clase concreta `BankAccountComparatorBy...` de alguna de estas formas:
+
+- Inyección a través del __constructor__: la clase inyectora suministra la dependencia a través del constructor de la clase dependiente.
+
+- Inyección a través de __propiedades__: la clase inyectora suministra la dependenca a través de un método _setter_ de la clase dependiente.
+
+- Inyección a través de __métodos__: la clase inyectora suministra la dependencia a través de una API establecida por la clase dependiente, en la que se especifican el/los método(s) para suministrarla.
+
+---
+
+#### Creación de anotaciones
 
 Ahora podría definirse una anotación del tipo `@comparator(BankAccountComparatorById.className)` o `@compareById` que inyecte a `BankAccount` una dependencia `BankAccountComparatorById` en `BankAccount.comparator`.
 
+---
 
-#### Inyección de dependencias con anotaciones
+### Inyección de dependencias con anotaciones
 
 - Java: Ejemplo de cómo [crear una anotación a medida en Java](https://www.baeldung.com/java-custom-annotation)
 - Typescript: las anotaciones se llaman **decorators** y son más sencillas de programar
