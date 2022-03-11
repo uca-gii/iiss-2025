@@ -191,19 +191,72 @@ public class OrquestaTest extends junit.framework.TestCase {
 
 ---
 
-#### Problemas:
+### Problemas:
 
 - Problema con la instanciación de instrumentos
 - Cada vez que se prueba `Orquesta`, también se prueban las subclases de `Instrumento`.
 - No se puede pedir a la orquesta que se comporte de otra forma (por ejemplo, un conjunto diferente de instrumentos)
 - Tampoco se puede cambiar la partitura que queremos probar
 
+---
+
+### Solución: inyección de dependencias
+
+- Proporcionar a la `Orquesta` el conjunto de intrumentos de los que depende
+- Proporcionar a cada `Instrumento` la partitura con la que debe ejecutar
+
+---
+
+#### Opciones:
+
+Dependencia `Instrumento` $\dashrightarrow$ `Partitura`:
+
+- ¿Añadir un argumento `Partitura` a los constructores de las subclases de `Instrumento`?
+- ¿Definir métodos `Instrumento::setPartitura(Partitura p)`?
+
+Dependencia `Orquesta` $\dashrightarrow$ `Instrumento`:
+
+- ¿Añadir un argumento `Instrumento` al constructor de la `Orquesta`?
+- ¿Definir métodos `Orquesta::addInstrumento(Instrumento i)`?
+  - Esto ya lo estamos haciendo en `PruebaOrquesta` y `OrquestaTest`
+
+---
+
+<style scoped>
+p {
+  text-align: center;
+  font-size: 125%;
+  color: green;
+}
+</style>
+
+¿Quién le pone el cascabel (partitura) al gato (instrumento)?
+
+¿Quién le añade los instrumentos a la orquesta?
+
+---
+
+## Framework DI
+
+La __inyección de dependencias__ (DI) no suele hacerse de modo manual (programando una clase que lo haga), sino que se delega en una biblioteca especial (el framework DI) que lo hace, previa configuración.
+
+El framework DI inyecta dependencias de forma universal, no de modo particular a un programa específico y a las clases que lo componen.
 
 ### Algunos frameworks de inyección de dependencias
 
 - [Google guice](https://github.com/google/guice/wiki/GettingStarted)
 - [Spring Framework](https://www.vogella.com/tutorials/SpringDependencyInjection/article.html)
 - [Eclipse RCP](https://wiki.eclipse.org/Eclipse4/RCP/Dependency_Injection)
+---
+
+## Tipos de inyección
+
+- Inyección a través del __constructor__: la inyectora suministra la dependencia a través del constructor de la clase dependiente.
+
+- Inyección a través de __propiedades__: la inyectora suministra la dependenca a través de un método _setter_ de la clase dependiente.
+
+- Inyección a través de __métodos__: la inyectora suministra la dependencia a través de una API establecida por la clase dependiente, en la que se especifican el/los método(s) para suministrarla.
+
 
 ---
 
