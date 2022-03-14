@@ -548,3 +548,89 @@ Ahora podría definirse una anotación del tipo `@comparator(BankAccountComparat
 
 - Java: Ejemplo de cómo [crear una anotación a medida en Java](https://www.baeldung.com/java-custom-annotation)
 - Typescript: las anotaciones se llaman **decorators** y son más sencillas de programar
+
+---
+
+#### Ejemplo de retención de anotaciones en Java
+
+Here we will be creating 3 annotations with RetentionPolicy as SOURCE, CLASS, & RUNTIME
+
+Obtaining the array of annotations used to annotate class A, B, and C. Array a and b will be empty as their annotation are attached before runtime while array c will contain the RuntimeRetention annotation as it was marked with RUNTIME retention policy
+
+Since the class C is annotated with an annotation which which has retention policy as runtime so it can be accessed during runtime while annotations of other two classes are discarded before runtime so they can't be accessed
+
+```java
+import java.lang.annotation.Annotation;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+```
+
+---
+
+```java
+@Retention(RetentionPolicy.SOURCE)
+@interface SourceRetention
+{
+   String value() default "Source Retention";
+}
+
+@Retention(RetentionPolicy.CLASS)
+@interface ClassRetention
+{
+   String value() default "Class Retention";
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@interface RuntimeRetention
+{
+   String value() default "Runtime Retention";
+}
+```
+
+---
+
+```java
+// Annotating classes A, B, and C
+// with our custom annotations
+
+@SourceRetention
+class A {
+}
+
+@ClassRetention
+class B {
+}
+
+@RuntimeRetention
+class C {
+};
+```
+
+---
+
+```java
+public class RetentionPolicyDemo {
+   public static void main(String[] args)
+   {
+      Annotation a[] = new A().getClass().getAnnotations();
+      Annotation b[] = new B().getClass().getAnnotations();
+      Annotation c[] = new C().getClass().getAnnotations();
+
+      // Printing the number of retained annotations of
+      // each class at runtime
+      System.out.println( "Number of annotations attached to "
+         + "class A at Runtime: " + a.length);
+
+      System.out.println("Number of annotations attached to "
+         + "class B at Runtime: " + b.length);
+
+      System.out.println("Number of annotations attached to "
+         + "class C at Runtime: " + c.length);
+
+      System.out.println("Annotation attached to class C: " + c[0]);
+   }
+}
+```
+
+
+
