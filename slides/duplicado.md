@@ -134,10 +134,15 @@ public class Autonomo extends Empleado {
       System.out.print(" "+vatCode);
   }
 }
+```
+
+---
+
+```java
 public class Prueba {
   public static void main(String[] args) {
     Empleado e = new Empleado("0001", "Enrique");
-    Empleado a = new Autonomo("0001", "Ana", "12345-A");
+    Empleado a = new Autonomo("0002", "Ana", "12345-A");
     e.print();  System.out.println();
     a.print();  System.out.println();
   }
@@ -158,7 +163,8 @@ p {
 
 ---
 
-- ¿Todos los empleados deben tener un salario anual `yearlyGrossSalary` bruto? Los autónomos no...
+- ¿Todos los empleados deben tener un salario anual `yearlyGrossSalary` bruto?
+  Los autónomos no...
 - El método de cálculo del salario está descohesionado
 
 ---
@@ -170,19 +176,25 @@ public class Prueba {
   public static void main(String[] args) {
     Empleado e = new Plantilla("0001", "Pepe");
     e.setSalary(25000.0);
-    Empleado a = new Autonomo("0001", "Ana", "12345-A");
+    Empleado a = new Autonomo("0002", "Ana", "12345-A");
     a.addWorkingHours(30.0);
     e.print(); System.out.println(" Salario: "+e.computeMonthlySalary()+" EUR");
     a.print(); System.out.println(" Salario: "+a.computeMonthlySalary()+" EUR");
   }
 }
+```
 
+---
+
+```java
 public abstract class Empleado {
   /* ... */
   public abstract float computeMonthlySalary();
 }
+
 public class Plantilla extends Empleado {
   float yearlyGrossSalary;
+
   /* ... */
   float setSalary( float s ) { yearlyGrossSalary=s; }
   public float computeMonthlySalary() {
@@ -197,17 +209,21 @@ public class Plantilla extends Empleado {
 public class Autonomo extends Empleado {
   String vatCode;
   float workingHours;
+
   public Autonomo(String id, String name, String vat) {
       super(id,name);
       this.vatCode = vat;
       this.workingHours = 0.0;
   }
+  
   public void addWorkingHours(float workingHours){
     this.workingHours += workingHours;
   }
+
   public float computeMonthlySalary() {
       return workingHours*Company.getHourlyRate()*(1.0+Company.getVatRate());
   }
+
   @Override
   public void print() {
       super.print();
@@ -235,7 +251,7 @@ Hacer _refactoring_ es hacer pequeñas transformaciones en el código que mantie
 
 ### Motivos para refactoring
 
-- Código duplicado
+- **Código duplicado**
 - Rutinas demasiado largas
 - Bucles demasiado largos o demasiado anidados
 - Clases poco cohesionadas
@@ -253,6 +269,20 @@ Hacer _refactoring_ es hacer pequeñas transformaciones en el código que mantie
 >  - Hunt & Thomas. [The Pragmatic Programmer](bibliografia.md#pragmatic), 1999. Capítulo: *Refactoring*
 >  - McConnell. [Code Complete](bibliografia.md#codecomplete), 2004.
 
+---
+
+### Conceptos relacionados con el refactoring
+
+- Deuda técnica
+- Clean code vs dirty code
+- Tests unitarios
+- Code smells
+
+
+> **Lecturas recomendadas**
+>  - Refactoring Guru: [What is Refactoring?](https://refactoring.guru/refactoring/what-is-refactoring)
+>  - Refactoring Guru: [Code Smells](https://refactoring.guru/refactoring/smells)
+>  - Refactoring Guru: [Refactoring techniques](https://refactoring.guru/refactoring/techniques)
 ---
 
 <style scoped>
@@ -284,10 +314,10 @@ p {
 
 ### Causas de la duplicación
 
-- __Impuesta__: No hay elección
-- __Inadvertida__: No me he dado cuenta
-- __Impaciencia__: No puedo esperar
-- __Simultaneidad__: Ha sido otro
+1. __Impuesta__: No hay elección
+2. __Inadvertida__: No me he dado cuenta
+3. __Impaciencia__: No puedo esperar
+4. __Simultaneidad__: Ha sido otro
 
 ### Principio DRY – *Don't Repeat Yourself!*
 
@@ -299,7 +329,7 @@ by [Hunt & Thomas (1999)](bibliografia.md#pragmatic)
 
 ---
 
-### Duplicación impuesta
+## 1. Duplicación impuesta
 
 La gestión del proyecto así nos lo exige. Algunos ejemplos:
 
@@ -316,7 +346,7 @@ La gestión del proyecto así nos lo exige. Algunos ejemplos:
 
 ---
 
-#### Cómo evitaba Java la duplicación en sus _containers_
+### Cómo evitaba Java la duplicación en sus _containers_
 
 Cuando el lenguaje no tenía capacidad de usar tipos genéricos (hasta el JDK 1.4), podría aparecer la necesidad de duplicar código a la hora de implementar un TAD contenedor, pues habría que repetir todo el código de manejo del TAD para cada tipo de elemento contenido.
 
@@ -326,7 +356,7 @@ Más tarde (a partir del JDK 1.5) introdujo los tipos genéricos y ya no era nec
 
 ---
 
-#### Técnicas de solución
+### Técnicas de solución
 
 - __Generadores de código__: para evitar duplicar representaciones múltiples de la información
 - Herramientas de __ingeniería inversa__: para generar código a partir de un esquema de BD – v.g. [jeddict](https://jeddict.github.io/) para crear clases JPA, visualizar y modificar BDs y automatizar la generación de código Java EE.
@@ -350,7 +380,7 @@ p {
 
 ---
 
-#### Property-based testing
+### Property-based testing
 
 - Herramientas de *property-based testing*, como [Hypothesis](https://pypi.org/project/hypothesis/) (python), [RapidCheck](https://github.com/emil-e/rapidcheck) (C++), [jqwik](https://jqwik.net/)  (Java) o [QuickCheck](https://en.wikipedia.org/wiki/QuickCheck) (originalmente para Haskell).
 
@@ -358,7 +388,7 @@ p {
 
 ---
 
-##### Ejemplo de Hypothesis en Python
+#### Ejemplo de Hypothesis en Python
 
 Ejemplo de property-based testing con [Hypothesis](https://pypi.org/project/hypothesis/) en Python:
 
@@ -381,12 +411,12 @@ Ejemplo de property-based testing con [Hypothesis](https://pypi.org/project/hypo
 
 ---
 
-### Duplicación inadvertida
+## 2. Duplicación inadvertida
 
 - Normalmente tiene origen en un diseño inapropiado.
 - Fuente de numerosos problemas de integración.
 
-#### Ejemplo: código duplicado – versión 1
+### Ejemplo: código duplicado – versión 1
 
 ```java
   public class Line {
@@ -444,7 +474,7 @@ p {
 
 ---
 
-#### Ejemplo: aplicando memoization – versión 2
+### Ejemplo: aplicando memoization – versión 2
 
 ```java
   public class Line {
@@ -555,14 +585,16 @@ object NumerosComplejos {
 
 ---
 
-### Duplicación por impaciencia
+## 3. Duplicación por impaciencia
 
 - Los peligros del *copy&paste*
 - "Vísteme despacio que tengo prisa" (_shortcuts make for long delays_). Ejemplos:
     - Meter el `main` de Java en cualquier clase
     - Fiasco del año 2000
 
-#### Duplicación por simultaneidad
+---
+
+## 4. Duplicación por simultaneidad
 
 - No resoluble a nivel de técnicas de construcción
 - Hace falta metodología, gestión de equipos + herramientas de comunicación
