@@ -274,9 +274,9 @@ Hacer _refactoring_ es hacer pequeñas transformaciones en el código que mantie
 ### Conceptos relacionados con el refactoring
 
 - Deuda técnica
-- Clean code vs dirty code
-- Tests unitarios
-- Code smells
+- _Clean code_ vs _dirty code_
+- Tests unitarios y _Test-Driven Development_ (TDD)
+- Tufo o _code smells_
 
 
 > **Lecturas recomendadas**
@@ -362,7 +362,7 @@ Más tarde (a partir del JDK 1.5) introdujo los tipos genéricos y ya no era nec
 - Herramientas de __ingeniería inversa__: para generar código a partir de un esquema de BD – v.g. [jeddict](https://jeddict.github.io/) para crear clases JPA, visualizar y modificar BDs y automatizar la generación de código Java EE.
 - __Plantillas__: Tipos genéricos del lenguaje (Java, C++, TypeScript, etc.) o mediante un motor de plantillas – v.g. [Apache Velocity](http://velocity.apache.org/) template language ([VTL](http://velocity.apache.org/engine/2.0/user-guide.html#velocity-template-language-vtl-an-introduction))
 - __Metadatos__: Anotaciones @ en Java, decoradores en TypeScript, etc.
-- Herramientas de __documentación__ (v.g. [asciidoctor](http://asciidoctor.org/): [inclusión de ficheros](http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/#include-files) y [formateo de código fuente](http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/#source-code)).
+- Herramientas de __documentación__ (v.g. [asciidoctor](http://asciidoctor.org/): [inclusión de ficheros](https://docs.asciidoctor.org/asciidoc/latest/directives/include/)).
 - Herramientas de __[programación literaria](http://www.literateprogramming.com/)__
 - Ayuda del __IDE__
 
