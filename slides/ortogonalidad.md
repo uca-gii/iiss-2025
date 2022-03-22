@@ -52,7 +52,7 @@ Dos componentes A y B son ortogonales ($A \perp B$) si los cambios en uno no afe
 - Es más fácil escribir un componente pequeño y auto-contenido que un bloque muy grande de código. El tiempo de desarrollo y __pruebas__ se reduce
 - Se pueden combinar unos componentes con otros más fácilmente. Mayor __reutilización__.
 - En teoría, si $A \perp B$, el componente A sirve para $m$ propósitos y B sirve para $n$, entonces $A \cup B$ sirve para $m \times n$ propósitos.
-- La falta de cohesión perjudica la reutilización --> ¿y si hay que hacer una nueva versión gráfica de una aplicación de línea de comandos que lleva incrustada la escritura en consola con `System.out.println`? Pueden descohesionar!
+- La falta de cohesión perjudica la reutilización ⟶  ¿y si hay que hacer una nueva versión gráfica de una aplicación de línea de comandos que lleva incrustada la escritura en consola con `System.out.println`? Pueden descohesionar!
 
 ---
 
@@ -203,7 +203,7 @@ Este tipo de interfaces como la del API de streams de Java se conoce como [_flue
 
 ##### Críticas
 
-- Multiplicidad de dependencias: `plotDate` $\dashrightarrow$ `Selection`, `Recorder`, `Location`, `TimeZone`.
+- Multiplicidad de dependencias: `plotDate` ⟶ `Selection`, `Recorder`, `Location`, `TimeZone`.
 - Si cambia la implementación de `Location` de forma que ya no incluye directamente una `TimeZone`, hay que cambiar `plotDate`
 - Añadir un método *delegado* `getTimeZone` a `Selection`. Así `plotDate` no se entera de si la `TimeZone` le llega desde `Recorder` o desde un objeto contenido en `Recorder`.
 
@@ -216,7 +216,7 @@ Este tipo de interfaces como la del API de streams de Java se conoce como [_flue
   plotDate(someDate, someSelection.getTimeZone());
   ```
 
-  Ahora `plotDate` $\dashrightarrow$ `Selection`, `TimeZone`, pero se han eliminado las restantes dependencias.
+  Ahora `plotDate` ⟶ `Selection`, `TimeZone`, pero se han eliminado las restantes dependencias.
 
 - Costes de espacio y ejecución de métodos *wrapper* que reenvían la petición al objeto delegado: violar la ley de Demeter para mejorar el __rendimiento__
 - Otros ejemplos de mejora del rendimiento: desnormalización de BBDD
