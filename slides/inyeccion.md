@@ -1,7 +1,7 @@
 ---
 marp: true
-title: Apuntes DSS 2021
-description: Apuntes de Diseño de Sistemas Software, curso 2020/21
+title: Apuntes IISS 2022
+description: Apuntes de Implementación e Implantación de Sistemas Software, curso 2021/22
 ---
 
 <!-- size: 16:9 -->
