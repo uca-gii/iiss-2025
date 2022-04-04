@@ -68,11 +68,13 @@ class Point implements FigureElement {
 
 ---
 
-Hay que actualizar la pantalla tras mover los objetos
+Hay que actualizar la pantalla tras mover los objetos:
 
-![figuras en pantalla](./figuras/aspectj-1.png)
+![figuras en pantalla](./img/aspectj-1.png)
 
 Hay una colección de figuras que cambian periódicamente. Se deben monitorizar los cambios para refrescar el display.
+
+---
 
 ```java
 class Line {
@@ -116,6 +118,8 @@ Implementamos `MoveTracking`.  ¿Qué dependencias aparecen?
 - `Point` $\dashrightarrow$ `MoveTracking`
 
 ### Implementación sin aspectos
+
+Primero vemos una implementación con las dependencias anteriores, y sin aspectos...
 
 ---
 
@@ -378,6 +382,8 @@ class Point {
   }
 }
 ```
+
+Vamos a eliminar las dependencias, gracias a la implementación de aspectos...
 
 ---
 
