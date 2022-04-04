@@ -62,7 +62,7 @@ Dos componentes A y B son ortogonales ($A \perp B$) si los cambios en uno no afe
 - El tiempo de desarrollo y __pruebas__ se reduce
 - Se pueden combinar unos componentes con otros más fácilmente. Mayor __reutilización__.
 - En teoría, si $A \perp B$, el componente A sirve para $m$ propósitos y B sirve para $n$, entonces $A \cup B$ sirve para $m \times n$ propósitos.
-- La falta de cohesión perjudica la reutilización ⟶  ¿y si hay que hacer una nueva versión gráfica de una aplicación de línea de comandos que lleva incrustada la escritura en consola con `System.out.println`? Pueden descohesionar!
+- La falta de cohesión perjudica la reutilización ⟶  ¿y si hay que hacer una nueva versión gráfica de una aplicación de línea de comandos que lleva incrustada la escritura en consola con `System.out.println`? ¡Puede descohesionar!
 
 ---
 
