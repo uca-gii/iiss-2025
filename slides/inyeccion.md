@@ -246,6 +246,7 @@ El framework DI inyecta dependencias de forma universal, no de modo particular a
 
 - [Google guice](https://github.com/google/guice/wiki/GettingStarted)
 - [Spring Framework](https://www.vogella.com/tutorials/SpringDependencyInjection/article.html)
+- [Weld CDI](http://weld.cdi-spec.org/)
 - [Eclipse RCP](https://wiki.eclipse.org/Eclipse4/RCP/Dependency_Injection)
 ---
 
