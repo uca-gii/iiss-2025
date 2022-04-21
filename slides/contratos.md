@@ -107,7 +107,7 @@ java [ -disableassertions | -da ] [:<package name>"..." | :<class name> ]
 
 #### ¿Gestión de errores?
 
-Las aserciones no son para gestión de errores:
+Las aserciones no son un mecanismo de tratamiento de errores:
 
 ```java
 try {
@@ -143,6 +143,8 @@ while (Iterator i.hasNext() {
   // ...
 }
 ```
+
+¿Por qué? En Java, los objetos (y las estructuras de datos) no son inmutables.
 
 ---
 
@@ -229,15 +231,13 @@ void foo() {
 }
 ```
 
----
-
 #### Invariantes de clase
 
-Son un tipo de invariantes internas que se aplican a todas las instancias de una clase, en todos los momentos, excepto cuando una instancia está en transición de un estado consistente a otro.
-
-Por ejemplo, en un árbol binario equilibrado, una invariante de clase puede indicar que está ordenado y equilibrado:
+Son un tipo de invariantes __internas__ que se aplican a todas las instancias de una clase, en todos los momentos, excepto cuando una instancia está en transición de un estado consistente a otro.
 
 ---
+
+Por ejemplo, en un árbol binario equilibrado, una invariante de clase puede indicar que está ordenado y equilibrado:
 
 1. Añadir código en Java:
 
@@ -251,6 +251,12 @@ Por ejemplo, en un árbol binario equilibrado, una invariante de clase puede ind
 2. Todo constructor y método _público_ debe llamar a `assert isBalanced();` antes del `return`.
 
 Es recomendable incluir comprobaciones de invariantes de clase al principio de los métodos de clases cuyo estado es modificable por otras clases (v.g. _setters_).
+
+---
+
+### Inmutabilidad e invariantes
+
+La __inmutabilidad__ en los objetos (y estructuras de datos) es una garantía de que se cumplan las invariantes de clase.
 
 <!--
 
@@ -322,6 +328,8 @@ p {
 - Qué garantiza la rutina: estado del mundo cuando la rutina/método termina
 - Implica que la rutina debe finalizar: no puede haber bucles infinitos
 
+---
+
 **Invariante de clase**
 
 - Condición que se cumple para todas las instancias de la clase, desde la perspectiva del llamador
@@ -353,7 +361,8 @@ Si el usuario introduce un número negativo en la consola, es responsabilidad de
 - Emitir una advertencia y leer otro número
 - Pasar el número a complejo (ponerlo  en positivo y añadir una _i_)
 
-Si se llega a pasar un número negativo, Eiffel imprime el error `sqrt_arg_must_be_positive` en tiempo de ejecución y una traza de la pila (En otros lenguajes, como Java, se devolvería un `NaN`).
+Si se llega a pasar un número negativo, Eiffel imprime el error `sqrt_arg_must_be_positive` en tiempo de ejecución y una traza de la pila.
+En otros lenguajes, como Java, se devolvería un `NaN`.
 
 ---
 
@@ -501,11 +510,12 @@ end -- class ACCOUNT
 
 - _iContract_, inactiva, recuperada en Java Contract Suite o [JContractS](http://jcontracts.sourceforge.net/)
 - _Contracts for Java_ o [Cofoja](https://github.com/nhatminhle/cofoja)
+- Usar [ApectJ Oval](https://sebthom.github.io/oval/USERGUIDE.html#programming-by-contract) para programar contratos
 - Etc.
 
 ---
 
-**Actividad: Contratos en Scala**
+**Contratos en Scala**
 
 - Scala permite especificar aserciones (`assert`), precondiciones (`require`), postcondiciones (`ensuring`) e invariantes (`assume`).
 - Ejemplo:
@@ -513,18 +523,19 @@ end -- class ACCOUNT
   def divide(x: Int, y: Int): Int = {
     require(x > y, s"$x > $y")
     require(y > 0, s"$y > 0")
-
     x / y
   } ensuring (_ * y == x)
   ```
-- Seguir el tutorial [Design by Contract](https://madusudanan.com/blog/scala-tutorials-part-29-design-by-contract/)
+- Ejercicio: completar el tutorial en Scala sobre [Design by Contract](https://madusudanan.com/blog/scala-tutorials-part-29-design-by-contract/).
 
 ---
 
-**Actividad: ¿Hay contratos en C++?**
+**¿Hay contratos en C++?**
 Aún no hay contratos en C++17 ni en C++20.
 
-- Ver el video de J. D. García sobre [Contracts programming after C++17](https://www.youtube.com/watch?v=IBas3S2HtdU): Desde el minuto 4'10''
+- Actividad: Ver el video de J. D. García sobre [Contracts programming after C++17](https://www.youtube.com/watch?v=IBas3S2HtdU): Desde el minuto 4'10''
+
+---
 
 #### Ejemplo: Java + iContract
 
@@ -555,9 +566,8 @@ public class OrderedList {
 
 ---
 
-Una postcondición puede necesitar expresarse con parámetros pasados a un método para verificar un comportamiento correcto.
-
-Si el método puede cambiar el valor del parámetro pasado (parámetro mutable), el contrato puede incumplirse.
+- Una postcondición puede necesitar expresarse con parámetros pasados a un método para verificar un comportamiento correcto.
+- Si el método puede cambiar el valor del parámetro pasado (parámetro mutable), el contrato puede incumplirse.
 
 ---
 
@@ -568,6 +578,7 @@ Si el método puede cambiar el valor del parámetro pasado (parámetro mutable),
 - Opciones en Java:
     - Usar `final` para marcar un parámetro constante. Sin embargo, las subclases podrían redefinir los parámetros y volver a hacerlos mutables. Además `final` se aplica a la referencia, no al objeto en sí.
     - Usar `variable@pre` de _iContract_
+- Scala diferencia entre `val`y `var`
 - Muchos lenguajes funcionales (Lisp, Haskell, Erlang, Clojure, etc.) definen inmutabilidad por defecto
 
 ---
@@ -586,10 +597,9 @@ Si el método puede cambiar el valor del parámetro pasado (parámetro mutable),
 
 ### _Dead programs tell no lies_
 
-El diseño y la programación basada en contratos son una forma de incrementar la calidad del código mediante
-_early crash_.
+El diseño y la programación basada en contratos son una forma de incrementar la __calidad__ del código mediante _early crash_.
 
-Hay otras técnicas (que veremos más adelante), pero en general el principio básico es: cuando el código descubre que sucede algo que supuestamente es imposible o "no debería suceder", el programa ya no es viable: eutanasia.
+Hay otras técnicas, pero en general el principio básico es: cuando el código descubre que sucede algo que supuestamente es imposible o "no debería suceder", el programa ya no es viable: eutanasia.
 
 - En Java se lanza una `RuntimeException` cuando sucede algo extraño en tiempo de ejecución.
 - Se puede/debe hacer lo mismo con cualquier lenguaje
@@ -697,7 +707,7 @@ Without a contract, all the compiler can do is ensure that a subclass conforms t
 
 Los métodos de clase declaran *precondiciones* y *postcondiciones* al redefinir una operación en una subclase derivada.
 
-- Las **precondiciones** sólo pueden sustituirse por otras más débiles/laxas. Los métodos pueden redefinirse con implementaciones que _aceptan_ un rango _más amplio_ de entradas.
-- Las **postcondiciones** sólo pueden sustituirse por otras más fuertes/estrictas. Los métodos pueden redefinirse con implementaciones que _generan_ un rango _más estrecho_ de salidas.
+- Las **precondiciones** sólo pueden sustituirse por otras más débiles/laxas. Los métodos pueden redefinirse con implementaciones que **aceptan un rango más amplio de entradas**.
+- Las **postcondiciones** sólo pueden sustituirse por otras más fuertes/estrictas. Los métodos pueden redefinirse con implementaciones que **generan un rango más estrecho de salidas**.
 - Las **invariantes** sólo pueden sustituirse por otras más fuertes/estrictas. Las clases e interfaces pueden _derivarse_ para _restringir_ el conjunto de estados válidos. Un objeto debe tener un estado _consistente_ con cualquiera de sus superclases o interfaces.
 
