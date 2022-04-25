@@ -545,7 +545,7 @@ object Demo {
 
 ---
 
-__Ejemplo en Java 8 con sintaxis imperativa__
+#### Ejemplo en Java 8 con sintaxis imperativa
 
 ```java
 private static Optional<Double> getDurationOfAlbumWithName(String name) {
@@ -574,7 +574,7 @@ private static Optional<Double> getDurationOfAlbumWithName(String name) {
 
 Al ejecutar varias operaciones seguidas que pueden devolver null, el nivel de anidamiento del código aumenta y queda menos claro (se mezcla código funcional con código de gestión de errores). Solución...
 
-__Ejemplo en Java 8 con sintaxis *fluent*__
+#### Ejemplo en Java 8 con sintaxis *fluent*
 
 ```java
 Optional<Double> getDurationOfAlbumWithName(String name) {
@@ -591,6 +591,8 @@ La función `map` comprueba si el `Optional` que recibe está vacío. Si lo est�
 Esto sirve para concatenar operaciones sin necesidad de comprobar en cada momento si el `Optional` está vacío.
 
 Cuando queremos encadenar distintas operaciones que devuelvan `Optional`, es necesario usar `flatMap`, ya que si no acabaríamos teniendo un `Optional<Optional<Double>>`.
+
+Pero... `getDurationOfAlbumWithName()` devuelve un `Optional<Double>`. ¿No debería mejor devolver un `double`?
 
 ---
 
@@ -609,7 +611,29 @@ Para ello se usa `orElse()` para proporcionar un valor alternativo en caso de qu
 
 ---
 
-__Ejemplo sin `Optional`__: Programa de prueba
+#### Ejemplo del API Streams en Java:
+
+```java
+import java.util.List;
+import java.util.Arrays;
+...
+
+List<String> myList = Arrays.asList("a1", "a2", "b1", "c2", "c1");
+
+myList.stream()
+  .filter(s -> s.startsWith("c"))
+  .map(String::toUpperCase)
+  .sorted()
+  .forEach(System.out::println);
+
+myList.stream()
+  .reduce( (a,b) -> a + " " + b )
+  .ifPresent(System.out::println);
+```
+
+---
+
+#### Ejemplo sin `Optional`: Programa de prueba
 
 ```java
 public class MobileTesterWithoutOptional {
@@ -633,9 +657,6 @@ public class MobileTesterWithoutOptional {
 ```
 
 ---
-
-Demasiadas dependencias: `MobileService` ⟶ `DisplayFeatures`, `ScreenResolution`
-
 
 Cantidad de código _boilerplate_ para comprobar los nulos en la clase principal:
 
@@ -727,7 +748,7 @@ public class Mobile {
 
 ---
 
-__Ejemplo con `Optionals`__: Uso de métodos de `Optional` en el programa de prueba:
+#### Ejemplo con `Optionals`: Uso de `Optional` en el programa de prueba
 
 ```java
 public class MobileTesterWithOptional {
@@ -826,6 +847,8 @@ public class Mobile {
 - Por tanto, no son apropiados para métodos en los que pueden salir varias cosas mal y no solo una (que no exista un valor a devolver)
 - Lenguajes como Scala proponen alternativas como `Either` y `Validation`.
 
+Lecturas para ampliación: clase [Validation en Scala](https://www.innoq.com/en/blog/validate-your-domain-in-scala/)
+
 ---
 
 **Ejemplo: División por cero**
@@ -847,3 +870,5 @@ object EitherLeftRightExample extends App {
 
 }
 ```
+
+__Nota__: No hay implementaciones de `Either` en el JDK, pero sí en extensiones funcionales a Java (v.g. [functionaljλvλ](http://www.functionaljava.org/))

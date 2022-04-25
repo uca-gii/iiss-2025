@@ -429,7 +429,7 @@ create
     make
 feature
     -- ... Attributes as before:
-      balance, minimum_balance, owner, open ...
+    balance, minimum_balance, owner, open ...
     deposit (sum: INTEGER) is
     -- Deposit sum into the account.
       require
@@ -578,7 +578,7 @@ public class OrderedList {
 - Opciones en Java:
     - Usar `final` para marcar un parámetro constante. Sin embargo, las subclases podrían redefinir los parámetros y volver a hacerlos mutables. Además `final` se aplica a la referencia, no al objeto en sí.
     - Usar `variable@pre` de _iContract_
-- Scala diferencia entre `val`y `var`
+- Scala: diferencia entre `val`y `var`
 - Muchos lenguajes funcionales (Lisp, Haskell, Erlang, Clojure, etc.) definen inmutabilidad por defecto
 
 ---
@@ -587,11 +587,6 @@ public class OrderedList {
 
 - Por rendimiento (v.g. `String` en Java): si es inmutable, para copiar un objeto basta con copiar la referencia (_interning_)
 - Por _thread-safety_ para código concurrente
-
-### Código perezoso
-
-- Se recomienda escribir código "perezoso" para los contratos: ser estricto en lo que se acepta al empezar y prometer lo menos posible al terminar.
-- Si un contrato indica que se acepta cualquier cosa y promete la luna a cambio, ¡habrá que escribir un montón de código!
 
 ---
 
@@ -698,10 +693,17 @@ Without a contract, all the compiler can do is ensure that a subclass conforms t
 
 ---
 
+### Código perezoso
+
+- Se recomienda escribir código "perezoso" para los contratos: ser estricto en lo que se acepta al empezar y prometer lo menos posible al terminar.
+- Si un contrato indica que se acepta cualquier cosa y promete la luna a cambio, ¡habrá que escribir un montón de código!
+
+
 ### Redefinición de contratos
 
 > A routine redeclaration [in a derivative] may only replace the original precondition by one equal or weaker, and the original post-condition by one equal or stronger
 > --Bertrand Meyer
+
 
 ---
 
