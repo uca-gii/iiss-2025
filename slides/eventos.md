@@ -562,11 +562,9 @@ Estrategias para escribir aplicaciones basadas en eventos:
 
 ### 1. Máquinas de estados
 
-- Una FSM es una especificación de cómo manejar eventos.
-- Lista de estados + estado actual
-- Para cada estado, transiciones a otros estados significativos
-- Las transiciones vienen definidas por **eventos**
-- Cada transición delimita una acción con la respuesta a cada evento
+Una FSM es una especificación de cómo manejar eventos
+
+![FSM](./img/fsm.png)
 
 ---
 
@@ -581,12 +579,25 @@ Las acciones de callback son gestionadas por los observables, que suele mantener
 
 ---
 
+__Estructura del patrón Observer:__
+
+![Observer](./img/observer-class.png)
+
+
+---
+
+__Comportamiento del patrón Observer:__
+
+![Observer](./img/observer-seq.png)
+
+---
+
 ### 3. PubSub
 
-- Los sistemas de PubSub son Observers generalizados.
-- Los publicadores y los suscriptores se conectan por **canales**
-- Suelen implementarse en bibliotecas aparte de mensajería o _Message Queues_ (MQ)
-- Cada canal tiene un nombre, empleado por publicadores y sucriptores para desacoplarse entre sí
+- Los sistemas de _PubSub_ son _observers_ generalizados
+- Los publicadores y los suscriptores se conectan por **canales** o **colas**
+- Suelen implementarse en bibliotecas de mensajería o _**Message Queues**_ (MQ)
+- Cada **canal** tiene un nombre, empleado por publicadores y sucriptores para desacoplarse entre sí
 - La comunicación puede hacerse asíncrona
 
 ---
@@ -655,7 +666,7 @@ Los Observables se pueden:
 
 ¿Qué añade un Observable al patrón Observer?
 
-Añade a un Observer asíncrono la semántica de un _Iterable_ síncrono:
+Añade a un __Observer asíncrono__ la semántica de un __Iterable síncrono__:
 
 - `onCompleted()`: para que el publicador avise al suscriptor que no hay más datos disponibles en el stream (los Iterables simplemente acaban su iteración)
 - `onError()`: para que el productor avise al suscriptor que ha ocurrido un error (en su lugar, los Iterables elevan excepciones)
@@ -669,6 +680,7 @@ Añade a un Observer asíncrono la semántica de un _Iterable_ síncrono:
 - Spark Streaming
 - Amazon Kinesis
 - Apache Pulsar
+- Etc.
   
 ---
 
