@@ -30,7 +30,17 @@ p {
 }
 </style>
 
-## LISTENERS
+## Listeners
+
+---
+
+### Manejo de eventos
+
+Un _listener_ o _event handler_ es una subrutina para retrollamadas (_callbacks_) que gestiona la entrada recibida como respuesta a un evento generado por el framework para el que está hecho un programa.
+
+- Los eventos pueden representar acciones de usuario, vencimiento de temporizadores, disponibilidad de mensajes o datos, etc.
+- El framework puede ser parte del sistema operativo, del entorno de programación, etc.
+- En POO, se implementan como _Observers_. En FP, se implementan como lambdas.
 
 ---
 
@@ -142,19 +152,24 @@ Aumentar la aridad de la función no bloqueante en 1 argumento adicional (la __r
 
 ![Paso de callback](./img/cont-callback.png)
 
+La lógica de continuación se indica mediante una función de **retrollamada** o _callback_
+
 ---
 
 ## Callbacks
 
 ---
 
-La lógica de continuación se indica mediante una función de **retrollamada** o _callback_
+Una retrollamada es cualquier referencia a un trozo de código ejecutable (función) que se pasa como argumento a otro trozo de código (función). Se espera que esta segunda función vuelva a llamar (call back) a la primera como parte de su tarea.
 
-__Ejemplos__ de callbacks: Implementaciones anteriores de _listeners_
+__Ejemplos__ de callbacks: Diversas implementaciones de _listeners_
 
-- Con clases anónimas
-- Con adaptadores
-- Con lambdas
+- Clases anónimas (como adaptadores)
+- Expresiones lambda
+- Subrutinas
+- Punteros a función
+- Bloques
+- Etc.
 
 ---
 
@@ -230,7 +245,7 @@ El uso de callbacks hace el código complejo, repetitivo y difícil de entender,
 
 ---
 
-## Promesas y Futuros
+## Promesas
 
 ---
 
@@ -254,8 +269,6 @@ Los futuros y promesas sirven para desacoplar un valor (el futuro) de cómo ést
 El cliente recibe como respuesta inmediata una __abstracción de datos__ (la `Promise`) que representa un compromiso de valor futuro, con __inyectores__ (`then`, `catch`) para incluir la __lógica de continuación__.
 
 Las promesas se pueden __resolver__ (_resolve_) o __rechazar__ (_reject_)
-
-Se pueden encadenar cálculos usando __futuros__ _computables_ o _escuchables_, que sirven para indicar a un __thread__ que ejecute una determinada tarea y, cuando termine, se dirija a hacer otra tarea usando el resultado de la tarea anterior.
 
 ---
 
@@ -365,8 +378,8 @@ __Salida__:
 
 - Una promesa tiene un método `then()` que...
 
-    - recibe una función, que será ejecutada automáticamente cuando la promesa se resuelva. Esta función recibirá como parámetro el valor de la promesa (el resultado esperado).
-    - devuelve una nueva promesa, que se resolverá cuando se ejecute la función que le habíamos asociado.
+    - recibe una __función__, que será ejecutada automáticamente cuando la promesa se resuelva. Dicha función recibirá como parámetro el valor de la promesa (el resultado esperado).
+    - devuelve una __nueva promesa__, que se resolverá cuando se ejecute la función que le habíamos asociado.
 
 - Se pueden encadenar varios `.then()` para simular un código secuencial, conforme se van resolviendo promesas.
 
@@ -374,25 +387,25 @@ __Salida__:
 
 **Inyectores:**
 
-- Una promesa tiene un método `catch()`:
+- Una promesa tiene un método `catch()` que:
 
-    - Se puede agregar la gestión de errores de cualquier parte de la cadena de llamadas asíncronas con un solo `.catch()`
-    - `.catch()` devuelve una promesa nueva, creando una cadena de promesas
-    - Cualquier error síncrono generado en un `then` o un `catch` hace que la promesa se rechace, y se llame al `catch` más apropiado
+  - recibe una __función__, que será ejecutada automáticamente cuando la promesa se rechace. 
+  - devuelve una __nueva promesa__, creando una cadena de promesas
+
+- Se puede agregar la gestión de errores de cualquier parte de la cadena de llamadas asíncronas con un solo `.catch()`
+- Cualquier error síncrono generado en un `then` o un `catch` hace que la promesa se rechace, y se llame al `catch` más apropiado
 
 ---
 
-### Sintaxis `async`/`await`
+### Sintaxis async/await
 
 - El prefijo `await` hace que se espere a que se llame a la función asíncrona antes de continuar con la ejecución del programa.
 - Esto genera un flujo de ejecución de la lógica del programa más fácil de leer y de seguir, pausando la ejecución hasta que se cumpla la promesa.
 
----
-
 `async`/`await` es azúcar sintáctico para usar promesas con una nueva sintaxis que las oculta y las hace parecer código síncrono:
 
-  - `await` delante de una llamada a una función entiende que esa función retorna una promesa.
-  - La ejecución se pausa y sólo se reanuda cuando la promesa haya sido resuelta.
+  - Un `await` delante de una llamada a función entiende que esa función devuelve una promesa.
+  - La ejecución se pausa y sólo se reanuda cuando la promesa se haya resuelto.
   - Entonces `await` devuelve como resultado el valor de la promesa.
 
 ---
@@ -407,7 +420,7 @@ async function main() {
 }
 ```
 
-Comparar la versión asíncrona con la versión síncrona inicial:
+Comparar la versión asíncrona async/await con la versión síncrona inicial:
 
 ```javascript
 function main() {
@@ -418,7 +431,9 @@ function main() {
 ```
 ---
 
-### Futuros
+## Futuros
+
+---
 
 Recordemos los [futuros y promesas](https://en.wikipedia.org/wiki/Futures_and_promises) en wikipedia...
 
@@ -429,12 +444,16 @@ Los futuros y promesas sirven para desacoplar un valor (el futuro) de cómo ést
 
 ---
 
-#### Futuros en Java
+### Futuros en Java
 
 En Java hay definida una interfaz explícita para los futuros:
 
 - Desde Java 5: [`java.util.concurrent.Future`](https://docs.oracle.com/javase/9/docs/api/java/util/concurrent/Future.html) 
-- Desde Java 8, inspirado por los [`ListenableFuture`](https://github.com/google/guava/wiki/ListenableFutureExplained) de Guava: [`java.util.concurrent.CompletableFuture`](https://docs.oracle.com/javase/9/docs/api/java/util/concurrent/CompletableFuture.html)
+- Se pueden encadenar cálculos usando futuros __computables__ o __escuchables__, que sirven para indicar a un __thread__ que ejecute una determinada tarea y, cuando termine, se dirija a hacer otra tarea usando el resultado de la tarea anterior.
+  - En Guava: [`ListenableFuture`](https://github.com/google/guava/wiki/ListenableFutureExplained)
+  - Desde Java 8 (inspirado por Guava): [`java.util.concurrent.CompletableFuture`](https://docs.oracle.com/javase/9/docs/api/java/util/concurrent/CompletableFuture.html)
+
+Un `CompletableFuture` es un futuro que debe completarse explícitamente (i.e. fijar su valor y su estado) y puede servir para dar soporte a otras funciones y acciones dependientes, que se disparan tras su compleción.
 
 ---
 
@@ -457,8 +476,8 @@ public class Main {
     public static void main(String[] args) throws Exception{
         ExecutorService exec = Executors.newSingleThreadExecutor();
         Future<Integer> f = exec.submit(new MyCallable());
-        System.out.println(f.isDone()); //False
-        System.out.println(f.get()); //Waits until the task is done, then prints 1
+        System.out.println(f.isDone()); //Falso
+        System.out.println(f.get()); //Espera hasta que termine la tarea, luego imprime
     }
 }
 ```
@@ -482,7 +501,7 @@ public class Main {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                //Do nothing
+                //No hacer nada
             }
             return 1;
         }
@@ -503,9 +522,9 @@ public class Main {
         ExecutorService exec = Executors.newSingleThreadExecutor();
         CompletableFuture<Integer> f = CompletableFuture.supplyAsync(
                                           new MySupplier(), exec);
-        System.out.println(f.isDone()); // False
+        System.out.println(f.isDone()); // Falso
         CompletableFuture<Integer> f2 = f.thenApply(new PlusOne());
-        System.out.println(f2.get()); // Waits until calculation is done, then prints 2
+        System.out.println(f2.get()); // Espera hasta que termine el cálculo, luego imprime
     }
 }    
 ```
@@ -518,7 +537,7 @@ public class Main {
 
 ### Modelo de eventos
 
-Las operaciones disparan eventos de diferentes tipos, que son escuchados por los manejadores (_listeners_) de eventos, que los clientes han registrado en un bus de eventos.
+Las operaciones disparan eventos de diferentes tipos, que son escuchados por los manejadores (_listeners_) de eventos, que habrán sido registrados previamente en un bus de eventos.
 
 
 ![Eventos](./img/eventos.png)
