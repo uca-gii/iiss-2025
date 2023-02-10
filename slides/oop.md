@@ -531,7 +531,7 @@ public class Main {
 
 <style scoped>
 p {
-  text-align: left;
+  text-align: center;
   font-size: 125%;
   color: green;
 }
@@ -799,9 +799,36 @@ public class Aventura {
   - ¿Hay herencia sólo de comportamiento? Pista: pensar en C++
   
 - Herencia como **tipo** vs herencia como **estructura**:
-    - En herencia de tipos, cada subclase es un subtipo. Debe satisfacerse el principio de __sustitución__ de Liskov (LSP, _Liskov Substitution Principle_): toda operación que funciona para un objeto de la clase $C$ también debe funcionar para un objeto de una subclase de $C$
-    - Usar la herencia como una forma de estructurar programas es **erróneo**, pues provoca que no se satisfaga la propiedad LSP.
+  - En herencia de tipos, cada subclase es un subtipo. Debe satisfacerse el principio de __sustitución__ de Liskov (LSP, _Liskov Substitution Principle_): toda operación que funciona para un objeto de la clase $C$ también debe funcionar para un objeto de una subclase de $C$
+  - Usar la herencia como una forma de estructurar programas es **erróneo**, pues provoca que no se satisfaga la propiedad LSP.
 
+---
+
+<style scoped>
+p {
+  text-align: center;
+  font-size: 125%;
+  color: green;
+}
+</style>
+
+¿El polimorfismo está ligado siempre a la herencia?
+
+---
+
+## Polimorfismo paramétrico
+
+- **Genéricos**
+  - Ada
+  - C++ generics
+  - Java _templates_ (desde JDK 1.5)
+  - Scala
+  - etc.
+
+- Diferencias entre lenguajes:
+  - En C++, los genéricos permiten meta-programación en tiempo de compilación
+  - En Java, las plantillas son wrappers que _moldean_ objetos (_syntactic sugar_)
+  
 ---
 
 <style scoped>
