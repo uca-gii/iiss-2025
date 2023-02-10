@@ -82,7 +82,7 @@ h2 {
 
 ## Versión inicial: Lista v0.1
 
-Criticar la implementación siguiente en Java de un TAD Lista:
+En relación a los principios de _alta cohesión_ y _bajo acoplamiento_, criticar la implementación siguiente en Java de un TAD Lista:
 
 ```java
   public abstract class List<T> {
@@ -228,13 +228,26 @@ h3 {
 
 ### Críticas a Lista v0.3
 
-- ¿Hay que especializar de nuevo para cada tipo de operación que hace `traverse()` con cada elemento individual (imprimir, sumar, etc.)? 
-- ¿Y si hay que especializar de nuevo el recorrido: sólo los pares, sólo los impares, etc.? 
+- ¿Hay que especializar de nuevo para cada tipo de operación que hace `traverse()` con cada elemento individual (imprimir, sumar, etc.)?
+- ¿Y si hay que especializar de nuevo el recorrido: sólo los pares, sólo los impares, etc.?
 
 #### Problemáticas de Lista v0.3
 
 - Elevada __complejidad__. Si hay que crear nuevos tipos de recorrido, se abusará de la [herencia como _estructura_](#ejemplo-herencia-como-estructura)
 - La __variabilidad__ no está bien tratada $\rightarrow$ poca __flexibilidad__, mala __reutilización__
+
+---
+
+<style scoped>
+p {
+  text-align: center;
+  font-size: 125%;
+  color: green;
+}
+</style>
+
+¿Cómo se resuelve esto en las bibliotecas típicas que conocéis
+(v.g. C++ STL, Java Collections, etc.)?
 
 ---
 
@@ -502,7 +515,7 @@ class Complejo extends Real {
 ---
 
 ```java
-public class MyClass {
+public class Main {
   public static void main(String args[]) {
       Real r = new Real(7.6);
       Complejo c = new Complejo(1.2, 3.4);
@@ -535,7 +548,7 @@ p {
 }
 </style>
 
-Si no se añade `@Override`, podemos llegar a confundirnos y hacer sobrecarga cuando queríamos haber hecho sobreescritura.
+Si no se añade `@Override`, podemos confundirnos y hacer un _overload_ accidental de un método cuando realmente queríamos redefinirlo.
 
 ---
 
