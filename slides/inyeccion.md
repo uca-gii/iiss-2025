@@ -148,6 +148,51 @@ public class Instrumentos implements Iterable<Instrumento> {
 ```
 
 ---
+<style>
+section > img {
+  align-self: flex-start;
+}
+</style>
+
+### Diagrama de clases
+
+@startuml
+class Partitura {
+  score
+}
+
+abstract class Instrumento {
+  nombre
+  partitura
+}
+
+Instrumento <|-down- Viento
+Instrumento <|-down- Cuerda
+Instrumento <|-down- Percusion
+
+Instrumento -r-> Partitura
+
+Orquesta -r-> Instrumentos
+
+Instrumentos *-d-> Instrumento
+
+PruebaOrquesta .r.> Orquesta
+
+PruebaOrquesta .r.> Instrumento
+
+together{
+  class PruebaOrquesta
+  class Orquesta
+  class Instrumentos
+}
+
+together{
+  class Instrumentos
+  class Instrumento
+}
+@enduml
+
+---
 
 ### Dependencias de instrumento
 
@@ -168,6 +213,55 @@ public class PruebaOrquesta {
 Los `new` de `PruebaOrquesta` siguen introduciendo dependencias de `PruebaOrquesta` con respecto a los tipos concretos de `Instrumento`.
 
 Si quisiéramos probar la orquesta con otros instrumentos, tendríamos que modificar la clase cliente que utiliza la Orquesta.
+
+---
+<style>
+section > img {
+  align-self: flex-start;
+}
+</style>
+
+#### Diagrama de clases - Dependencias
+
+@startuml
+class Partitura {
+  score
+}
+
+abstract class Instrumento {
+  nombre
+  partitura
+}
+
+Instrumento <|-down- Viento
+Instrumento <|-down- Cuerda
+Instrumento <|-down- Percusion
+
+Instrumento -r-> Partitura
+
+Orquesta -r-> Instrumentos
+
+Instrumentos *-d-> Instrumento
+
+PruebaOrquesta .r.> Orquesta
+
+PruebaOrquesta .r.> Instrumento
+
+PruebaOrquesta .right.> Viento #red
+PruebaOrquesta .right.> Cuerda #red
+PruebaOrquesta .right.> Percusion #red
+
+together{
+  class PruebaOrquesta
+  class Orquesta
+  class Instrumentos
+}
+
+together{
+  class Instrumentos
+  class Instrumento
+}
+@enduml
 
 ---
 
