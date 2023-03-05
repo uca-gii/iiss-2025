@@ -31,7 +31,6 @@ p {
 }
 </style>
 
-
 ## CASO PRÁCTICO: Implementación de una orquesta (2)
 
 ---
@@ -66,6 +65,7 @@ public abstract class Instrumento {
     }
 }
 ```
+
 ---
 
 ```java
