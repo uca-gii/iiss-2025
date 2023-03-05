@@ -258,10 +258,9 @@ El framework DI inyecta dependencias de forma universal, no de modo particular a
 
 - Inyección a través de __métodos__: la inyectora suministra la dependencia a través de una API establecida por la clase dependiente, en la que se especifican el/los método(s) para suministrarla.
 
-
 ---
 
-#### Construcción con Spring
+### Construcción con Spring
 
 A través de un fichero de configuración `orquesta.xml` le indicamos los valores inyectables:
 
@@ -323,7 +322,7 @@ public class PruebaOrquesta {
 
 ---
 
-## Beans
+### Beans
 
 Un _bean_ es una clase/componente reutilizable en Java que tiene una interfaz bien definida, según una especificación estándar de Java, que permite a un contenedor gestionar su _ciclo de vida_ (crearlos, cambiarles valores de sus propiedades, destruirlos, etc.)
 
@@ -334,7 +333,7 @@ Los _beans_ son usados por muchos frameworks, entre otros Spring:
 
 ---
 
-### Ejemplo: Logger
+#### Ejemplo: Logger
 
 También se puede inyectar la dependencia en el constructor.
 
@@ -352,7 +351,6 @@ public class MyClass {
 ```
 
 Un _contenedor_ de dependencias en el framework debe responsabilizarse de crear las instancias de `Logger` e inyectarlas en su sitio (normalmente vía _reflexión_ o _introspección_)
-
 
 ---
 
@@ -550,6 +548,8 @@ Ahora podría definirse una anotación del tipo `@comparator(BankAccountComparat
 - Java: Ejemplo de cómo [crear una anotación a medida en Java](https://www.baeldung.com/java-custom-annotation)
 - Typescript: las anotaciones se llaman **decorators** y son más sencillas de programar
 
+<!--
+
 ---
 
 #### Ejemplo de retención de anotaciones en Java
@@ -633,5 +633,4 @@ public class RetentionPolicyDemo {
 }
 ```
 
-
-
+-->
