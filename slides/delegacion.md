@@ -667,7 +667,7 @@ public final class BankAccount implements Comparable<BankAccount> {
 
 ---
 
-#####  Identificador de BankAccount: Implementación en Java ≤ 1.4
+##### Identificador de BankAccount: Implementación en Java ≤ 1.4
 
 - No hay plantillas (polimorfismo paramétrico).
 - La genericidad se consigue con `Object`. Hay que hacer casting.
