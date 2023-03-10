@@ -1,7 +1,7 @@
 ---
 marp: true
-title: Apuntes IISS 2022
-description: Apuntes de Implementación e Implantación de Sistemas Software, curso 2021/22
+title: Apuntes IISS
+description: Apuntes de Implementación e Implantación de Sistemas Software
 ---
 
 <!-- size: 16:9 -->
@@ -19,7 +19,80 @@ h2 {
 }
 </style>
 
-# DUPLICACIÓN DE CÓDIGO
+# REFACTORING
+
+---
+
+## Refactoring
+
+Hacer _refactoring_ es hacer pequeñas transformaciones en el código que mantienen el sistema funcional, sin añadir nuevas funcionalidades.
+
+> Refactoring is a __disciplined__ technique for restructuring an existing body of code, altering its internal structure without changing its __external__ behavior
+>
+> — [M. Fowler](http://www.refactoring.com/), www.refactoring.com
+>
+> A change made to the internal structure of the software to make it easier to understand and cheaper to modify without changing its observable behavior
+>
+> – [M. Fowler (2008): Refactoring...](bibliografia.md#refactoring)
+
+---
+
+### Motivos para hacer refactoring
+
+- Duplicación de código
+- Diseño no ortogonal
+- Cambios (de requisitos, más conocimiento del problema)
+- Uso del sistema (se descubre la imporancia de las cosas)
+- Rendimiento
+- Pasan todos los tests (es la oportunidad)
+
+---
+
+> __Lecturas recomendadas__
+>  - Hunt & Thomas. [The Pragmatic Programmer](bibliografia.md#pragmatic), 1999. Capítulo: *Refactoring*
+>  - McConnell. [Code Complete](bibliografia.md#codecomplete), 2004.
+
+---
+
+### Conceptos relacionados con el refactoring
+
+- Deuda técnica
+- _Clean code_ vs _dirty code_
+- Tests unitarios y _Test-Driven Development_ (TDD)
+- Tufos o _code smells_
+
+> __Lecturas recomendadas__
+>  - Refactoring Guru: [What is Refactoring?](https://refactoring.guru/refactoring/what-is-refactoring)
+>  - Refactoring Guru: [Code Smells](https://refactoring.guru/refactoring/smells)
+>  - Refactoring Guru: [Refactoring techniques](https://refactoring.guru/refactoring/techniques)
+
+---
+
+<style scoped>
+p {
+  text-align: center;
+  font-size: 125%;
+  color: green;
+}
+</style>
+
+¿Cuál es la primera razón para hacer refactoring?
+
+---
+
+### Motivos para refactoring
+
+- __Código duplicado__
+- Rutinas demasiado largas
+- Bucles demasiado largos o demasiado anidados
+- Clases poco cohesionadas
+- Interfaz de una clase con un nivel de abstracción poco consistente
+- Demasiados parámetros en una lista de parámetros
+- Muchos cambios en una clase tienden a estar compartimentalizados (afectan solo a una parte)
+- Muchos cambios requieren modificaciones en paralelo a varias clases
+- Hay que cambiar jerarquías de herencia en paralelo
+- Hay que cambiar muchas sentencias _case_ en paralelo
+- Etc.
 
 ---
 
@@ -231,70 +304,6 @@ public class Autonomo extends Empleado {
   }
 }
 ```
-
----
-
-## Refactoring
-
-Hacer _refactoring_ es hacer pequeñas transformaciones en el código que mantienen el sistema funcional, sin añadir nuevas funcionalidades.
-
-> Refactoring is a __disciplined__ technique for restructuring an existing body of code, altering its internal structure without changing its __external__ behavior
->
-> — [M. Fowler](http://www.refactoring.com/), www.refactoring.com
->
-> A change made to the internal structure of the software to make it easier to understand and cheaper to modify without changing its observable behavior
->
-> – [M. Fowler (2008): Refactoring...](bibliografia.md#refactoring)
-
-
----
-
-### Motivos para refactoring
-
-- **Código duplicado**
-- Rutinas demasiado largas
-- Bucles demasiado largos o demasiado anidados
-- Clases poco cohesionadas
-- Interfaz de una clase con un nivel de abstracción poco consistente
-- Demasiados parámetros en una lista de parámetros
-- Muchos cambios en una clase tienden a estar compartimentalizados (afectan solo a una parte)
-- Muchos cambios requieren modificaciones en paralelo a varias clases
-- Hay que cambiar jerarquías de herencia en paralelo
-- Hay que cambiar muchas sentencias _case_ en paralelo
-- Etc.
-
----
-
-> **Lecturas recomendadas**
->  - Hunt & Thomas. [The Pragmatic Programmer](bibliografia.md#pragmatic), 1999. Capítulo: *Refactoring*
->  - McConnell. [Code Complete](bibliografia.md#codecomplete), 2004.
-
----
-
-### Conceptos relacionados con el refactoring
-
-- Deuda técnica
-- _Clean code_ vs _dirty code_
-- Tests unitarios y _Test-Driven Development_ (TDD)
-- Tufo o _code smells_
-
-
-> **Lecturas recomendadas**
->  - Refactoring Guru: [What is Refactoring?](https://refactoring.guru/refactoring/what-is-refactoring)
->  - Refactoring Guru: [Code Smells](https://refactoring.guru/refactoring/smells)
->  - Refactoring Guru: [Refactoring techniques](https://refactoring.guru/refactoring/techniques)
----
-
-<style scoped>
-p {
-  text-align: center;
-  font-size: 125%;
-  color: green;
-}
-</style>
-
-
-¿Cuál es la primera razón para hacer refactoring?
 
 ---
 
