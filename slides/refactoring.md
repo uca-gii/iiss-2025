@@ -80,18 +80,18 @@ p {
 
 ---
 
-### Motivos para refactoring
+### Ejemplos de refactoring
 
 - __Código duplicado__
 - Rutinas demasiado largas
 - Bucles demasiado largos o demasiado anidados
 - Clases poco cohesionadas
 - Interfaz de una clase con un nivel de abstracción poco consistente
-- Demasiados parámetros en una lista de parámetros
-- Muchos cambios en una clase tienden a estar compartimentalizados (afectan solo a una parte)
-- Muchos cambios requieren modificaciones en paralelo a varias clases
-- Hay que cambiar jerarquías de herencia en paralelo
-- Hay que cambiar muchas sentencias _case_ en paralelo
+- Demasiados parámetros en una función
+- Jerarquías de herencia en paralelo
+- Muchas sentencias _case_ en paralelo
+- Hay muchos cambios en una clase que tienden a estar compartimentalizados (afectan solo a una parte)
+- Hay muchos cambios que requieren modificaciones en paralelo a varias clases
 - Etc.
 
 ---
@@ -607,3 +607,18 @@ object NumerosComplejos {
 
 - No resoluble a nivel de técnicas de construcción
 - Hace falta metodología, gestión de equipos + herramientas de comunicación
+
+---
+
+## Reglas para hacer refactoring (según Fowler)
+
+1. No hacer refactoring y añadir funcionalidad al mismo tiempo
+2. Disponer de buenos tests antes de empezar. Pasarlos a menudo.
+3. Dar pasos cortos:
+   - mover un campo de una clase a otra
+   - dividir un método
+   - renombrar una variable
+
+Yo añado...
+
+- Reflejar cada cambio en un _commit_ separado
