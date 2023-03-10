@@ -610,7 +610,9 @@ object NumerosComplejos {
 
 ---
 
-## Reglas para hacer refactoring (según Fowler)
+## Reglas para hacer refactoring
+
+Según Fowler:
 
 1. No hacer refactoring y añadir funcionalidad al mismo tiempo
 2. Disponer de buenos tests antes de empezar. Pasarlos a menudo.
