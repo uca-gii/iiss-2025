@@ -25,16 +25,9 @@ h2 {
 
 <!-- paginate: true -->
 
-<style scoped>
-p {
-  text-align: center;
-}
-</style>
-
-
 ## Ortogonalidad
 
-Dos componentes A y B son ortogonales ($A \perp B$) si los cambios en uno no afectan al otro. Suponen más independencia y menos acoplamiento. Por ejemplo:
+Dos componentes A y B son ortogonales ($A \perp B$) si los cambios en uno no afectan al otro. Suponen más independencia y menos acoplamiento
 
 ### Ejemplos
 
