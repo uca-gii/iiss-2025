@@ -1,7 +1,7 @@
 ---
 marp: true
-title: Apuntes IISS 2022
-description: Apuntes de Implementación e Implantación de Sistemas Software, curso 2021/22
+title: Apuntes IISS
+description: Apuntes de Implementación e Implantación de Sistemas Software
 ---
 
 <!-- size: 16:9 -->
@@ -145,11 +145,11 @@ private void logError(Exception e) {
 
 ### Excepciones en Java
 
-- **Checked** — Instancias de clases derivadas de `java.lang.Throwable` (menos `RuntimeException`). Deben declararse en el método mediante `throws` y obligan al llamador a tratar la excepción.
+- __Checked__ — Instancias de clases derivadas de `java.lang.Throwable` (menos `RuntimeException`). Deben declararse en el método mediante `throws` y obligan al llamador a tratar la excepción.
 
-- **Unchecked** — Instancias de clases derivadas de `java.lang.RuntimeException`. No se declaran en el método y no obligan al llamador a tratar la excepción.
+- __Unchecked__ — Instancias de clases derivadas de `java.lang.RuntimeException`. No se declaran en el método y no obligan al llamador a tratar la excepción.
 
-**¿Qué implica elevar una excepción `e` en Java?**
+__¿Qué implica elevar una excepción `e` en Java?__
 
 1. Deshacer (_roll back_) la llamada a un método...
 2. ...hasta que se encuentre un bloque catch para el tipo de `e` y...
@@ -157,7 +157,7 @@ private void logError(Exception e) {
 
 ---
 
-**Tratamiento de excepciones en Java**
+#### Tratamiento de excepciones en Java
 
 ```java
   try {
@@ -178,7 +178,7 @@ private void logError(Exception e) {
 
 ---
 
-**Recomendaciones**
+#### Recomendaciones sobre excepciones
 
 Incluir el __contexto__ de la ejecución:
 
@@ -190,7 +190,7 @@ Los beneficios de las excepciones _checked_ en Java son mínimos: [¿por qué?](
 
 ---
 
-**Cómo afectan al diseño las excepciones checked**
+__Cómo afectan al diseño las excepciones checked__
 
 Se paga el precio de violar el principio OCP (_Open-Closed Principle_): si lanzamos una excepción _checked_ desde un método y el `catch` está tres niveles por encima, hay que declarar la excepción en la signatura de todos los métodos que van entre medias. Esto significa que un cambio en un nivel bajo del software puede forzar cambios en niveles altos.
 
@@ -213,7 +213,7 @@ __Ejemplo__: Al ejecutar una consulta mediante `executeQuery` en el API de JDBC 
 
 ---
 
-**Solución: Transformación en unchecked**
+__Solución: Transformación en unchecked__
 
 Transformar las excepciones checked en unchecked:
 
@@ -254,7 +254,6 @@ Criticar la siguiente implementación:
 __Código duplicado__: llamada a `reportPortError()` se repite mucho. ¿Cómo evitarlo?
 
 __Solución: Excepción encapsulada__
-
 
 ```java
 public class LocalPort {
@@ -300,7 +299,7 @@ try {
 
 __Recomendación de uso__: Usar excepciones para problemas excepcionales (eventos inesperados)
 
-**Ejemplo: Excepciones por ficheros**: ¿Usar excepciones cuando se intenta abrir un fichero para leer y el fichero no existe?
+__Ejemplo: Excepciones por ficheros__: ¿Usar excepciones cuando se intenta abrir un fichero para leer y el fichero no existe?
 
 - Depende de si el fichero debe estar ahí
 
@@ -337,14 +336,13 @@ p {
 }
 </style>
 
-
 ## ABUSO DE NULL
 
 ---
 
 Obtener un _null_ cuando no se espera puede ser un quebradero de cabeza para el tratamiento de errores.
 
-**Principio general: no devolver null**
+__Principio general: no devolver null__
 
 Este código puede parecer inofensivo, pero es maligno:
 
@@ -460,7 +458,7 @@ public class MetricsCalculator
 
 El uso de `assert` es una buena forma de documentar, pero no resuelve el problema.
 
-Más adelante se verán __aserciones__ y __contratos__ para resolver esto...
+Pueden usarse __aserciones__ o __contratos__ para resolver esto.
 
 ---
 
@@ -504,9 +502,9 @@ object Demo {
 
 ---
 
-**Valores vacíos en Scala**
+#### Valores vacíos en Scala
 
-Conocer las diferencias entre [`Null`, `null`, `Nil`, `Nothing`, `None` y `Unit`](https://www.geeksforgeeks.org/scala-null-null-nil-nothing-none-and-unit/) en Scala:
+Diferencias entre [`Null`, `null`, `Nil`, `Nothing`, `None` y `Unit`](https://www.geeksforgeeks.org/scala-null-null-nil-nothing-none-and-unit/) en Scala:
 
 - `null` es como el de Java
 - `Null` es un trait, subjonjunto de todos los tipos-referencia, cuya única instancia es `null`
@@ -539,9 +537,10 @@ object Demo {
 
 ### Java 8 `Optional`
 
-**Lecturas recomendadas**
-    - Leer [Java 8 Optional in Depth](https://www.mkyong.com/java8/java-8-optional-in-depth/).
-    - Leer [Jugando con Optional en Java 8](https://www.adictosaltrabajo.com/2015/03/02/optional-java-8/).
+#### Lecturas recomendadas
+
+- Leer [Java 8 Optional in Depth](https://www.mkyong.com/java8/java-8-optional-in-depth/).
+- Leer [Jugando con Optional en Java 8](https://www.adictosaltrabajo.com/2015/03/02/optional-java-8/).
 
 ---
 
@@ -851,7 +850,7 @@ Lecturas para ampliación: clase [Validation en Scala](https://www.innoq.com/en/
 
 ---
 
-**Ejemplo: División por cero**
+#### Ejemplo: División por cero
 
 ```scala
 object EitherLeftRightExample extends App {
