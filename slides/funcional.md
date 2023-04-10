@@ -399,10 +399,10 @@ __*capture* = entorno de referencia__
 
 ### Clausuras o _closures_
 
-- Función o referencia a función junto con un _entorno de referencia_
+- __Clausura__ = función o referencia a función junto con un _entorno de referencia_
 
-  - La diferencia entre una función normal y una clausura es que una clausura depende de una o varias **variables libres**.
-  - Una clausura permite acceder a las variables libres incluso cuando se invoca desde fuera de su ámbito léxico
+  - La diferencia entre una función normal y una clausura es que una clausura depende de una o varias __variables libres__.
+  - Una clausura permite acceder a las variables libres fuera de su ámbito léxico (i.e. alcance), incluso cuando se invoca desde fuera de ese ámbito.
 
 ---
 
@@ -435,7 +435,7 @@ std::for_each(
 ---
 
 - Una _clausura_ en C++ se expresa mediante la parte [_capture_]
-- El _entorno de referencia_ se expresa por el conjunto de variables externas indicadas dentro del cierre
+- El _entorno de referencia_ se expresa por el conjunto de variables externas indicadas dentro de la clausura
 - Las variables del entorno de referencia en C++ pueden ser capturadas por valor (`[=]`) o por referencia (`[&]`)
 - Las variables externas capturadas son inmutables por defecto; si no, usar `mutable` después de los (_parameters_)
 
@@ -453,11 +453,18 @@ __Tutoriales recomendado:__
 
 ---
 
-#### Anónimas y cierres en Java
+#### Anónimas y clausuras en Java
 
 ##### Captura de variables en lambdas
 
-Una expresión lambda en Java puede **capturar** (o no) variables de instancia no locales (atributos de la clase contenedora) y variables locales (declaradas o no `final`, pero cuyo valor no es modificado) del ámbito contenedor.
+Una expresión lambda en Java puede **capturar** (o no)...
+
+- variables de instancia no locales (atributos de la clase contenedora) y
+- variables locales (declaradas o no `final`, pero cuyo valor no es modificado)
+
+...del ámbito contenedor.
+
+<!--
 
 ---
 
@@ -478,12 +485,14 @@ for (int j = 0; j < 999999999; j++) {
 
 __Ejemplo: Lambda que captura variables locales no declaradas `final` pero cuyo valor no es modificado__
 
-```java 
+```java
 BigDecimal bd = new BigDecimal(1);
 BigDecimal x = new BigDecimal(2);
  // Se puede consultar x pero no se podría cambiar el valor de x:
 Function<BigDecimal, BigDecimal> func =
-    (a) -> { bd.multiply(a).add(x); /* x = new BigDecimal(0); */ };
+    (a) -> bd.multiply(a).add(x);
+    // x debe ser final o efectivamente final:
+    // (a) -> { bd.multiply(a).add(x); x = new BigDecimal(0); return bd; };
 
 for (int j = 0; j < 999999999; j++) {
     func.apply(new BigDecimal(j));
@@ -509,6 +518,8 @@ public class LambdaInstanceCapturing implements Runnable {
     }
 }
 ```
+
+-->
 
 ---
 
@@ -549,7 +560,7 @@ public String scopeExperiment() {
   ClaseFuncional unaLambda = parametro -> {
       String variable= "Valor de la lambda";
       return this.variable; 
-        /* Con this, el cierre de la variable libre se produce
+        /* Con this, la clausura de la variable libre se produce
            con el valor de ClaseFuncional::variable */
   };
   String resultadoLambda = unaLambda.method("");
