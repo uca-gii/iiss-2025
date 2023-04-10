@@ -1,7 +1,7 @@
 ---
 marp: true
-title: Apuntes IISS 2022
-description: Apuntes de Implementación e Implantación de Sistemas Software, curso 2021/22
+title: Apuntes IISS
+description: Apuntes de Implementación e Implantación de Sistemas Software
 ---
 
 <!-- size: 16:9 -->
@@ -397,16 +397,16 @@ __*capture* = entorno de referencia__
 
 ---
 
-### Cierres o _closures_
+### Clausuras o _closures_
 
 - Función o referencia a función junto con un _entorno de referencia_
 
-  - La diferencia entre una función normal y un cierre es que un cierre depende de una o varias **variables libres**.
-  - Un cierre permite acceder a las variables libres incluso cuando se invoca desde fuera de su ámbito léxico
+  - La diferencia entre una función normal y una clausura es que una clausura depende de una o varias **variables libres**.
+  - Una clausura permite acceder a las variables libres incluso cuando se invoca desde fuera de su ámbito léxico
 
 ---
 
-#### Entorno de referencia de un cierre
+#### Entorno de referencia de una clausura
 
 - Tabla que guarda una referencia a cada una de las variables no locales (_libres_) de la función
 
@@ -415,7 +415,7 @@ __*capture* = entorno de referencia__
 
 ---
 
-#### Anónimas y cierres en C++ 
+#### Anónimas y clausuras en C++ 
 
 ```cpp
 std::vector<int> some_list; // assume that contains something
@@ -434,7 +434,7 @@ std::for_each(
 
 ---
 
-- Un _cierre_ en C++ se expresa mediante la parte [_capture_]
+- Una _clausura_ en C++ se expresa mediante la parte [_capture_]
 - El _entorno de referencia_ se expresa por el conjunto de variables externas indicadas dentro del cierre
 - Las variables del entorno de referencia en C++ pueden ser capturadas por valor (`[=]`) o por referencia (`[&]`)
 - Las variables externas capturadas son inmutables por defecto; si no, usar `mutable` después de los (_parameters_)
