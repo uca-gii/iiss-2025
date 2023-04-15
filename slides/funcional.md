@@ -265,12 +265,16 @@ private void checkMatchesInGroup(List<Match> matchesInGroup) {
 }
 ```
 
+<!--
+
 ---
 
 ### Retrollamadas (_callbacks_)
 
 - Un __callback__ o retrollamada es un fragmento de código ejecutable que se pasa como argumento.
 - Hacen falta interfaces funcionales para poder definir retrollamadas
+
+-->
 
 ---
 
