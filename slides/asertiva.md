@@ -209,7 +209,7 @@ Añadir:
 
 ```java
 default:
-  assert false : suit;
+  assert false: suit;
 ```
 
 o también (protección aunque se deshabiliten las aserciones, pero sin coste extra):
@@ -303,11 +303,9 @@ Ejemplo de cómo hacerlo con una _inner class_ que guarda el estado de variables
 
 <!-- - Eiffel no permite que se pueda cambiar el valor de un parámetro (es inmutable) -->
 - En C++, usar `const`
-- Opciones en Java:
-
-  - Usar `final` para marcar un parámetro constante. Sin embargo, las subclases podrían redefinir los parámetros y volver a hacerlos mutables. Además `final` se aplica a la referencia, no al objeto en sí.
-  - Usar `variable@pre` de _iContract_
-
+- En Java: ¿usar `final` para marcar un parámetro constante?
+  - Las subclases podrían redefinir los parámetros y volver a hacerlos mutables
+  - `final` se aplica a la referencia, no al objeto en sí
 - Scala: diferencia entre `val` y `var`
 - Muchos lenguajes funcionales (Lisp, Haskell, Erlang, Clojure, etc.) y algunos orientados a objetos (Eiffel) definen la inmutabilidad por defecto
 
@@ -598,6 +596,8 @@ public class OrderedList {
 
 - Una postcondición puede necesitar expresarse con parámetros pasados a un método para verificar un comportamiento correcto.
 - Si el método puede cambiar el valor del parámetro pasado (parámetro mutable), el contrato puede incumplirse.
+
+  - Opción en Java: Usar `variable@pre` de _iContract_
 
 ---
 
