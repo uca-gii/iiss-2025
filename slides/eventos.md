@@ -112,7 +112,7 @@ La programación asíncrona...
 
 - promueve la definición de operaciones **no bloqueantes**
 - busca mecanismos que simulen la secuencialidad algorítmica a la vez que se mantiene el carácter no bloqueante de las operaciones
-- suele llevarse bien con la FP, menos con la OOP
+- suele llevarse bien con la FP, no tan bien con la OOP
 
 ---
 
@@ -302,13 +302,11 @@ function main() {
         console.log("Error: "+ err.message)
     });
 }
-//...
 ```
 
 ---
 
 ```javascript
-//...
 // Lo anterior puede escribirse más conciso:
 function main() {
     asinc1("datos iniciales")
@@ -684,6 +682,7 @@ Añade a un __Observer asíncrono__ la semántica de un __Iterable síncrono__:
   
 ---
 
-__Lectura recomendada__
+__Lecturas recomendadas__
 
 - Thomas & Hunt. The Pragmatic Programmer, 2nd edition, 2022. Capítulo: *Transforming Programming*
+- [How to Write Clean Codes by Using Pipe Operations in Python?](https://www.turing.com/kb/write-clean-codes-by-using-pipe-operations-in-python)
