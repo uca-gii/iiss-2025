@@ -274,8 +274,6 @@ private void checkMatchesInGroup(List<Match> matchesInGroup) {
 - Un __callback__ o retrollamada es un fragmento de código ejecutable que se pasa como argumento.
 - Hacen falta interfaces funcionales para poder definir retrollamadas
 
--->
-
 ---
 
 #### Implementaciones en C/C++
@@ -291,6 +289,8 @@ private void checkMatchesInGroup(List<Match> matchesInGroup) {
 - _functor_ en C++
     - clase que define `operator()`
     - es una clase y por tanto pueden contener un estado
+
+-->
 
 ---
 
