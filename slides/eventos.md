@@ -22,6 +22,56 @@ h2 {
 # PROGRAMACIÓN ASÍNCRONA
 
 ---
+
+## Operaciones bloqueantes vs no bloqueantes
+
+La programación asíncrona...
+
+- promueve la definición de operaciones **no bloqueantes**
+- busca mecanismos que simulen la secuencialidad algorítmica a la vez que se mantiene el carácter no bloqueante de las operaciones
+- suele llevarse bien con la FP, no tan bien con la OOP
+
+---
+
+## Modelos de ejecución
+
+![modelos de ejecución](./img/modelos-ejecucion.png)
+
+---
+
+## Estado y continuación
+
+Las funciones no bloqueantes afectan a:
+
+- El **estado** del programa
+- La lógica de **continuación** del programa
+
+Esto complica notablemente el razonamiento y la operativa algorítmica habitual
+
+---
+
+programación secuencial   |  programación asíncrona
+:-------------------------:|:-------------------------:
+![Modelo de programación secuencial](./img/prog-secuencial.png) | ![Modelo de programación asíncrona](./img/prog-asincrona.png)
+
+---
+
+¿Qué problemas hay que resolver en programación asíncrona?
+
+![modelos de ejecución](./img/problemas-asincronia.png)
+
+---
+
+## Modelos de paso de continuaciones
+
+Aumentar la aridad de la función no bloqueante en 1 argumento adicional (la función de **retrollamada**), donde se indica la lógica de continuación.
+
+![Paso de callback](./img/cont-callback.png)
+
+- El comportamiento del cliente _llamador_ puede especificarse con un _listener_ o manejador de eventos
+- La lógica de continuación se puede indicar mediante una retrollamada o _callback_
+
+---
 <!-- paginate: true -->
 
 <style scoped>
@@ -36,11 +86,11 @@ p {
 
 ### Manejo de eventos
 
-Un _listener_ o _event handler_ es una subrutina para retrollamadas (_callbacks_) que gestiona la entrada recibida como respuesta a un evento generado por el framework para el que está hecho un programa.
+Un _listener_ o _event handler_ es una subrutina para manejar retrollamadas (_callbacks_) que gestiona la entrada recibida como respuesta a un evento generado por el framework/sistema operativo para el que está preparado un programa.
 
 - Los eventos pueden representar acciones de usuario, vencimiento de temporizadores, disponibilidad de mensajes o datos, etc.
-- El framework puede ser parte del sistema operativo, del entorno de programación, etc.
-- En POO, se implementan como _Observers_. En FP, se implementan como lambdas.
+- El framework puede ser parte del sistema operativo, del entorno de programación, de una máquina virtual, etc.
+- En OOP se implementan como **observers**; En FP, se implementan como lambdas.
 
 ---
 
@@ -102,75 +152,22 @@ public class ListenerLambdaExample extends JFrame {
 
 ---
 
-## Programación asíncrona
-
----
-
-### Operaciones bloqueantes
-
-La programación asíncrona...
-
-- promueve la definición de operaciones **no bloqueantes**
-- busca mecanismos que simulen la secuencialidad algorítmica a la vez que se mantiene el carácter no bloqueante de las operaciones
-- suele llevarse bien con la FP, no tan bien con la OOP
-
----
-
-### Modelos de ejecución
-
-![modelos de ejecución](./img/modelos-ejecucion.png)
-
----
-
-### Estado y continuación
-
-Las funciones no bloqueantes afectan a:
-
-- El **estado** del programa
-- La lógica de **continuación** del programa
-
-Esto complica notablemente el razonamiento y la operativa algorítmica habitual
-
----
-
-programación secuencial   |  programación asíncrona
-:-------------------------:|:-------------------------:
-![Modelo de programación secuencial](./img/prog-secuencial.png) | ![Modelo de programación asíncrona](./img/prog-asincrona.png)
-
-
----
-
-¿Qué problemas hay que resolver en programación asíncrona?
-
-![modelos de ejecución](./img/problemas-asincronia.png)
-
----
-
-### Modelos de paso de continuaciones
-
-Aumentar la aridad de la función no bloqueante en 1 argumento adicional (la __retrollamada__), donde se indica la lógica de continuación.
-
-![Paso de callback](./img/cont-callback.png)
-
-La lógica de continuación se indica mediante una función de **retrollamada** o _callback_
-
----
-
 ## Callbacks
 
 ---
 
+### Retrollamada
+
 Una retrollamada es cualquier referencia a un trozo de código ejecutable (función) que se pasa como argumento a otro trozo de código (función). Se espera que esta segunda función vuelva a llamar (call back) a la primera como parte de su tarea.
 
-__Ejemplos__ de callbacks: Diversas implementaciones de _listeners_
+__Ejemplos__: Diversas implementaciones de _listeners_ + _callbacks_
 
-- Clases anónimas (como adaptadores)
+- Clases anónimas
 - Expresiones lambda
-- Subrutinas
 - Punteros a función
-- Bloques
 - Etc.
 
+<!--
 ---
 
 ### Ejemplo: Ajax + jQuery callbacks
@@ -178,6 +175,8 @@ __Ejemplos__ de callbacks: Diversas implementaciones de _listeners_
 - [Ajax](http://learn.jquery.com/ajax/)
 - [jQuery](http://devdocs.io/jquery/)
 - [jQuery Callbacks object](http://devdocs.io/jquery-callbacks-object/)
+
+-->
 
 ---
 
@@ -245,7 +244,7 @@ El uso de callbacks hace el código complejo, repetitivo y difícil de entender,
 
 ---
 
-## Promesas
+## Promesas y Futuros
 
 ---
 
@@ -257,6 +256,101 @@ El uso de callbacks hace el código complejo, repetitivo y difícil de entender,
 - **Promesa**: contenedor de una asignación escribible (solo para inicialización), que fija el valor de un _futuro_.
 
 Los futuros y promesas sirven para desacoplar un valor (el futuro) de cómo éste se calculó (la promesa), permitiendo así la paralelización de los cálculos.
+
+---
+
+## Futuros
+
+---
+
+### Futuros en Java
+
+En Java hay definida una interfaz explícita para los futuros:
+
+- Desde Java 5: [`java.util.concurrent.Future`](https://docs.oracle.com/javase/9/docs/api/java/util/concurrent/Future.html) 
+- Se pueden encadenar cálculos usando futuros __computables__ o __escuchables__, que sirven para indicar a un __thread__ que ejecute una determinada tarea y, cuando termine, se dirija a hacer otra tarea usando el resultado de la tarea anterior.
+  - En Guava: [`ListenableFuture`](https://github.com/google/guava/wiki/ListenableFutureExplained)
+  - Desde Java 8 (inspirado por Guava): [`java.util.concurrent.CompletableFuture`](https://docs.oracle.com/javase/9/docs/api/java/util/concurrent/CompletableFuture.html)
+
+Un `CompletableFuture` es un futuro que debe completarse explícitamente (i.e. fijar su valor y su estado) y puede servir para dar soporte a otras funciones y acciones dependientes, que se disparan tras su compleción.
+
+---
+
+**Ejemplo: `Future` en Java**
+
+```java
+import java.util.concurrent.*;
+
+public class Main {
+    // Callable<V> = Interfaz funcional que representa a una operación sin args
+    // y que devuelve un resultado de tipo V (permite checked exceptions)
+    public static class MyCallable implements Callable<Integer> {
+        @Override
+        public Integer call() throws Exception {
+            Thread.sleep(1000);
+            return 1;
+        }
+    }
+
+    public static void main(String[] args) throws Exception{
+        ExecutorService exec = Executors.newSingleThreadExecutor();
+        Future<Integer> f = exec.submit(new MyCallable());
+        System.out.println(f.isDone()); //Falso
+        System.out.println(f.get()); //Espera hasta que termine la tarea, luego imprime
+    }
+}
+```
+
+---
+
+**Ejemplo: `CompletableFuture` en Java**
+
+```java
+import java.util.concurrent.*;
+import java.util.function.*;
+
+public class Main {
+
+    // Supplier<T> = Interfaz funcional que representa a una operación sin args y que 
+    // devuelve un resultado de tipo T (no permite checked exceptions)
+
+    public static class MySupplier implements Supplier<Integer> {
+        @Override
+        public Integer get() {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                //No hacer nada
+            }
+            return 1;
+        }
+    }
+```
+
+---
+
+```java
+    public static class PlusOne implements Function<Integer, Integer> {
+        @Override
+        public Integer apply(Integer x) {
+            return x + 1;
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        ExecutorService exec = Executors.newSingleThreadExecutor();
+        CompletableFuture<Integer> f = CompletableFuture.supplyAsync(
+                                          new MySupplier(), exec);
+        System.out.println(f.isDone()); // Falso
+        CompletableFuture<Integer> f2 = f.thenApply(new PlusOne());
+        System.out.println(f2.get()); // Espera hasta que termine el cálculo, luego imprime
+    }
+}    
+```
+
+---
+
+## Promesas
 
 ---
 
@@ -365,7 +459,7 @@ __Salida__:
 
 ---
 
-**Solución al _callback hell_**: 
+**Solución al _callback hell_**:
 
 - Las promesas evitan la anidación y hacen más simple el manejo de errores.
 - La ventaja de las promesas es que se pueden [encadenar](https://basarat.gitbook.io/typescript/future-javascript/promise#chain-ability-of-promises).
@@ -376,8 +470,8 @@ __Salida__:
 
 - Una promesa tiene un método `then()` que...
 
-    - recibe una __función__, que será ejecutada automáticamente cuando la promesa se resuelva. Dicha función recibirá como parámetro el valor de la promesa (el resultado esperado).
-    - devuelve una __nueva promesa__, que se resolverá cuando se ejecute la función que le habíamos asociado.
+  - recibe una __función__, que será ejecutada automáticamente cuando la promesa se resuelva. Dicha función recibirá como parámetro el valor de la promesa (el resultado esperado).
+  - devuelve una __nueva promesa__, que se resolverá cuando se ejecute la función que le habíamos asociado.
 
 - Se pueden encadenar varios `.then()` para simular un código secuencial, conforme se van resolviendo promesas.
 
@@ -426,105 +520,6 @@ function main() {
     r2 = serv2(r1);
     console.log("Resultado final: { " + r2 + " }");
 }
-```
----
-
-## Futuros
-
----
-
-Recordemos los [futuros y promesas](https://en.wikipedia.org/wiki/Futures_and_promises) en wikipedia...
-
-- **Futuro**: marcador de posición (_placeholder_), de solo lectura, para una variable que representa el resultado de un cómputo asíncrono
-- **Promesa**: contenedor de una asignación escribible (solo para inicialización), que fija el valor de un _futuro_.
-
-Los futuros y promesas sirven para desacoplar un valor (el futuro) de cómo éste se calculó (la promesa), permitiendo así la paralelización de los cálculos.
-
----
-
-### Futuros en Java
-
-En Java hay definida una interfaz explícita para los futuros:
-
-- Desde Java 5: [`java.util.concurrent.Future`](https://docs.oracle.com/javase/9/docs/api/java/util/concurrent/Future.html) 
-- Se pueden encadenar cálculos usando futuros __computables__ o __escuchables__, que sirven para indicar a un __thread__ que ejecute una determinada tarea y, cuando termine, se dirija a hacer otra tarea usando el resultado de la tarea anterior.
-  - En Guava: [`ListenableFuture`](https://github.com/google/guava/wiki/ListenableFutureExplained)
-  - Desde Java 8 (inspirado por Guava): [`java.util.concurrent.CompletableFuture`](https://docs.oracle.com/javase/9/docs/api/java/util/concurrent/CompletableFuture.html)
-
-Un `CompletableFuture` es un futuro que debe completarse explícitamente (i.e. fijar su valor y su estado) y puede servir para dar soporte a otras funciones y acciones dependientes, que se disparan tras su compleción.
-
----
-
-**Ejemplo: `Future` en Java**
-
-```java
-import java.util.concurrent.*;
-
-public class Main {
-    // Callable<V> = Interfaz funcional que representa a una operación sin args
-    // y que devuelve un resultado de tipo V (permite checked exceptions)
-    public static class MyCallable implements Callable<Integer> {
-        @Override
-        public Integer call() throws Exception {
-            Thread.sleep(1000);
-            return 1;
-        }
-    }
-
-    public static void main(String[] args) throws Exception{
-        ExecutorService exec = Executors.newSingleThreadExecutor();
-        Future<Integer> f = exec.submit(new MyCallable());
-        System.out.println(f.isDone()); //Falso
-        System.out.println(f.get()); //Espera hasta que termine la tarea, luego imprime
-    }
-}
-```
-
----
-
-**Ejemplo: `CompletableFuture` en Java**
-
-```java
-import java.util.concurrent.*;
-import java.util.function.*;
-
-public class Main {
-
-    // Supplier<T> = Interfaz funcional que representa a una operación sin args y que 
-    // devuelve un resultado de tipo T (no permite checked exceptions)
-
-    public static class MySupplier implements Supplier<Integer> {
-        @Override
-        public Integer get() {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                //No hacer nada
-            }
-            return 1;
-        }
-    }
-```
-
----
-
-```java
-    public static class PlusOne implements Function<Integer, Integer> {
-        @Override
-        public Integer apply(Integer x) {
-            return x + 1;
-        }
-    }
-
-    public static void main(String[] args) throws Exception {
-        ExecutorService exec = Executors.newSingleThreadExecutor();
-        CompletableFuture<Integer> f = CompletableFuture.supplyAsync(
-                                          new MySupplier(), exec);
-        System.out.println(f.isDone()); // Falso
-        CompletableFuture<Integer> f2 = f.thenApply(new PlusOne());
-        System.out.println(f2.get()); // Espera hasta que termine el cálculo, luego imprime
-    }
-}    
 ```
 
 ---
