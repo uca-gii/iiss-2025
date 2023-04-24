@@ -666,7 +666,6 @@ Los Observables se pueden:
 
 Añade a un __Observer asíncrono/push__ la semántica de un __Iterable síncrono/pull__:
 
-- `onNext()`: para que el suscriptor sepa qué hacer al iterar (asíncronamente) hacia el siguiente elemento
 - `onCompleted()`: para que el publicador avise al suscriptor que no hay más datos disponibles en el stream (los Iterables simplemente acaban su iteración)
 - `onError()`: para que el productor avise al suscriptor que ha ocurrido un error (en su lugar, los Iterables elevan excepciones)
 
