@@ -553,7 +553,7 @@ Estrategias para escribir aplicaciones basadas en eventos:
 
 ---
 
-### 1. Máquinas de estados
+#### 1. Máquinas de estados
 
 Una FSM es una especificación de cómo manejar eventos
 
@@ -561,7 +561,7 @@ Una FSM es una especificación de cómo manejar eventos
 
 ---
 
-### 2. Patrón Observer
+#### 2. Patrón Observer
 
 - **Observable**: fuente de eventos
 - **Observadores**: lista de clientes interesados en los eventos
@@ -585,7 +585,7 @@ __Comportamiento del patrón Observer:__
 
 ---
 
-### 3. PubSub
+#### 3. PubSub
 
 - Los sistemas de _PubSub_ son _observers_ generalizados
 - Los publicadores y los suscriptores se conectan por **canales** o **colas**
@@ -619,7 +619,7 @@ Los eventos deben disparar reacciones en el código, pero no es fácil conectar 
 
 ---
 
-### 4. Streams y Rx
+#### 4. Streams y Rx
 
 Los datos fluyen por pipelines y se consumen siguiendo modelos _push_ o _pull_
 
@@ -641,6 +641,15 @@ Es un paradigma, parte de la programación asíncrona: la disponibilidad de info
 
 ---
 
+#### Características de la programación reactiva
+
+- Tratar con _streams_ de datos asíncronos procedentes de cualquier fuente: interacción de usuarios, estructuras de datos, etc.
+- Usar funciones para crear, combinar, filtrar, etc. esos streams: paradigma funcional
+- Los eventos emitidos por un stream siguen una ordenación temporal: un valor, un error  o una señal de _stream completado_
+- La captura de esos eventos es asíncrona (mediante callbacks, listeners, promesas, futuros etc.)
+
+---
+
 #### Observables
 
 Los Observables se pueden:
@@ -653,17 +662,14 @@ Los Observables se pueden:
 
 ---
 
-> LECTURA recomendada: [The introduction to Reactive Programming you've been missing (by @andrestaltz)](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754)
-
----
-
 ¿Qué añade un Observable al patrón Observer?
 
-Añade a un __Observer asíncrono__ la semántica de un __Iterable síncrono__:
+Añade a un __Observer asíncrono/push__ la semántica de un __Iterable síncrono/pull__:
 
+- `onNext()`: para que el suscriptor sepa qué hacer al iterar (asíncronamente) hacia el siguiente elemento
 - `onCompleted()`: para que el publicador avise al suscriptor que no hay más datos disponibles en el stream (los Iterables simplemente acaban su iteración)
 - `onError()`: para que el productor avise al suscriptor que ha ocurrido un error (en su lugar, los Iterables elevan excepciones)
- 
+
 ---
 
 #### Ejemplos de frameworks de streams
@@ -680,4 +686,5 @@ Añade a un __Observer asíncrono__ la semántica de un __Iterable síncrono__:
 __Lecturas recomendadas__
 
 - Thomas & Hunt. The Pragmatic Programmer, 2nd edition, 2022. Capítulo: *Transforming Programming*
+- [The introduction to Reactive Programming you've been missing (by @andrestaltz)](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754)
 - [How to Write Clean Codes by Using Pipe Operations in Python?](https://www.turing.com/kb/write-clean-codes-by-using-pipe-operations-in-python)
