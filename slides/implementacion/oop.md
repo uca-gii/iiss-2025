@@ -249,6 +249,8 @@ p {
 ¿Cómo se resuelve esto en las bibliotecas típicas que conocéis
 (v.g. C++ STL, Java Collections, etc.)?
 
+<!-- Iteradores -->
+
 ---
 
 ## Implementación alternativa: Lista v0.4
@@ -443,7 +445,7 @@ p {
 
 ---
 
-#### Ejemplo 3: Override en Java
+#### Ejemplo 3: `@Override` en Java
 
 <style scoped>
 h4 {
