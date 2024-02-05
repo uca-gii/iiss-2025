@@ -2,9 +2,16 @@
 
 ## Slides
 
-- [Cultura DevOps](cultura.md)
-- [CI/CD](cicd.md)
-- [Git Branching patterns](branching.md)
+- [Objetos](oop.md)
+- [Delegación](delegacion.md)
+- [Inyección de dependencias](inyeccion.md)
+- [Refactoring y duplicación](refactoring.md)
+- [Ortogonalidad](ortogonalidad.md)
+- [Aspectos](aspectos.md)
+- [Errores y excepciones](errores.md)
+- [Programación funcional](funcional.md)
+- [Contratos](asertiva.md)
+
 
 Para generar las slides hay que instalar [marp-cli](https://github.com/marp-team/marp-cli).
 
@@ -17,7 +24,3 @@ Para generar las slides hay que instalar [marp-cli](https://github.com/marp-team
 `marp/html-build [FILENAME]`
 
 Los PDF se generan por defecto en la carpeta `pdf/`. Los ficheros HTML e imágenes se generan por defecto en la carpeta `html/`
-
-## Tutoriales
-
-- [Tutorial de GitFlow](gitflow.md)
