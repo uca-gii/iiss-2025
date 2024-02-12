@@ -1,10 +1,18 @@
 # DevOps
 
-## Slides
+## Teoría
 
 - [Cultura DevOps](cultura.md)
 - [CI/CD](cicd.md)
 - [Git Branching patterns](branching.md)
+
+## Prácticas
+
+- [Control de versiones: git](scv/scv-01.md)
+- [Contenedores: docker](docker/)
+- [Infraestructura como código: terraform](terraform/terraform-01.md)
+- [Integración: jenkins](jenkins/jenkins-01.md)
+
 
 Para generar las slides hay que instalar [marp-cli](https://github.com/marp-team/marp-cli).
 

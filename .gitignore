@@ -10,10 +10,12 @@ html/*.html
 html/img/*.png
 html/img/*.gif
 *.pdf
+**/html
 
 # Output
 pdf/
 pdf/*.pdf
+**/pdf
 
 # Logs
 logs
