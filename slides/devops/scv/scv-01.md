@@ -30,6 +30,9 @@ img[alt~="float"] {
   display: float;
   margin: 8px 5px 0 5px;
 }
+emph {
+  color: #E87B00;
+}
 </style>
 
 # Sistema de Control de Versiones (SCV)
@@ -44,25 +47,47 @@ img[alt~="float"] {
 
 ### ¿Qué es un Sistema de Control de Versiones (SCV)?
 
-Un SCV, en inglés *version control system* (VCS), es un sistema que registra los cambios realizados en un conjunto de archivos a lo largo del tiempo.
+Un SCV, en inglés *Version Control System* (VCS), registra los cambios realizados en un conjunto de archivos a lo largo del tiempo.
 
-Permite recuperar versiones específicas de esos archivos, lo que es útil para el trabajo colaborativo y para mantener un historial de cambios.
+Permite recuperar versiones específicas de esos archivos, útil para el trabajo colaborativo y para mantener un historial de cambios.
 
 ### Repositorio
 
-Un repositorio es un lugar donde se almacenan los archivos de un proyecto, junto con el historial de cambios.
+Lugar donde se almacenan los archivos de un proyecto, junto con el historial de cambios.
 
 Puede estar ubicado localmente en la máquina del usuario o de forma remota en un servidor.
 
 ---
 
+## SCV: Source Code Versioning
+
+![width:1100px SCV systems](img/scv-vcs-scm.png)
+
+<emph>VCS: Version Control Systems</emph> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <emph>SCM: Source Code Management</emph>
+
+¿Para qué sirven?
+
+- Rastrear cambios y restaurar versiones anteriores del software
+- Gestionar y coordinar el código fuente en equipos de desarrollo de software
+- Seguimiento de varias líneas de trabajo y ayudar a fusionar líneas
+
+<!--
+
+El código fuente es un activo vital para cualquier equipo de desarrollo de software. Las herramientas de gestión de código fuente sirven para rastrear cambios, lo que facilita la recreación de versiones anteriores del software y ver cómo se desarrolla con el tiempo.
+
+También sirven para coordinar a un equipo de programadores que trabajan en un código base común. Al registrar los cambios que cada desarrollador realiza, estos sistemas pueden hacer un seguimiento de múltiples líneas de trabajo al mismo tiempo y ayudar a los desarrolladores a fusionar estas líneas de trabajo.
+
+-->
+
+---
+
 ## Herramientas SCV
 
-- **Subversion (SVN)**: sistema centralizado de control de versiones
+- <emph>Subversion (SVN)</emph>: sistema **centralizado** de control de versiones
   - Un solo repositorio central que almacena todas las versiones
   - Los usuarios deben estar conectados al repositorio central para trabajar
 
-- **Git**: sistema distribuido de control de versiones
+- <emph>Git</emph>: sistema **distribuido** de control de versiones
   - Cada usuario tiene una copia completa del repositorio
   - Los usuarios pueden trabajar de forma independiente sin necesidad de una conexión constante a un servidor central
 
@@ -70,12 +95,11 @@ Git fue creado por Linus Torvalds en 2005 y se ha convertido en uno de los SCV m
 
 ---
 
-## Repositorios en la Nube
+## Plataformas en la nube
 
-Existen plataformas de alojamiento de repositorios en la nube como GitHub, GitLab y Bitbucket.
+Alojamiento de repositorios (y más cosas) en la nube como GitHub, GitLab y Bitbucket.
 
-Estas plataformas permiten a los desarrolladores alojar y colaborar en proyectos de código abierto y privados de forma remota.
-
+Permiten a los desarrolladores alojar y colaborar en proyectos de código abierto y repositorios públicos o privados de forma remota.
 
 ![width:300 float](img/GitHub-logo.png) ![width:300 float](img/gitlab-logo-100.png) ![width:380 float](img/Bitbucket-Logo-blue.svg)
 
@@ -104,7 +128,7 @@ brew install git
 
 ---
 
-## Comandos básicos de Git
+## Trabajando con repositorios
 
 ### Inicializar un repositorio local
 
@@ -136,7 +160,7 @@ Si son privados, necesitareis autenticaros para poder clonarlos.
 Vamos a usar un repositorio público de Github:
   
 ```bash
-  git clone https://github.com/jacaballero/vs-git-<curso_actual>.git
+  git clone https://github.com/sistemas-sw/iiss-git-<curso_actual>.git
 ```
 
 Donde `<curso_actual>` es el curso actual (por ejemplo, `23-24`).
@@ -166,7 +190,7 @@ Podemos comprobar el estado del repositorio local usando el comando `git status`
 
 ---
 
-### Actualizar repositorio
+### Actualizar cambios
 
 Para confirmar los cambios en el repositorio local, usamos el comando `git commit`:
 
@@ -177,6 +201,10 @@ git commit -m "Mensaje"
 - El mensaje debe ser descriptivo y debe indicar los cambios realizados
 - Al ejecutar `git commit`, se crea un nuevo commit en el repositorio local
 - Cada commit tiene un identificador único que se puede usar para identificarlo
+
+---
+
+### Sincronizar cambios
 
 Para subir los cambios al repositorio remoto, usamos el comando `git push` (debemos tener permisos de escritura en el repositorio remoto):
 
@@ -304,33 +332,17 @@ git push origin --delete <nombre_de_la_rama>
 
 ---
 
-### Stash
+### Stash de ramas
 
 Stash permite guardar los cambios realizados en la rama actual para poder cambiar de rama sin tener que hacer un commit.
 
-Para guardar los cambios realizados en la rama actual:
+`git stash` - guardar los cambios realizados en la rama actual
 
-```bash
-git stash
-```
+`git stash pop` - recuperar los cambios guardados
 
-Para recuperar los cambios guardados:
+`git stash list` - ver los cambios guardados
 
-```bash
-git stash pop
-```
-
-Para ver los cambios guardados:
-
-```bash
-git stash list
-```
-
-Para eliminar los cambios guardados:
-
-```bash
-git stash drop
-```
+`git stash drop` - eliminar los cambios guardados
 
 ---
 
@@ -408,6 +420,17 @@ Rebase soluciona el mismo problema que la fusión de ramas, pero de forma muy di
 
 ---
 
+<!-- _class: invert -->
+<style scoped>
+  section { justify-content: start; text-align: center; }
+</style>
+
+### Merge vs rebase vs cherry-pick
+
+![Conflicts](img/merge-rebase-cherry-b.png)
+
+---
+
 ### Rebase de ramas (II)
 
 Para hacer un rebase de una rama con la rama actual:
@@ -452,6 +475,7 @@ El archivo `.gitignore` permite ignorar archivos y directorios que no queremos a
 - En caso de querer añadir un archivo o directorio ignorado, se puede forzar su inclusión con `git add -f`
 
 El archivo `.gitkeep` permite añadir un directorio vacío al repositorio.
+
 - Git no permite añadir directorios vacíos al repositorio
 - Para añadir un directorio vacío, se crea un archivo `.gitkeep` dentro del directorio
 
@@ -471,6 +495,33 @@ Los IDEs más populares también tienen integración con Git.
 
 ---
 
+### Vocabulario git (1)
+
+| 📙 | Repositorios |
+----:|:----
+<emph>fork</emph> |  Una copia de un repositorio en el que se puede trabajar de forma independiente (te haces propietario)
+<emph>clone</emph> | Copia de un repo remoto (<emph>origin</emph>) en la máquina local, para trabajar independientemente (pero no eres propietario)
+<emph>origin</emph> | Nombre para referirse al repositorio remoto del que se clonó un repo local
+<emph>upstream</emph> | Nombre para referirse al repositorio original desde el que se forkeó un repo
+<emph>commit</emph> | Conjunto de cambios en el código fuente que se registra en el repo
+<emph>checkout</emph> | Cambiar de rama activa en el repo local
+
+---
+
+### Vocabulario git (2)
+
+| 📙 | Ramas |
+----:|:----
+<emph>branch</emph> | Una secuencia de commits
+<emph>head</emph> | Último commit de una rama
+<emph>stage</emph> | Cambios preparados para el próximo commit
+<emph>push/pull </emph> | Sincronizar commits con/desde el repositorio remoto/local
+<emph>merge </emph> | Fusionar una rama con otra
+<emph>rebase </emph> | Mover commits de una rama a otra
+<emph>stash </emph> | Dejar a un lado (guardar) los cambios en la rama actual
+
+---
+
 ## Tarea
 
 1. Crear un repositorio en GitHub
@@ -483,3 +534,13 @@ Los IDEs más populares también tienen integración con Git.
 8. Fusionar la rama `feature` con la rama `main`
 9. Subir los cambios al repositorio remoto
 10. Eliminar la rama `feature`
+
+---
+
+<style scoped>
+  section { text-align: center; }
+</style>
+
+### Tutorial recomendado
+
+JJ Merelo: [Aprende Git](https://github.com/JJ/aprende-git)
