@@ -1,7 +1,7 @@
 ---
 marp: true
-title: Apuntes IISS 2022
-description: Apuntes de Implementación e Implantación de Sistemas Software, curso 2021/22
+title: Apuntes IISS
+description: Apuntes de Implementación e Implantación de Sistemas Software
 ---
 
 <!-- size: 16:9 -->
@@ -25,7 +25,7 @@ h2 {
 
 <!-- paginate: true -->
 
-## CASO PRÁCTICO: Implementación de una orquesta (1)
+## CASO PRÁCTICO: Implementación de una orquesta
 
 ---
 
@@ -393,47 +393,25 @@ Eliminamos lo que no nos interesa: el resto de elementos de la interfaz `List` q
 
 Supongamos que queremos sustituir la implementación basada en una `List` por otra (quizá más eficiente) basada en un `Map`.
 
----
+Consultar la interfaz de `Map`:
 
-__Nota__: La interfaz [`java.util.Map`](http://docs.oracle.com/javase/6/docs/api/java/util/Map.html) declara los métodos siguientes:
+- Interfaz [`java.util.Map`](http://docs.oracle.com/javase/6/docs/api/java/util/Map.html) de Java 6:
 
-```
-clear() void – Map
-containsKey(Object key) boolean – Map
-containsValue(Object value) boolean – Map
-entrySet() Set – Map
-equals(Object o) boolean – Map
-get(Object key) Object – Map
-getClass() Class<? extends Object> – Object
-hashCode() int – Map
-isEmpty() boolean – Map
-keySet() Set – Map
-notify() void – Object
-notifyAll() void – Object
-put(Object key, Object value) Object – Map
-putAll(Map t) void – Map
-remove(Object key) Object – Map
-size() int – Map
-toString() String – Object
-values() Collection – Map
-wait() void – Object
-wait(long timeout) void – Object
-wait(long timeout, int nanos) void – Object
-```
+- Interfaz [`java.util.Map<K,V>`](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html) de Java 11:
 
 ---
 
-Pero ¡`Map` no implementa `Iterable`!
+`Map` no implementa `Iterable` (!)
 
 Existe una cierta tensión proveedor-cliente en la **frontera** de la interfaz
 
 - Los proveedores de packages y frameworks quieren ampliar aplicabilidad
 - Los clientes quieren una interfaz centrada en sus necesidades particulares
 
-Construimos un `Map` y lo pasamos.
+Si construimos un `Map` y lo pasamos...
 
-- Primera opción: Ninguno de los receptores deberá poder borrar algo del map. Pero ¡hay un `clear()` en el `Map`!
-- Segunda opción: solo algunos tipos de objetos deben poderse guardar. Pero ¡los tipos de objeto a guardar no están restringidos en un `Map`!
+- Ninguno de los receptores deberá poder borrar algo del map. Pero ¡hay un `clear()` en el `Map`!
+- Algunos de los métodos de `Map` esperan un `Object`: `containsKey(Object key)`, `containsValue(Object value)`
 
 ---
 
@@ -442,21 +420,21 @@ Construimos un `Map` y lo pasamos.
 - JDK < 5.0:
 
 ```java
-      Map sensors = new HashMap();
-      sensors.put(1, new Sensor());
-      sensors.put(2, new Sensor());
-      ...
-      Sensor s = (Sensor)sensors.get(sensorId);
+  Map sensors = new HashMap();
+  sensors.put(1, new Sensor());
+  sensors.put(2, new Sensor());
+  ...
+  Sensor s = (Sensor)sensors.get(sensorId);
 ```
 
 - JDK >= 5.0:
 
 ```java
-      Map<Integer,Sensor> sensors = new HashMap<Integer,Sensor>();
-      sensors.put(1, new Sensor());
-      sensors.put(2, new Sensor());
-      ...
-      Sensor s = sensors.get(sensorId);
+  Map<Integer,Sensor> sensors = new HashMap<Integer,Sensor>();
+  sensors.put(1, new Sensor());
+  sensors.put(2, new Sensor());
+  ...
+  Sensor s = sensors.get(sensorId);
 ```
 
 ---
@@ -464,19 +442,19 @@ Construimos un `Map` y lo pasamos.
 __Conclusión__: `Map<Integer,Sensor>` ofrece más de lo que necesitamos
 
 ```java
-      public class Sensors {
-        private Map sensors = new HashMap();
-        public Sensor getById(String id) {
-          return (Sensor) sensors.get(id);
-        }
-        //...
-      }
+  public class Sensors {
+    private Map sensors = new HashMap();
+    public Sensor getById(String id) {
+      return (Sensor) sensors.get(id);
+    }
+    //...
+  }
 ```
 
-- La interfaz `Map` queda oculta
-- Filtramos los métodos que no nos sirven
+- La interfaz `Map` queda oculta en `Sensors`
+- Se filtran los métodos que no nos sirven
 - Más fácil de hacer evolucionar sin impacto en el resto de la aplicación
-- El casting queda confinado en la clase Sensors, que es más seguro
+- El casting queda confinado en la clase `Sensors`, que es más seguro
 
 ---
 
@@ -570,7 +548,7 @@ Delegación _en horizontal_ hacia otras clases cuya interfaz es bien conocida
 
 ---
 
-## CASO PRÁCTICO: implementación de comparadores (1)
+## CASO PRÁCTICO: Implementación de comparadores
 
 ---
 
