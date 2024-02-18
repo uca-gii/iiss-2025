@@ -517,6 +517,10 @@ p {
 
 ¿Es necesario usar la inyección de dependencias para especificar las _partituras_ con las que deben funcionar los instrumentos de la _orquesta_?
 
+<!--
+Sólo si queremos que la orquesta pueda tocar con diferentes partituras, o si queremos probar la orquesta con diferentes partituras.
+-->
+
 ---
 
 ## CASO PRÁCTICO: Implementación de comparadores (2)
