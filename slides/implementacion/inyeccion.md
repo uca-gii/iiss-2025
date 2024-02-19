@@ -313,6 +313,7 @@ Dependencia `Orquesta` $\dashrightarrow$ `Instrumento`:
 - ¿Añadir un argumento `Instrumento` al constructor de la `Orquesta`?
 - ¿Definir métodos `Orquesta::addInstrumento(Instrumento i)`?
   - Esto ya lo estamos haciendo en `PruebaOrquesta` y `OrquestaTest`
+- ¿Y por qué no un método `Orquesta::setPartitura(Partitura p)`?
 
 ---
 
@@ -324,9 +325,9 @@ p {
 }
 </style>
 
-¿Quién le pone el cascabel (partitura) al gato (instrumento)?
-
 ¿Quién le añade los instrumentos a la orquesta?
+¿Quién le pone el cascabel (partitura) al gato (instrumento)?
+¿A qué gato (orquesta o instumento)?
 
 ---
 
@@ -344,17 +345,7 @@ El framework DI inyecta dependencias de forma universal, no de modo particular a
 - [Eclipse RCP](https://wiki.eclipse.org/Eclipse4/RCP/Dependency_Injection)
 ---
 
-## Tipos de inyección
-
-- Inyección a través del __constructor__: la inyectora suministra la dependencia a través del constructor de la clase dependiente.
-
-- Inyección a través de __propiedades__: la inyectora suministra la dependenca a través de un método _setter_ de la clase dependiente.
-
-- Inyección a través de __métodos__: la inyectora suministra la dependencia a través de una API establecida por la clase dependiente, en la que se especifican el/los método(s) para suministrarla.
-
----
-
-### Construcción con Spring
+### Inyección con Spring Framework
 
 A través de un fichero de configuración `orquesta.xml` le indicamos los valores inyectables:
 
@@ -424,6 +415,8 @@ Los _beans_ son usados por muchos frameworks, entre otros Spring:
 
 - [Spring Bean](https://www.baeldung.com/spring-bean)
 - [Spring FactoryBean](http://www.baeldung.com/spring-factorybean)
+
+Más info sobre [Spring DI](https://docs.spring.io/spring-framework/reference/core/beans/dependencies/factory-collaborators.html)
 
 ---
 
@@ -631,7 +624,7 @@ El motor de inyección de dependencias (por ejemplo, Spring) inyectaría la clas
 
 - Inyección a través de __propiedades__: la clase inyectora suministra la dependenca a través de un método _setter_ de la clase dependiente.
 
-- Inyección a través de __métodos__: la clase inyectora suministra la dependencia a través de una API establecida por la clase dependiente, en la que se especifican el/los método(s) para suministrarla.
+- Inyección a través de __métodos (API)__: la clase inyectora suministra la dependencia a través de una API determinada para la que está preparada (construida/configurada) la clase dependiente.
 
 ---
 
