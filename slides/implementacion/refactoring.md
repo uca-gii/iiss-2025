@@ -49,7 +49,7 @@ Hacer _refactoring_ es hacer pequeñas transformaciones en el código que mantie
 ---
 
 > __Lecturas recomendadas__
->  - Hunt & Thomas. [The Pragmatic Programmer](bibliografia.md#pragmatic), 1999. Capítulo: *Refactoring*
+>  - Hunt & Thomas. [The Pragmatic Programmer](bibliografia.md#pragmatic), 2019. Capítulo 40: *Refactoring*
 >  - McConnell. [Code Complete](bibliografia.md#codecomplete), 2004.
 
 ---
@@ -607,6 +607,8 @@ object NumerosComplejos {
 
 - No resoluble a nivel de técnicas de construcción
 - Hace falta metodología, gestión de equipos + herramientas de comunicación
+  - CI/CD (_Continuous Integration / Continuous Delivery)
+  - Prácticas DevOps
 
 ---
 
