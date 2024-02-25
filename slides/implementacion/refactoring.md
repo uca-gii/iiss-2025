@@ -607,7 +607,7 @@ object NumerosComplejos {
 
 - No resoluble a nivel de técnicas de construcción
 - Hace falta metodología, gestión de equipos + herramientas de comunicación
-  - CI/CD (_Continuous Integration / Continuous Delivery)
+  - CI/CD (_Continuous Integration_ / _Continuous Delivery_)
   - Prácticas DevOps
 
 ---
