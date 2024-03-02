@@ -112,14 +112,36 @@ class Point {
 
 ---
 
-Implementamos `MoveTracking`.  ¿Qué dependencias aparecen?
+Implementamos una clase que monitoriza los cambios en las figuras:
+
+```java
+class MoveTracking {
+  private static boolean flag = false;
+
+  public static void setFlag() {
+    flag = true;
+  }
+
+  public static boolean testAndClear() {
+    boolean result = flag;
+    flag = false;
+    return result;
+  }
+}
+```
+
+¿Qué dependencias aparecen?
+
+---
+
+¿Qué dependencias aparecen?
 
 - `Line` $\dashrightarrow$ `MoveTracking`
 - `Point` $\dashrightarrow$ `MoveTracking`
 
 ### Implementación sin aspectos
 
-Primero vemos una implementación con las dependencias anteriores, y sin aspectos...
+Primero vemos una implementación con las dependencias anteriores, sin aspectos...
 
 ---
 
@@ -161,24 +183,6 @@ class Point {
   }
   void setY(int y) {
     this.y = y;
-  }
-}
-```
-
----
-
-```java
-class MoveTracking {
-  private static boolean flag = false;
-
-  public static void setFlag() {
-    flag = true;
-  }
-
-  public static boolean testAndClear() {
-    boolean result = flag;
-    flag = false;
-    return result;
   }
 }
 ```
