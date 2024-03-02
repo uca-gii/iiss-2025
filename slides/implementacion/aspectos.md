@@ -193,8 +193,7 @@ class Point {
 
 También detecta el cambio de coordenadas de un punto.
 
-- `Line` $\dashrightarrow$ `MoveTracking`
-- `Point` $\dashrightarrow$ `MoveTracking`
+`Line` $\dashrightarrow$ `MoveTracking` y `Point` $\dashrightarrow$ `MoveTracking`
 
 ```java hl_lines="25 29"
 class Line {
@@ -393,7 +392,7 @@ Vamos a eliminar las dependencias, gracias a la implementación de aspectos...
 
 #### Versión 1 con aspectos
 
-`Line` $\not\dashrightarrow$ `MoveTracking`
+Eliminar dependencia `Line` $\not\dashrightarrow$ `MoveTracking`
 
 ```java
 aspect MoveTracking {
@@ -418,8 +417,7 @@ aspect MoveTracking {
 
 #### Versión 2 con aspectos
 
-- `Line` $\not\dashrightarrow$ `MoveTracking`
-- `Point` $\not\dashrightarrow$ `MoveTracking`
+Eliminar dependencias `Line` $\not\dashrightarrow$ `MoveTracking` y `Point` $\not\dashrightarrow$ `MoveTracking`
 
 ```java hl_lines="12 13"
 aspect MoveTracking {
