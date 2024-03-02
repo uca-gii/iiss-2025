@@ -188,9 +188,7 @@ Los métodos `stream`, `filter`, `map`, `sorted` y `forEach` son parte de las nu
 
 Este tipo de interfaces como la del API de streams de Java se conoce como [_fluent interfaces_](https://en.wikipedia.org/wiki/Fluent_interface).
 
-> La programación con streams se tratará en el capítulo sobre [Programación basada en Eventos](eventos.md)
-
-> Las interfaces funcionales se tratarán en el capítulo sobre [Programación Funcional](lambdas.md)
+> La programación con streams y se tratarán en el bloque sobre **Programación Funcional**
 
 ---
 
