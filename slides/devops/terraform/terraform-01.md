@@ -49,13 +49,13 @@ Terraform es una herramienta de código abierto que permite automatizar la imple
 
 IaC es una metodología que permite definir y administrar la infraestructura de una aplicación utilizando archivos de configuración en lugar de configuraciones manuales.
 
-* Automatización: automatiza la creación, configuración y gestión de recursos de infraestructura, lo que ahorra tiempo y reduce errores
+- Automatización: automatiza la creación, configuración y gestión de recursos de infraestructura, lo que ahorra tiempo y reduce errores
 
-* Declarativo: se decribe el estado de la infraestructura en lugar de escribir scripts
+- Declarativo: se decribe el estado de la infraestructura en lugar de escribir scripts
 
-* Multiplataforma: compatible con una variedad de proveedores de nube y tecnologías: AWS, Azure, Google Cloud, Kubernetes, Docker...
+- Multiplataforma: compatible con una variedad de proveedores de nube y tecnologías: AWS, Azure, Google Cloud, Kubernetes, Docker...
 
-* Colaboración y Replicabilidad: archivos de configuración legibles y versionables
+- Colaboración y Replicabilidad: archivos de configuración legibles y versionables
 
 ---
 
@@ -63,9 +63,9 @@ IaC es una metodología que permite definir y administrar la infraestructura de 
 
 ![width:720 center](img/terraform_architecture.avif)
 
-* Creación de los archivos Terraform (IaC)
-* Plan: Vista previa de los cambios que Terraform realizará para que coincidan con tu configuración
-* Apply: Se aplican los cambios planificados
+- Creación de los archivos Terraform (IaC)
+- Plan: Vista previa de los cambios que Terraform realizará para que coincidan con tu configuración
+- Apply: Se aplican los cambios planificados
 
 ---
 
