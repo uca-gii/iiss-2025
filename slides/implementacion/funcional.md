@@ -387,17 +387,17 @@ __Ejemplos__
 __Sintaxis__
 
 ```c++
-[capture](parameters) -> return_type { function_body }
+[capture](parameters) -> return_type { body }
 ```
 
 __*capture* = entorno de referencia__
 
 `[]`       – Sin variables externas definidas. Erróneo intentar utilizar cualquier variable externa
-`[x, &y]`  – `x` se captura por valor, `y` por referencia
+`[x, &y]`  – `x` se captura por copia, `y` por referencia
 `[&]`      – Toda variable externa utilizada es capturada implícitamente por referencia
-`[=]`      – Toda variable externa utilizada es capturadas implícitamente por valor
-`[&, x]`   – `x` se captura explícitamente por valor; el resto, por referencia
-`[=, &z]`  – `z` se captura explícitamente por referencia; el resto, por valor
+`[=]`      – Toda variable externa utilizada es capturadas implícitamente por copia
+`[&, x]`   – `x` se captura explícitamente por copia; el resto, por referencia
+`[=, &z]`  – `z` se captura explícitamente por referencia; el resto, por copia
 
 ---
 
@@ -440,8 +440,10 @@ std::for_each(
 
 - Una _clausura_ en C++ se expresa mediante la parte [_capture_]
 - El _entorno de referencia_ se expresa por el conjunto de variables externas indicadas dentro de la clausura
-- Las variables del entorno de referencia en C++ pueden ser capturadas por valor (`[=]`) o por referencia (`[&]`)
-- Las variables externas capturadas son inmutables por defecto; si no, usar `mutable` después de los (_parameters_)
+- Las variables del entorno de referencia en C++ pueden ser capturadas por copia (`[=]`) o por referencia (`[&]`)
+- Mutabilidad de variables en _body_
+  - Las variables externas capturadas son inmutables por defecto
+  - `mutable` después de los (_parameters_): permite que _body_ modifique los objetos capturados por copia
 
 ---
 
@@ -531,9 +533,13 @@ public class LambdaInstanceCapturing implements Runnable {
 
 En Java, una expresión lambda y una clase anónima interna (_inner class_) tienen un propósito similar, pero son diferentes en un aspecto: el **ámbito** (_scope_) de la definición de las variables locales.
 
-- Cuando se usa una inner class, se crea un __nuevo ámbito__ para dicha clase. Se pueden ocultar las variables locales para el ámbito contenedor instanciando nuevas variables con el mismo nombre. También se puede usar la palabra reservada `this` dentro de una clase anónima para hacer referencia a su instancia.
+- Cuando se usa una inner class, se crea un __nuevo ámbito__ para dicha clase.
+  - Se pueden ocultar las variables locales para el ámbito contenedor instanciando nuevas variables con el mismo nombre.
+  - También se puede usar la palabra reservada `this` dentro de una clase anónima para hacer referencia a su instancia.
 
-- Sin embargo, las expresiones lambda trabajan con el __ámbito contenedor__. No se pueden ocultar las variables del ámbito contenedor dentro del cuerpo de la expresión lambda. En tal caso, la palabra reservada `this` hace referencia a una instancia de la clase contenedora.
+- Sin embargo, las expresiones lambda trabajan con el __ámbito contenedor__.
+  - No se pueden ocultar las variables del ámbito contenedor dentro del cuerpo de la expresión lambda.
+  - `this` hace referencia a una instancia de la clase contenedora.
 
 ---
 
@@ -983,4 +989,90 @@ __Lecturas recomendadas__
 
 - M. Williams: [Java SE 8: Lambda Quick Start](http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/Lambda-QuickStart/index.html), Oracle Learning Library, 2013.
 - D. Thomas & A. Hunt: [Programming Ruby. The Pragmatic Programmer's Guide](http://www.ruby-doc.org/docs/ProgrammingRuby/), Addison-Wesley, 2005.
+
+---
+
+## STREAMS
+
+Un stream representa una secuencia de elementos que soportan diferentes tipos de operaciones para realizar cálculos sobre ellos
+
+### Operaciones
+
+Las operaciones sobre un stream pueden ser intermediarias o terminales
+
+- Las operaciones __intermediarias__ devuelven un nuevo stream permitiendo encadenar múltiples operaciones intermediarias sin usar punto y coma
+- Las operaciones __terminales__ son nulas o devuelven un resultado de un tipo diferente, normalmente un valor agregado a partir de cómputos anteriores
+
+---
+
+### Ejemplo v0.1
+
+\[Probar en [paiza.io](https://paiza.io/projects/K6lkbmKSYAKnF0o0fo0oEQ?language=java)\]
+
+```java
+public class Main{
+  public static void main(String []args){
+      
+    List<String> myList =
+      Arrays.asList("a1", "a2", "b1", "c2", "c1");
+
+    myList
+      .stream()
+      .filter(s -> s.startsWith("c"))
+      .map(String::toUpperCase)
+      .sorted()
+      .forEach(System.out::println);
+      
+  }
+}
+```
+
+---
+
+### Streams con interfaces funcionales
+
+- Las operaciones que se aplican sobre un _stream_ aceptan algún parámetro en forma de:
+
+  - __interfaz funcional__: objeto cuyo tipo (clase) representa a una función ejecutable con un cierto número de parámetros (normalmente 0, 1 o 2)
+  - __expresión lambda__: interfaz funcional anónima, que especifica el comportamiento de la operación, pero sin especificar formalmente su nombre y tipo de parámetros
+
+- Las operaciones aplicadas no pueden modificar el _estado_ del stream original
+
+---
+
+En el ejemplo anterior, se puede observar que:
+
+- `filter`, `map` y `sorted` son operaciones intermediarias
+- `forEach` es una operación terminal
+- Ninguna de las operaciones modifica el estado de `myList` añadiendo o eliminando elementos
+- Sólo se filtran ciertos elementos, se transforman a mayúsculas, se ordenan (por defecto, alfabéticamente) y se imprimen por pantalla
+
+---
+
+### Ejemplo v0.2
+
+```java
+List<String> myList =
+  Arrays.asList("a1", "a2", "b1", "c2", "c1");
+
+myList
+  .stream()
+  .filter(s -> s.startsWith("c"))
+  .map(String::toUpperCase)
+  .sorted()
+  .forEach(System.out::println);
+
+myList
+  .stream()
+  .reduce( (a,b) -> a + " " + b )
+  .ifPresent(System.out::println);
+```
+
+---
+
+### Más información
+
+- Winterbe: [Java 8 stream tutorial](https://winterbe.com/posts/2014/07/31/java8-stream-tutorial-examples/)
+- Oracle: [Procesamiento de datos con streams de Java](https://www.oracle.com/lad/technical-resources/articles/java/processing-streams-java-se8.html) 
+- Oracle: [Introducción a Expresiones Lambda y API Stream en Java](https://www.oracle.com/lad/technical-resources/articles/java/expresiones-lambda-api-stream-java-part2.html)
 
