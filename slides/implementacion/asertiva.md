@@ -559,9 +559,12 @@ end -- class ACCOUNT
 
 ### ¿Hay contratos en C++?
 
-Aún no hay contratos en C++17 ni en C++20.
+Aún no hay contratos en C++17 ni en C++20 ni en C++23.
 
-- Actividad: Ver el video de J. D. García sobre [Contracts programming after C++17](https://www.youtube.com/watch?v=IBas3S2HtdU): Desde el minuto 4'10''
+Para interesados:
+
+- Leer el [working paper](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2022/p2521r2.html) sobre el estado de la propuesta de contratos en C++
+- Ver el video de J. D. García sobre [Contracts programming after C++17](https://www.youtube.com/watch?v=IBas3S2HtdU): Desde el minuto 4'10''
 
 ---
 
