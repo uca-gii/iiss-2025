@@ -633,19 +633,19 @@ Podemos volver a Jenkins y ejecutar el pipeline.
 
 ### Ejemplo: Pipeline para desplegar aplicación React (V)
 
-Actualizamos el archivo `Jenkinsfile` con una etapa de Despliegue:
+Actualizamos el archivo `Jenkinsfile` con una etapa de Entrega/Despliegue:
 
 ```groovy
-  stage('Deploy') {
+  stage('Deliver') {
       steps {
-          sh './jenkins/scripts/deploy.sh'
+          sh './jenkins/scripts/deliver.sh'
           input message: 'Finished using the web site? (Click "Proceed" to continue)'
           sh './jenkins/scripts/kill.sh'
       }
   }
 ```
 
-- El script `deploy.sh` despliega la aplicación en un contenedor Docker (más detalles dentro del script)
+- El script `deliver.sh` entrega y despliega la aplicación en un contenedor Docker (más detalles dentro del script)
 - `input message` detiene la ejecución y solicita respuesta al usuario
 
 ---
