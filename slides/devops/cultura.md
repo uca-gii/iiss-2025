@@ -52,11 +52,14 @@ section { text-align: center; }
 
 - <emph>Dev</emph>elopment + <emph>Op</emph>erations
 
-  - Concepción > Desarrollo > Entrega
+  - ∆ Concepción ⇾ Desarrollo ⇾ Entrega
+  - Desarrolladores: innovación y agilidad
+  - Sysadmin: garantías y estabilidad
 
-- Procesos ágiles
+- <emph>Agilidad</emph>: _Lean manufacturing_
 
-  - _Lean manufacturing_
+  - La agilidad llega a los procesos de negocio
+  - Falta incluir a los sysadmin
 
 <!--
 
@@ -92,7 +95,7 @@ La cultura DevOps es como una extensión de los procesos ágiles a todos los equ
 
 ---
 
-## Elementos clave en DevOps
+## Elementos clave para la comunicación y colaboración
 
 - <emph>Deployment</emph> (despliegues) frecuentes
 - Pruebas automáticas
@@ -137,14 +140,6 @@ _On your marks, get set,... go!_
 
 ![bg cover On your marks](img/on-your-marks.jpg)
 
----
-
-| 📙 | Definiciones |
-----:|:----
- **<emph>Integración</emph>**  continua   | Llevar automáticamente los cambios de <emph>varios desarrolladores</emph> en el código de una aplicación a un <emph>repositorio</emph> compartido para cada nueva versión.
- **<emph>Entrega</emph>**  continua  | Trasladar la aplicación de software desde el entorno de desarrollo y dejarla <emph>disponible para</emph> su despliegue en un entorno de producción. Incluye pruebas, empaquetado y preparación de cada _<emph>release</emph>_.
-**<emph>Despliegue</emph>**    | Instalación de una aplicación en su entorno de <emph>producción</emph>, ya sea en un servidor, un conjunto de servidores, un contenedor, la nube, etc.
- 
 <!--
 
 El despliegue es el "¡ya!" en "preparados, listos... ¡ya!"
@@ -155,14 +150,23 @@ La integración podría ser el "¡a sus puestos!"
 
 ---
 
+| 📙 | Definiciones |
+----:|:----
+ **<emph>Integración</emph>**  continua   | Llevar automáticamente los cambios de <emph>varios desarrolladores</emph> en el código de una aplicación a un <emph>repositorio</emph> compartido para cada nueva versión.
+ **<emph>Entrega</emph>**  continua  | Trasladar la aplicación de software desde el entorno de desarrollo y dejarla <emph>disponible para</emph> su despliegue en un entorno de producción. Incluye pruebas, empaquetado y preparación de cada _<emph>release</emph>_.
+**<emph>Despliegue</emph>**    | Instalación de una aplicación en su entorno de <emph>producción</emph>, ya sea en un servidor, un conjunto de servidores, un contenedor, la nube, etc.
+
+---
+
 <!-- _class: invert -->
 <style scoped>
-section { text-align: center; }
+section {
+  text-align: left;
+  justify-content: start;
+}
 </style>
 
 <emph>¿DevOps es un nuevo rol?</emph>
-
----
 
 ![bg cover Superhero](img/superhero.png)
 
@@ -189,8 +193,6 @@ El problema de este pensamiento es que las empresas tienden a crear un nuevo sil
 
 <!--
 
-El problema de este pensamiento es que las empresas tienden a crear un nuevo silo llamado DevOps e intentan llenarlo con superadministradores que saben mágicamente de ambas cosas.
-
 Más que un rol, DevOps es un cambio cultural en la forma en que se crea software.
 
 El objetivo no es contratar personas superhumanas, sino construir sistemas con una nueva mentalidad:
@@ -200,21 +202,6 @@ El objetivo no es contratar personas superhumanas, sino construir sistemas con u
 - Deben formar parte de un proceso colaborativo
 
 DevOps está más centrado en la colaboración entre equipos que en la creación de un nuevo rol.
-
--->
-
----
-
-<!-- _class: invert -->
-<style scoped>
-section { text-align: center; }
-</style>
-
-<emph>¿Es DevOps equivalente a _Site Reliability Engineering_ (SRE)?</emph>
-
-<!--
-
-No es Site Reliability Engineering, que es más bien un rol de operaciones, enfocado en cómo garantizar la fiabilidad y la escala en los sistemas en producción.
 
 DevOps es más una cultura, indica qué conseguir. Pero habitualmente se suele mezclar con el cómo y se convierte en un rol.
 
@@ -266,7 +253,7 @@ Los desarrolladores se ven obligados a tomar atajos, que suelen dar lugar a una 
 
 | 📙 | Definiciones |
 ----:|:----
- <emph>Deuda técnica   | Decisiones tomadas durante el desarrollo de un software que, en el corto plazo, permiten un desarrollo más rápido o una solución temporal, pero que crean problemas a largo plazo en términos de NFR
+ <emph>Deuda técnica   | Decisiones tomadas durante el desarrollo de un software que, en el corto plazo, permiten un desarrollo más rápido o una solución temporal, pero que crean problemas de NFR a largo plazo
  <emph>Requisitos No Funcionales (NFR) | Aspectos que no están relacionados directamente con la funcionalidad de un sistema software, sino con características no directamente vinculados a sus funciones específicas (rendimiento, usabilidad, confiabilidad, seguridad, eficiencia, etc.)
  <emph>Arquitectura software | Estructura y diseño organizativo de un sistema de software, sobre cómo sus <emph>componentes</emph> interactúan entre sí y cómo se organizan para lograr sus objetivos de manera efectiva. Proporciona un marco conceptual para abordar aspectos de los NFR.
 
@@ -285,8 +272,6 @@ Los desarrolladores se ven obligados a tomar atajos, que suelen dar lugar a una 
 - Productos con Herramientas
 
 <!--
-
-DevOps es la unión de personas, procesos y productos para una entrega continua de valor a los usuarios finales.
 
 ¿Cuál es el proceso? Muy similar a los procesos ágiles, incluyendo los elementos clave descritos antes: CI/CD, monitorización, etc.
 
@@ -307,12 +292,6 @@ DevOps es la unión de personas, procesos y productos para una entrega continua 
 - Continuous deployment
 
 Cada proceso tiene su propio <emph>pipeline</emph>
-
-<!--
-
-Cada uno de estos procesos tiene su propio pipeline
-
--->
 
 ---
 
@@ -338,7 +317,7 @@ CD añade pruebas automáticas y despliegue automático al proceso de CI.
 
 Gracias a CD, el software entregado debe funcionar siempre.
 
-Todos los cambios que se incorporan en un _build_ pueden formar parte de un candidato a _release_.
+Todos los cambios que se incorporan en un build pueden formar parte de un candidato a release.
 
 Antiguamente, los cambios pequeños solían tener que esperar a que se completaran otros muchos antes de ser empaquetados en una release. Siguiendo ese modelo, se suponía que el software era incorrecto hasta que era validado por profesionales de QA. Todas las pruebas se realizaban después del desarrollo, la responsabilidad de la calidad recaía exclusivamente en el equipo de QA.
 
@@ -390,6 +369,10 @@ La entrega es manual, el despliegue es automático.
 
 - <emph>IaC: _Infrastructure as Code_</emph>
 
+  - Automatizar: MV/contenedores
+  - Imágenes _estándar_ (v.g. NGINX + MariaDB + Ruby)
+  - Entorno de destino
+
 - Provisioning
 - Feature flags
 
@@ -397,11 +380,11 @@ La entrega es manual, el despliegue es automático.
 
 IaC es el proceso de escribir el código de las etapas de aprovisionamiento y configuración de los componentes de la infraestructura, lo que ayuda a automatizar su implementación de manera repetible y consistente.
 
-La forma de permitir el self-service provisioning es crear un conjunto estándar de imágenes de máquinas se puedan solicitar bajo demanda. Estas imágenes representan máquinas estándar con todos los controles de seguridad, políticas y paquetes de software estándar instalados.
+La forma de permitir el self-service provisioning es crear un conjunto estándar de imágenes de máquinas que se puedan solicitar bajo demanda. Estas imágenes representan máquinas estándar con todos los controles de seguridad, políticas y paquetes de software estándar instalados.
 
-Por ejemplo, un desarrollador que necesira un servidor web con Ruby puede seleccionar, de entre un conjunto estándar de imágenes de máquinas, un servidor de aplicaciones NGINX, un servidor de base de datos MySQL, etc. El desarrollador no tiene que configurar ninguno de estos entornos.
+Por ejemplo, un desarrollador que necesira un servidor web con Ruby puede seleccionar, de entre un conjunto estándar de imágenes de máquinas, un servidor de aplicaciones NGINX, un servidor de base de datos MySQL, etc.
 
-En su lugar, solo tiene que solicitar una imagen y un entorno de destino. El entorno se aprovisiona automáticamente y el desarrollador puede empezar a trabajar.
+El desarrollador no tiene que configurar ninguno de estos entornos. En su lugar, solo tiene que solicitar una imagen y un entorno de destino. El entorno se aprovisiona automáticamente y el desarrollador puede empezar a trabajar.
 
 -->
 
@@ -427,33 +410,15 @@ EXPOSE 80
 
 <!--
 
-La contenerización consiste en desplegar aplicaciones en contenedores en lugar de desplegarlas en máquinas virtuales.
+Contenerización = desplegar aplicaciones en contenedores en lugar de desplegarlas en VM.
 
-Por ejemplo, Docker es una herramienta que permite crear, desplegar y ejecutar aplicaciones en contenedores. Las imágenes de los contenedores se crean a partir de un fichero Dockerfile. Este fichero contiene la declaración de la imagen base, que representa el sistema operativo a utilizar, middleware adicional a instalar en la imagen y la configuración de red de los puertos. Solo contiene los ficheros y binarios necesarios para la aplicación.
+Es importante que la IaC sea inmutable, es decir, que no se pueda modificar una vez creada. Si se necesita un cambio, se crea una nueva versión de la imagen. A diferencia de las VMs, los contenedores son inmutables, es decir, la configuración de un contenedor no puede modificarse durante su ejecución.
 
-Lo que se ha descrito puede funcionar en una IaaS. Pero también en una PaaS, donde los desarrolladores pueden realizar la misma funcionalidad de autoservicio utilizando la interfaz de usuario de la PaaS.
+v.g.: Dockerfile para especificar la imagen (sistema operativo) base, middleware adicional y configuración de red y puertos. Solo contiene los ficheros y binarios necesarios para la aplicación.
 
-Es importante que esta IaC sea inmutable, es decir, que no se pueda modificar una vez creada. Si se necesita un cambio, se crea una nueva versión de la imagen.
-
-A diferencia de las VMs, los contenedores son inmutables, es decir, la configuración de un contenedor no puede modificarse durante su ejecución.
+Esto puede funcionar en una IaaS. Pero también en una PaaS, donde los desarrolladores pueden realizar la misma funcionalidad de autoservicio utilizando la interfaz de usuario de la PaaS.
 
 -->
-
----
-
-#### IaC mediante scripting
-
-[Ejemplo usando Azure CLI](docs/iac-ejemplos.md#ejemplo-usando-azure-cli):
-
-```shell
-az group create --location westeurope --resource-group MyAppResourcegroup
-```
-
-[Ejemplo usando Azure PowerShell](docs/iac-ejemplos.md#ejemplo-usando-azure-powershell):
-
-```shell
-New-AzResourceGroup -Name MyAppResourcegroup -Location westeurope
-```
 
 ---
 
@@ -479,33 +444,7 @@ Este es el caso, por ejemplo, de Terraform y Vagrant de HashiCorp, Ansible, Azur
 
 ---
 
-[Ejemplo usando terraform](docs/iac-ejemplos.md#iac-con-tipos-declarativos) para definir un _resource group_ de Azure:
-
-```hcl
-terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~> 3.0.2"
-    }
-  }
-  required_version = ">= 1.1.0"
-}
-provider "azurerm" {
-  features {}
-}
-resource "azurerm_resource_group" "rg" {
-  name = "MyAppResourceGroup"
-  location = "West Europe"
-  tags = {
-    environment = "Demo"
-  }
-}
-```
-
----
-
-<emph>Ejemplo usando terraform</emph> para definir un servicio de AWS con un contenedor de Docker que sirve una página web en un cluster de ECS
+<emph>Ejemplo usando terraform</emph> para definir un servicio de AWS con un contenedor de Docker que sirve una página web en un cluster de ECS (_Elastic Container Service_)
 
 ```hcl
 provider "aws" {
@@ -520,13 +459,13 @@ resource "aws_ecs_task_definition" "example_task" {
   family                   = "example-task"
   network_mode             = "bridge"
   requires_compatibilities = ["EC2"]
-...
+  ...
 ```
 
 ---
 
 ```hcl
-...
+  ...
   container_definitions = <<EOF
 [
   {
@@ -573,6 +512,9 @@ resource "aws_ecs_service" "example_service" {
 
 - <emph>Provisioning</emph>
 
+  - Despliegues manuales engorrosos
+  - No repetibles. Hay que automatizar
+
 - Feature flags
 
 <!--
@@ -605,37 +547,41 @@ La automatización de los despliegues tiene como objetivo resolver todos estos p
 
 <!--
 
-El aprovisionamiento es la creación de los recursos que forman la infraestructura. Puede aprovisionarse un PaaS o un tipo de recurso serverless, como una app web, una Azure function o un Event Hub. Pero también puede aprovisionarse la parte de red que se gestiona, como VNet, subnets, tablas de encaminamiento o un cortafuegos de Azure.
+Aprovisionamiento = creación de los recursos que forman la infraestructura.
 
-Para las máquinas virtuales, el aprovisionamiento solo crea o actualiza el recurso cloud de la VM, pero no su contenido.
+Puede aprovisionarse un PaaS o un tipo de recurso serverless, como una app web, una Azure function o un Event Hub. Pero también puede aprovisionarse la parte de red que se gestiona, como VNet, subnets, tablas de encaminamiento o un cortafuegos de Azure.
 
-Hay varias herramientas de aprovisionamiento, como terraform, ARM template, AWS Cloud training, Azure CLI, Azure PowerShell y Google Cloud Deployment Manager.
+Para las VM, solo se crea o actualiza el recurso cloud de la VM, pero no su contenido, que hay que aprovisionar.
+
+Diversas herramientas de aprovisionamiento
 
 -->
 
 ---
 
-#### Buenas prácticas de IaC
+#### Buenas prácticas de IaC & provisioning
 
-- Automatizar todo en el código
-- SCM: _Source Control Manager_
-- Guardar el código junto al de la aplicación
+Análogas al desarrollo de software:
+
+- Automatizar todo en el código, nada manual
+- Someter a SCM (_Source Control Manager_) para versionar, rastrear, fusionar y restaurar
+- Guardar el código de IaC junto al de la aplicación (mismo repo)
 - Código de la IaC debe ser <emph>idempotente</emph>
 - Integrar con CI/CD
 
 <!--
 
-IaC, al igual que el desarrollo software, requiere prácticas y procesos que permitan que el código de la infraestructura evolucione y se pueda mantener.
+IaC requiere de prácticas análogas a la del desarrollo software:
 
 - Todo debe estar automatizado en el código: hay que codificar y automatizar todos los pasos de aprovisionamiento y no dejar fuera pasos manuales que distorsionen la automatización de la infraestructura.
 
-- Al igual que el código de las aplicaciones, el código de la IaC debe estar sometido a un source control manager o SCM para poder versionarlo, rastrearlo, fusionarlo y restaurarlo. Así se tiene una mejor visibilidad del código entre Devs y Ops.
+- Al igual que el código de las aplicaciones, el código de la IaC debe estar sometido a un SCM para poder versionarlo, rastrearlo, fusionarlo y restaurarlo. Mejorar visibilidad del código entre Devs y Ops.
 
 - El código de la IaC debe guardarse junto al código de la aplicación, si es posible en el mismo repositorio. Así se asegura una mejor organización del trabajo entre desarrolladores y operaciones, que compartirán el mismo espacio de trabajo.
 
 - Los scripts deben tener en cuenta el estado de la infraestructura cuando se ejecutan y no generar un error si el recurso que se va a crear ya existe, o si un recurso que se va a eliminar ya se ha eliminado. Los lenguajes declarativos, como Terraform, asumen este aspecto de la idempotencia de forma nativa.
 
-Por lo tanto, la IaC, al igual que los procesos de CI/CD, es una práctica clave de la cultura DevOps que permite desplegar y configurar una infraestructura. La IaC solo puede ser eficaz con herramientas adecuadas.
+Al igual que los procesos de CI/CD, la IaC es clave en la cultura DevOps. La IaC solo puede ser eficaz con herramientas adecuadas.
 
 Para las pruebas locales de infraestructura, algunas herramientas como Vagrant pueden simular un entorno local.
 
@@ -651,25 +597,15 @@ Para las pruebas locales de infraestructura, algunas herramientas como Vagrant p
 
 - <emph>Feature flags</emph>
 
-<!--
-
-Supongamos que un product manager tiene la teoría de que el proceso de registro es demasiado complejo para algunos usuarios y quiere probar un nuevo formulario más sencillo. La nueva página de registro se puede querer configurar para que se muestre cada vez que se solicite, de modo que el equipo pueda comparar las métricas de los usuarios de la nueva página con las de los usuarios de la página antigua.
-
-La cultura DevOps fomenta este tipo de experimentación fail fast. 
-
--->
-
----
-
-#### Feature flags
-
-- A/B testing
-- Distintas versiones, geografías, periodos de tiempo, navegadores, dispositivos, etc.
-- Experimentos en producción
+  - A/B testing
+  - Distintas versiones, geografías, periodos de tiempo, navegadores, dispositivos, etc.
+  - Experimentos en producción
 
 <!--
 
-Una tendencia actual es el uso de feature flags. Las feature flags permiten configurar características que se pueden activar o desactivar, o que solo estén disponibles para un determinado grupo de usuarios.
+Ejemplo: supongamos que un product manager tiene la teoría de que el proceso de registro es demasiado complejo para algunos usuarios y quiere probar un nuevo formulario más sencillo. La nueva página de registro se puede querer configurar para que se muestre cada vez que se solicite, de modo que el equipo pueda comparar las métricas de los usuarios de la nueva página con las de los usuarios de la página antigua. La cultura DevOps fomenta este tipo de experimentación fail fast. 
+
+Las feature flags permiten configurar características que se pueden activar o desactivar, o que solo estén disponibles para un determinado grupo de usuarios.
 
 Aprovechando las feature flags, podemos ejecutar experimentos como A/B testing para recopilar información y aprender sobre el sistema y sus usuarios.
 
@@ -677,9 +613,7 @@ Aprovechando las feature flags, podemos ejecutar experimentos como A/B testing p
 
 - Otra opción sería probar una característica en determinadas geografías, periodos de tiempo, navegadores o dispositivos.
 
-Las feature flags también se pueden utilizar para probar características en producción con una carga de trabajo real. La característica se puede habilitar para un grupo de prueba o como un lanzamiento beta para una ubicación seleccionada. Después se puede supervisar de cerca y desactivarla una vez que se haya recopilado suficiente información o si se hay problemas. 
-
-En resumen, con la automatización de infraestructura, despliegues con un solo clic y configurando feature flags, se puede experimentar, aprender y ajustar rápidamente.
+- Las FF también se pueden utilizar para probar características en producción con una carga de trabajo real. La característica se puede habilitar para un grupo de prueba o como un lanzamiento beta para una ubicación seleccionada. Después se puede supervisar de cerca y desactivarla una vez que se haya recopilado suficiente información o si se hay problemas. 
 
 -->
 
