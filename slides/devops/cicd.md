@@ -99,14 +99,14 @@ Desarrollo de una nueva característica o _feature_...
 Hacer <emph>check-out</emph> de una <emph>working copy</emph> en un <emph>repositorio</emph>
   
 ```bash
-$ git clone https://github.com/uca-virtualizacion/devops
-Clonando en 'devops'...
-remote: Enumerating objects: 234, done.
-remote: Counting objects: 100% (234/234), done.
-remote: Compressing objects: 100% (161/161), done.
-remote: Total 234 (delta 118), reused 182 (delta 69), pack-reused 0
-Recibiendo objetos: 100% (234/234), 3.50 MiB | 3.91 MiB/s, listo.
-Resolviendo deltas: 100% (118/118), listo.
+$ git clone https://github.com/sistemas-sw/construccion
+Clonando en 'construccion'...
+remote: Enumerating objects: 688, done.
+remote: Counting objects: 100% (104/104), done.
+remote: Compressing objects: 100% (74/74), done.
+remote: Total 688 (delta 45), reused 84 (delta 29), pack-reused 584
+Recibiendo objetos: 100% (688/688), 39.75 MiB | 22.49 MiB/s, listo.
+Resolviendo deltas: 100% (296/296), listo.
 ```
 
 ---
@@ -126,8 +126,30 @@ Resolviendo deltas: 100% (118/118), listo.
 Cambiarse al repo con la working copy local
 
 ```bash
-cd devops 
+$ tree -d construccion 
+construccion/
+├── docs
+├── marp
+└── slides
+    ├── devops
+    │   ├── docker
+    │   │   ├── docs
+    │   │   └── img
+    │   ├── img
+    │   ├── jenkins
+    │   │   ├── entregable
+    │   │   └── img
+    │   ├── scv
+    │   │   └── img
+    │   └── terraform
+    │       └── img
+    ├── implementacion
+    │   └── img
+    └── marp
+$ cd construccion 
 ```
+
+---
 
 Modificar el código fuente:
 
@@ -156,41 +178,45 @@ found 0 vulnerabilities
 Construir en local (debería automatizarse):
 
 ```bash
-$ mkdir slides
-$ marp/html-build.sh cultura.md
+$ cd ..
+$ mkdir ./html/img
+$ cp -R slides/devops/img/ ./html/img/
+$ marp --allow-local-files --config-file ./marp/marp-engine.js --html slides/devops/cultura.md -o ./html/cultura.html
 [  INFO ] Converting 1 markdown...
-[  INFO ] cultura.md => slides/html/cultura.md.html
+[  INFO ] slides/devops/cultura.md => html/cultura.html
+$ open ./html/cultura.html
 ```
-
-Modificar _source code_ para hacer una tarea. Por ejemplo:
-
-```bash
-# Ignorar sync de slides/ en el repo
-$ touch .gitignore
-# Modificar el .gitignore para ignorar la carpeta slides/
-```
-
-Luego hay que hacer tests de que el cambio funciona.
 
 ---
 
-Incluir los cambios en el repositorio, primero en el local:
+Ignorar el _build_ (carpeta `html/`) al sincronizar el repo:
 
 ```bash
-$ git add .gitignore # incluirlo en el index
-$ git commit -m "Ignorar sync de slides/"
-[main ab5c62d] Ignorar sync de slides/
- 1 file changed, 7 insertions(+)
+$ cat .gitignore
+...
+# .gitignore para ignorar la carpeta html/
+*.html
+html/*.html
+html/img/*.png
+html/img/*.gif
+*.pdf
+**/html
+...
 ```
 
-- En git, el _index_ guarda una instantánea del contenido del _working tree_.
+---
+
+A partir de ahora:
+
+- Modificar _source code_ (ficheros `.md`) para hacer una tarea.
+- Hacer tests de que el cambio funciona.
+- `git add`, `git commit` y `git push` para subir los cambios al repositorio.
+
+Con git:
+
+- El _index_ guarda una instantánea del contenido del _working tree_.
 - Hacer _commit_ es grabar los cambios en el repositorio (local).
-
-Luego subir al repo global:
-
-```bash
-git push 
-```
+- Hacer _push: es subir al repo global
 
 ---
 
@@ -203,7 +229,7 @@ remote: Counting objects: 100% (7/7), done.
 remote: Compressing objects: 100% (2/2), done.
 remote: Total 4 (delta 2), reused 4 (delta 2), pack-reused 0
 Desempaquetando objetos: 100% (4/4), 436 bytes | 109.00 KiB/s, listo.
-Desde https://github.com/uca-virtualizacion/devops
+Desde https://github.com/sistemas-sw/construccion
    fe24065..382de02  main       -> origin/main
 Actualizando fe24065..382de02
 Fast-forward
