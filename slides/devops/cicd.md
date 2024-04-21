@@ -92,9 +92,23 @@ section { text-align: center; }
 
 ---
 
+| 📙 | Conceptos |
+----:|:----
+<emph>Control de versiones</emph> | git, cvs, subversion, mercurial, etc.
+<emph>Repo</emph> | `uca-virtualizacion/devops` alojado en github
+<emph>Mainline</emph> | estado actual del repositorio
+<emph>Working copy</emph> | copia local del repositorio
+<emph>Check out</emph> | clonar el repositorio en local
+
+¡Cuidado! A diferencia de otros SCV antiguos, hacer `checkout` en git es cambiar de rama o restaurar los ficheros de un _working tree_.
+
+---
+
 ## Ejemplo de CI a escala
 
 Desarrollo de una nueva característica o _feature_...
+
+### Check-out
 
 Hacer <emph>check-out</emph> de una <emph>working copy</emph> en un <emph>repositorio</emph>
   
@@ -111,19 +125,7 @@ Resolviendo deltas: 100% (296/296), listo.
 
 ---
 
-| 📙 | Conceptos |
-----:|:----
-<emph>Control de versiones</emph> | git, cvs, subversion, mercurial, etc.
-<emph>Repo</emph> | `uca-virtualizacion/devops` alojado en github
-<emph>Mainline</emph> | estado actual del repositorio
-<emph>Working copy</emph> | copia local del repositorio
-<emph>Check out</emph> | clonar el repositorio en local
-
-¡Cuidado! A diferencia de otros SCV antiguos, hacer `checkout` en git es cambiar de rama o restaurar los ficheros de un _working tree_.
-
----
-
-Cambiarse al repo con la working copy local
+Cambiarse al repo con la _working copy_ <emph>local</emph>
 
 ```bash
 $ tree -d construccion 
@@ -151,13 +153,7 @@ $ cd construccion
 
 ---
 
-Modificar el código fuente:
-
-```bash
-touch <FICHERO MODIFICADO>
-```
-
----
+### Entorno de construcción
 
 Preparar el entorno de construcción:
 
@@ -175,13 +171,17 @@ found 0 vulnerabilities
 
 ---
 
+### Construcción (_build_)
+
 Construir en local (debería automatizarse):
 
 ```bash
 $ cd ..
 $ mkdir ./html/img
 $ cp -R slides/devops/img/ ./html/img/
-$ marp --allow-local-files --config-file ./marp/marp-engine.js --html slides/devops/cultura.md -o ./html/cultura.html
+$ marp --allow-local-files --config-file ./marp/marp-engine.js \
+    --html slides/devops/cultura.md \
+    -o ./html/cultura.html
 [  INFO ] Converting 1 markdown...
 [  INFO ] slides/devops/cultura.md => html/cultura.html
 $ open ./html/cultura.html
@@ -194,17 +194,17 @@ Ignorar el _build_ (carpeta `html/`) al sincronizar el repo:
 ```bash
 $ cat .gitignore
 ...
-# .gitignore para ignorar la carpeta html/
-*.html
+# Ignorar la carpeta html/
 html/*.html
 html/img/*.png
 html/img/*.gif
-*.pdf
 **/html
 ...
 ```
 
 ---
+
+### Desarrollo y pruebas
 
 A partir de ahora:
 
@@ -216,42 +216,41 @@ Con git:
 
 - El _index_ guarda una instantánea del contenido del _working tree_.
 - Hacer _commit_ es grabar los cambios en el repositorio (local).
-- Hacer _push: es subir al repo global
+- Hacer _push_: es subir al repo global
 
 ---
+
+### Colaboración con otros
 
 Si alguien modifica algo...
 
 ```bash
 $ git pull
-remote: Enumerating objects: 7, done.
-remote: Counting objects: 100% (7/7), done.
-remote: Compressing objects: 100% (2/2), done.
-remote: Total 4 (delta 2), reused 4 (delta 2), pack-reused 0
-Desempaquetando objetos: 100% (4/4), 436 bytes | 109.00 KiB/s, listo.
+remote: Enumerating objects: 20, done.
+remote: Counting objects: 100% (20/20), done.
+remote: Compressing objects: 100% (6/6), done.
+remote: Total 15 (delta 9), reused 15 (delta 9), pack-reused 0
+Desempaquetando objetos: 100% (15/15), 3.03 KiB | 344.00 KiB/s, listo.
 Desde https://github.com/sistemas-sw/construccion
-   fe24065..382de02  main       -> origin/main
-Actualizando fe24065..382de02
+   23141b5..7cc4304  master     -> origin/master
+Actualizando 23141b5..7cc4304
 Fast-forward
- marp/html-build.sh | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ slides/devops/cicd.md    | 194 ++++++++++++++++++------------------------------
+ slides/devops/cultura.md | 184 ++++++++++++++++++-------------------------
+ 2 files changed, 118 insertions(+), 260 deletions(-)
 ```
 
 ---
 
-Aún no hemos acabado. Hay que hacer un build (manual o automático) en un servidor de integración común.
+### Intregración
+
+Aún no hemos acabado... Hay que hacer un build (manual o automático) en un servidor de integración común (v.g. Jenkins, Github Actions).
 
 - Si hay un conflicto entre dos desarrolladores, se suele detectar cuando el segundo hace un build sobre su copia de trabajo. Hay que arreglarlo lo antes posible.
-
 - El repo debe quedar en todo momento con un software estable, funcional y con pocos errores.
-
 - No hay que alejarse mucho de esa base estable pues llevaría mucho tiempo integrarse con ella.
 
 Martin Fowler: [Building a feature with CI](https://martinfowler.com/articles/continuousIntegration.html#BuildingAFeatureWithContinuousIntegration)
-
-<!--
-
--->
 
 ---
 
@@ -263,7 +262,7 @@ emph {
 
 ![bg left Devops team](img/devops-team.png)
 
-### Beneficios de CI
+## Beneficios de CI
 
 Abordar problemas del desarrollo:
 
@@ -290,7 +289,7 @@ Las prácticas de integración continua (CI) sirven para abordar estos problemas
 
 ---
 
-### Prácticas de CI
+## Prácticas de CI
 
 - Un solo repositorio de código fuente
 - Automatizar la construcción (build)
@@ -305,7 +304,7 @@ Martin Fowler: [Practices of CI](https://martinfowler.com/articles/continuousInt
 
 ---
 
-#### Un solo repositorio
+### Un solo repositorio
 
 ![bg right Un solo repo](img/un-solo-anillo.png)
 
@@ -333,7 +332,7 @@ Martin Fowler: [Practices of CI](https://martinfowler.com/articles/continuousInt
 
 ![bg left Automatizar construcción](img/automatizar-construccion.png)
 
-#### Automatizar los _build_
+### Automatizar los _build_
 
 - Build tools: make, GNU Autotools, Apache ant, mvn, gradle, dotnet msbuild, Ruby rake, etc.
 - Dependencias: Apache ivy, maven, npm, yarn, pip, conda, NuGet, cargo, etc.
@@ -346,7 +345,7 @@ No depender de los IDEs para hacer builds
 
 ---
 
-#### Hacer el build self-testing
+### Hacer el build self-testing
 
 ![bg right Self testing](img/self-testing.png)
 
@@ -369,7 +368,7 @@ No depender de los IDEs para hacer builds
 
 ---
 
-#### Todos deben hacer commit al trunk todos los días
+### Todos deben hacer commit al trunk todos los días
 
 ![bg left Aizkolaris](img/aizkolaris.png)
 
@@ -393,7 +392,7 @@ No depender de los IDEs para hacer builds
 section { justify-content: start; text-align: left; }
 </style>
 
-##### Búsqueda binaria de bugs en _commits_ (inicio)
+#### Búsqueda binaria de bugs en _commits_ (inicio)
 
 ![width:900px Git bisect](img/git-bisect-1.png)
 
@@ -412,7 +411,7 @@ Bisecting: X revisions left to test after this (roughly Y steps)
 section { justify-content: start; text-align: right; }
 </style>
 
-##### Búsqueda binaria de bugs en _commits_ (repetir pasos)
+#### Búsqueda binaria de bugs en _commits_ (repetir pasos)
 
 ![width:1100px Git bisect](img/git-bisect-2.png)
 
@@ -432,7 +431,7 @@ Tras encontrar el commit que introdujo el bug, se puede resetear el git bisect
 
 ---
 
-#### 1 commit de _mainline_ $\Rightarrow$ 1 build en servidor de integración
+### 1 commit de _mainline_ $\Rightarrow$ 1 build en servidor de integración
 
 ![bg right Elon Musk](img/worked-my-machine2.png)
 
@@ -467,7 +466,7 @@ Nightly builds no es hacer CI
 
 ---
 
-#### Arreglar inmediatamente los builds fallidos
+### Arreglar inmediatamente los builds fallidos
 
 ![bg left Build fallido](img/failed-build.png)
 
@@ -490,7 +489,7 @@ Técnica pending-head para evitar romper el mainline: crear una working copy que
 
 ---
 
-#### Mantener rápidos los build
+### Mantener rápidos los build
 
 ![bg right Sagrada Familia](img/sagrada-familia.png)
 
@@ -513,7 +512,7 @@ Ejemplo two-stage pipeline: 1º rápida (compilación y pruebas unitarias sin la
 
 ---
 
-#### Otras prácticas de CI...
+### Otras prácticas de CI...
 
 - Testear en un clon del entorno de producción
 - Hacer que sea fácil para cualquiera obtener el ejecutable más reciente
@@ -537,7 +536,7 @@ Automate Deployment
 section { justify-content: start; }
 </style>
 
-### Trunk-Based Development (TBD)
+## Trunk-Based Development (TBD)
 
 ![bg 110% TBD timeline](img/tbd-timeline.png)
 
@@ -556,7 +555,7 @@ La CI también incluye dos prácticas más, según Kent Beck y la comunidad XP:
 section { justify-content: start; }
 </style>
 
-### Timeline no TBD
+## Timeline no TBD
 
 ![bg 100% TBD timeline](img/non-tbd-timeline.png)
 
@@ -568,7 +567,7 @@ section { justify-content: start; }
 
 ---
 
-### Controversia de CI
+## Controversia de CI
 
 - Prácticas de CI son controvertidas
   - Dividir _features_ grandes en pasos pequeños
@@ -652,7 +651,7 @@ Se hace CD cuando:
 
 ![bg 80% right Software finished](img/dilbert-software-finished.png)
 
-## Beneficios de CD
+### Beneficios de CD
 
 - Despliegues con riesgo reducido
 - Progreso creíble: ¿quién garantiza el _done_? ¿que esté en producción? ¿que lo digan los desarrolladores?
@@ -666,13 +665,13 @@ Se hace CD cuando:
 section { justify-content: start; text-align: center; }
 </style>
 
-### Cuanto antes te des cuenta, mejor
+#### Cuanto antes te des cuenta, mejor
 
 ![bg 80% User requirements](img/dilbert-user-requirements.png)
 
 ---
 
-### Cómo implementar CD
+#### Cómo implementar CD
 
 - Automatizar el build, las pruebas y el despliegue
 - Trunk-based development
@@ -695,7 +694,7 @@ Gestión de cambios en la base de datos: almacenar los cambios de la BD como scr
 
 ---
 
-### Errores comunes al implementar CD
+#### Errores comunes al implementar CD
 
 - Creer que CD implica hacer despliegues frecuentes
 - No hacer cambios en las capacidades técnicas necesarias para hacer CD
@@ -707,7 +706,7 @@ Gestión de cambios en la base de datos: almacenar los cambios de la BD como scr
 section { justify-content: start; }
 </style>
 
-### Transformación
+#### Transformación
 
 ![bg 80% J Curve](img/cd-j-curve.png)
 
