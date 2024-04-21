@@ -375,7 +375,7 @@ No depender de los IDEs para hacer builds
 - Encontrar problemas pronto
 - Frecuentes merge de ramas en el trunk
 - Diff debugging tras detectar fallos al ejecutar el build:
-  `git bisect`
+  [`git bisect`](https://git-scm.com/docs/git-bisect)
 
 <!--
 
@@ -497,8 +497,8 @@ Técnica pending-head para evitar romper el mainline: crear una working copy que
 - Testing: cuello de botella
 - _Build pipeline_ o _Staged build_
 - Ejemplo: 2-stage pipeline
-  1ª etapa rápida (compilación y pruebas unitarias sin la BD) $\rightarrow$  1er. commit build
-  2ª etapa lenta (pruebas de integración con la BD real) $\rightarrow$  build secundario $\rightarrow$ si falla, añadir tests al commit build
+  <emph>1ª etapa</emph> rápida (compilación y pruebas unitarias sin la BD) $\rightarrow$  1er. _commit build_
+  <emph>2ª etapa</emph> lenta (pruebas de integración con la BD real) $\rightarrow$  build secundario $\rightarrow$ si falla, añadir tests al commit build
 
 <!--
 
@@ -519,18 +519,6 @@ Ejemplo two-stage pipeline: 1º rápida (compilación y pruebas unitarias sin la
 - Todos pueden ver lo que está pasando
 - Automatizar el despliegue
 
-<!--
-
-Test in a Clone of the Production Environment
-
-Make it Easy for Anyone to Get the Latest Executable
-
-Everyone can see what's happening
-
-Automate Deployment
-
--->
-
 ---
 <style scoped>
 section { justify-content: start; }
@@ -544,9 +532,9 @@ section { justify-content: start; }
 
 La CI también incluye dos prácticas más, según Kent Beck y la comunidad XP:
 
-1. La práctica de Trunk-Based Development (TBD), en la que los desarrolladores trabajan sobre el trunk (= master, main o mainline) en pequeños lotes y fusionan su trabajo regularmente en un trunk compartido, al menos una vez al día, en lugar de trabajar en ramas de features de larga duración.
+1. TBD: los desarrolladores trabajan sobre el trunk (= master, main o mainline) en pequeños lotes y fusionan su trabajo regularmente en un trunk compartido, al menos una vez al día, en lugar de trabajar en ramas de features de larga duración.
 
-2. La creación de suites de pruebas unitarias automatizadas mantenibles es compleja. Una manera de resolver este problema es practicar el TDD. Los desarrolladores escriben pruebas automatizadas que inicialmente fallan, antes de implementar el código que hace que las pruebas pasen.
+2. TDD: La creación de suites de pruebas unitarias automatizadas mantenibles es compleja. Una manera de resolver este problema es practicar el TDD. Los desarrolladores escriben pruebas automatizadas que inicialmente fallan, antes de implementar el código que hace que las pruebas pasen.
 
 -->
 
@@ -555,7 +543,7 @@ La CI también incluye dos prácticas más, según Kent Beck y la comunidad XP:
 section { justify-content: start; }
 </style>
 
-## Timeline no TBD
+### Timeline no TBD
 
 ![bg 100% TBD timeline](img/non-tbd-timeline.png)
 
@@ -574,10 +562,10 @@ section { justify-content: start; }
   - Lleva más tiempo completar las _features_ grandes
 
 - Si los cambios son pequeños
-  - Desarrollo + entrega más rápida y estable
+  - Desarrollo + Entrega más rápidos y estables
   - Las ramas son de corta duración
   - Los desarrolladores reciben comentarios periódicos sobre el impacto de su trabajo en el sistema en conjunto
-  - Es más fácil y rápido detectar, clasificar y solucionar problemas
+  - Más fácil y rápido detectar, clasificar y solucionar problemas
 
 CI es el paso previo a la CD
 
@@ -586,16 +574,16 @@ CI es el paso previo a la CD
 Las prácticas de CI se consideran a veces controvertidas.
 
 - Requiere que los desarrolladores dividan las características grandes y otros cambios en pasos incrementales más pequeños que se puedan integrar con frecuencia en el trunk. Esto es un cambio para los desarrolladores que no están acostumbrados a trabajar de esta manera.
-
 - Además, cuando los equipos cambian a usar pasos pequeños, puede llevar más tiempo completar las características grandes.
 
-A pesar de estas objeciones, ayudar a los equipos de desarrollo de software a implementar la CI debería ser la prioridad número uno para comenzar el viaje hacia la CD.
+Cuando los cambios son en lotes pequeños (y autocontenidos):
 
-El proceso de CI da como resultado un desarrollo y entrega de software más rápido y estable cuando los cambios son pequeños y autocontenidos, y las ramas en las que viven son de corta duración.
+- El proceso de CI da como resultado un desarrollo y entrega más rápidos y estables
+- Las ramas en las que viven los cambios son de corta duración
+- También garantiza que los desarrolladores reciban comentarios periódicos sobre el impacto de su trabajo en el sistema en su conjunto, tanto de otros desarrolladores, probadores y clientes, como de las pruebas automatizadas de rendimiento y seguridad.
+- Esto hace más fácil y rápido detectar, clasificar y solucionar problemas.
 
-Trabajar en lotes pequeños también garantiza que los desarrolladores reciban comentarios periódicos sobre el impacto de su trabajo en el sistema en su conjunto, tanto de otros desarrolladores, probadores y clientes, como de las pruebas automatizadas de rendimiento y seguridad.
-
-Esto hace más fácil y rápido detectar, clasificar y solucionar problemas.
+A pesar de las objeciones, ayudar a los equipos de desarrollo de software a implementar la CI debería ser la prioridad número uno para comenzar el viaje hacia la CD.
 
 -->
 
@@ -657,7 +645,7 @@ Se hace CD cuando:
 - Progreso creíble: ¿quién garantiza el _done_? ¿que esté en producción? ¿que lo digan los desarrolladores?
 - Feedback de los usuarios: reduce el riesgo de construir algo inútil
 
-  Cuanto antes te des cuenta...
+Cuanto antes te des cuenta...
 
 ---
 
@@ -671,7 +659,7 @@ section { justify-content: start; text-align: center; }
 
 ---
 
-#### Cómo implementar CD
+### Cómo implementar CD
 
 - Automatizar el build, las pruebas y el despliegue
 - Trunk-based development
@@ -694,7 +682,7 @@ Gestión de cambios en la base de datos: almacenar los cambios de la BD como scr
 
 ---
 
-#### Errores comunes al implementar CD
+### Errores comunes al implementar CD
 
 - Creer que CD implica hacer despliegues frecuentes
 - No hacer cambios en las capacidades técnicas necesarias para hacer CD
@@ -706,7 +694,7 @@ Gestión de cambios en la base de datos: almacenar los cambios de la BD como scr
 section { justify-content: start; }
 </style>
 
-#### Transformación
+### Transformación
 
 ![bg 80% J Curve](img/cd-j-curve.png)
 
