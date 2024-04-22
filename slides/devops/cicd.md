@@ -74,10 +74,10 @@ CI sigue el principio de que si algo cuesta mucho esfuerzo, se debe hacer más a
 
 ---
 
-| 📙 | Conceptos |
+| 📙 | Conceptos básicos |
 ----:|:----
 <emph>Control de versiones</emph> | git, cvs, subversion, mercurial, etc.
-<emph>Repo</emph> | `uca-virtualizacion/devops` alojado en github
+<emph>Repo</emph> | `sistemas-sw/construccion` alojado en github
 <emph>Mainline</emph> | estado actual del repositorio
 <emph>Working copy</emph> | copia local del repositorio
 <emph>Check out</emph> | clonar el repositorio en local
