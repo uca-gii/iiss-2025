@@ -52,7 +52,7 @@ section { text-align: center; }
 
 - <emph>Dev</emph>elopment + <emph>Op</emph>erations
 
-  - ∆ Concepción ⇾ Desarrollo ⇾ Entrega
+  - Concepción ⇾ Desarrollo ⇾ Entrega
   - Desarrolladores: innovación y agilidad
   - Sysadmin: garantías y estabilidad
 
