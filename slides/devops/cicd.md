@@ -38,15 +38,6 @@ emph {
 
 ---
 
-## Conceptos
-
-- Integración continua
-- Entrega continua
-- Automatización del despliegue
-- Trunk-based development
-
----
-
 <!-- _class: invert -->
 
 <style scoped>
