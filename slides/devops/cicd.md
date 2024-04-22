@@ -74,15 +74,6 @@ CI sigue el principio de que si algo cuesta mucho esfuerzo, se debe hacer más a
 
 ---
 
-<!-- _class: invert -->
-<style scoped>
-section { text-align: center; }
-</style>
-
-<emph>¿Cómo funciona CI en la práctica?</emph>
-
----
-
 | 📙 | Conceptos |
 ----:|:----
 <emph>Control de versiones</emph> | git, cvs, subversion, mercurial, etc.
@@ -92,6 +83,15 @@ section { text-align: center; }
 <emph>Check out</emph> | clonar el repositorio en local
 
 ¡Cuidado! A diferencia de otros SCV antiguos, hacer `checkout` en git es cambiar de rama o restaurar los ficheros de un _working tree_.
+
+---
+
+<!-- _class: invert -->
+<style scoped>
+section { text-align: center; }
+</style>
+
+<emph>¿Cómo funciona CI en la práctica?</emph>
 
 ---
 
