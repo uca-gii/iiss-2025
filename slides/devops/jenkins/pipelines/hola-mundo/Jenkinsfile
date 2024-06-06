@@ -1,0 +1,10 @@
+pipeline { // Declaración de pipeline
+    agent any // Agente que ejecuta el pipeline
+    stages { // Declaración de etapas
+        stage('Stage 1') { // Declaración de etapa
+            steps { // Declaración de pasos
+                echo 'Hola Mundo!' // Paso
+            }
+        }
+    }
+}
