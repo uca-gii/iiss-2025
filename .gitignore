@@ -123,8 +123,4 @@ dist
 .tern-port
 
 #Node files
-package.json
-package-lock.json
-marp/package.json
-marp/package-lock.json
 **/node_modules
