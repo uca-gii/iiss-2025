@@ -9,6 +9,6 @@
   },
   "devDependencies": {
     "@kazumatu981/markdown-it-kroki": "^1.1.1",
-    "@marp-team/marp-cli": "^1.1.1"
+    "@marp-team/marp-cli": "^1.7.2"
   }
 }
