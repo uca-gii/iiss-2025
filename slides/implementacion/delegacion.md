@@ -789,15 +789,14 @@ En Ruby los mixins se implementan mediante módulos (`module`).
 
 ### Comparadores: Implementación en Ruby
 
-Una manera de implementar un `Comparable` en ruby mediante el **módulo** [Comparable](https://ruby-doc.org/core-2.2.3/Comparable.html):
+Una manera de implementar un `Comparable` en ruby mediante el __módulo__ [Comparable](https://ruby-doc.org/core-2.2.3/Comparable.html):
 
 - La clase que incluye el módulo `Comparable` tiene que implementar:
- 
-    - el método `<=>`: es un método que incluye los siguientes operadores/métodos: `<, <=, ==, >, >=, between?` 
-    - el atributo-criterio de comparación
+
+  - el método `<=>`: es un método que incluye los siguientes operadores/métodos: `<, <=, ==, >, >=, between?` 
+  - el atributo-criterio de comparación
 
 - En `x <=> y`, `x` es el receptor del mensaje/método e `y` es el argumento
-
 
 ---
 
@@ -823,6 +822,46 @@ s3 = Student.new("Maria", 95)
 s1 > s2 #true
 s1 <= s2 #false
 s3.between?(s1,s2) #true
+```
+
+---
+
+### Scala Traits
+
+Un __trait__ es una forma de separar las dos principales responsabilidades de una clase: definir el __estado__ de sus instancias y definir su __comportamiento__.
+
+- Las clases y los objetos en Scala pueden extender un `trait`
+- Los `trait`de Scala son similares a las `interface` de Java.
+
+- Los `trait` no pueden instanciarse
+- Los métodos definidos en una clase tienen precedencia sobre los de un `trait`
+- Los `trait` no tienen estado propio, sino el del objeto o la instancia de la clase a la que se aplica
+
+---
+
+#### Ejemplo 2: Un iterador con Scala traits
+
+```scala hl_lines="4"
+trait Iterator[A] {
+  def hasNext: Boolean
+  def next(): A
+}
+
+class IntIterator(to: Int) extends Iterator[Int] {
+  private var current = 0
+  override def hasNext: Boolean = current < to
+  override def next(): Int =  {
+    if (hasNext) {
+      val t = current
+      current += 1
+      t
+    } else 0
+  }
+}
+
+val iterator = new IntIterator(10)
+println(iterator.next())  // prints 0
+println(iterator.next())  // prints 1
 ```
 
 ---
@@ -896,6 +935,25 @@ Entonces... una clase que extiende un trait con un comportamiento, ¿va contra e
 - Para ser un mixin genuino, un trait debería mezclar comportamiento y no interfaces heredadas
 
 Lectura recomendada: [Scala Mixins: The right way](http://baddotrobot.com/blog/2014/09/22/scala-mixins/)
+
+---
+
+<style scoped>
+p {
+  text-align: center;
+  font-size: 125%;
+  color: green;
+}
+</style>
+
+¿Y en Java no hay _traits_?
+
+---
+
+### Java default methods
+
+- Desde Java 8, las interfaces pueden incorporar [métodos por defecto](https://www.baeldung.com/java-static-default-methods) que hacen que las interfaces de Java se comporten más como un trait.
+- Sirven para implementar herencia múltiple
 
 ---
 
