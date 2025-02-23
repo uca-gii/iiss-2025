@@ -163,7 +163,7 @@ Vamos a usar un repositorio público de Github:
   git clone https://github.com/sistemas-sw/iiss-git-<curso_actual>.git
 ```
 
-Donde `<curso_actual>` es el curso actual (por ejemplo, `23-24`).
+Donde `<curso_actual>` es el curso actual (por ejemplo, `24-25`).
 
 ---
 
@@ -281,14 +281,18 @@ Las ramas se pueden fusionar entre sí para combinar los cambios realizados en c
 
 ---
 
-### Uso de ramas (I)
+### Crear ramas (i)
 
-Una rama se crea a partir de otra rama existente.
+Una rama se crea a partir de otra rama existente
 
 ![width:300 center](img/Git_branch_new.png)
 
 - `git branch` muestra las ramas existentes
 - Podemos ver la rama actual con `git branch` y con `git status`.
+
+---
+
+### Crear ramas (ii)
 
 Para crear una nueva rama a partir de la rama actual:
 
@@ -304,7 +308,7 @@ git checkout -b <nombre_de_la_rama>
 
 ---
 
-### Uso de ramas (II)
+### Checkout y push de ramas
 
 Cambiar de rama:
 
@@ -317,6 +321,10 @@ Subir una rama al repositorio remoto:
 ```bash
 git push origin <nombre_de_la_rama>
 ```
+
+---
+
+### Eliminar ramas
 
 Eliminar una rama del repositorio local (seguirá existiendo en el repositorio remoto):
 
@@ -334,7 +342,7 @@ git push origin --delete <nombre_de_la_rama>
 
 ### Stash de ramas
 
-Stash permite guardar los cambios realizados en la rama actual para poder cambiar de rama sin tener que hacer un commit.
+Guardar/esconder los cambios realizados en la rama actual para poder cambiar de rama sin tener que hacer un commit
 
 `git stash` - guardar los cambios realizados en la rama actual
 
@@ -346,17 +354,17 @@ Stash permite guardar los cambios realizados en la rama actual para poder cambia
 
 ---
 
-### Fusionar ramas (I)
+### Fusionar ramas (i)
 
 Siempre que se fusionan dos ramas, se crea en la rama actual un nuevo commit que contiene los cambios de ambas ramas:
 
-![width:700 center](img/Branch-merge.png)
+![width:700 center](img/branch-merge.png)
 
 [Ejemplo de fusión de ramas en un repositorio de Git](https://www.atlassian.com/es/git/tutorials/using-branches/git-merge)
 
 ---
 
-### Fusionar ramas (II)
+### Fusionar ramas (ii)
 
 Para fusionar una rama con la rama actual:
 
@@ -407,14 +415,14 @@ Donde `ours` es la rama actual y `theirs` es la rama que estamos fusionando.
 
 ---
 
-### Rebase de ramas (I)
+### Rebase de ramas (i)
 
 Rebase soluciona el mismo problema que la fusión de ramas, pero de forma muy distinta:
 
-- La fusión de ramas crea un nuevo commit que contiene los cambios de ambas ramas
-- El rebase mueve los commits de una rama a otra
+- `merge` crea un nuevo commit que contiene los cambios de ambas ramas
+- `rebase` mueve los commits de una rama a otra
 
-![width:500 center](img/rebase.svg)
+![width:500 center](img/rebase.png)
 
 [Ejemplo de rebase de ramas en un repositorio de Git](https://www.atlassian.com/es/git/tutorials/merging-vs-rebasing)
 
@@ -431,13 +439,17 @@ Rebase soluciona el mismo problema que la fusión de ramas, pero de forma muy di
 
 ---
 
-### Rebase de ramas (II)
+### Rebase de ramas (ii)
 
 Para hacer un rebase de una rama con la rama actual:
 
 ```bash
 git rebase <nombre_de_la_rama>
 ```
+
+---
+
+### Rebase de ramas (iii)
 
 1. Crear una rama llamada `feature_rebase` a partir de la rama actual y cambiar a ella
 2. Crea un archivo `feature_rebase.txt`
@@ -451,11 +463,10 @@ git rebase <nombre_de_la_rama>
 
 ---
 
-### Rebase de ramas (III)
+### Rebase de ramas (iv)
 
-En resumen, rebase actualiza el historial de cambios de una rama con el historial de cambios de otra rama.
-
-Es muy útil para mantener el historial de cambios de una rama "limpio" y ordenado.
+- Rebase actualiza el historial de cambios de una rama con el historial de cambios de otra rama.
+- Es muy útil para mantener el historial de cambios de una rama "limpio" y ordenado.
 
 **Suele usarse en ramas de desarrollo que se fusionan con la rama principal del proyecto.**
 
@@ -468,22 +479,22 @@ Rebase es una operación muy potente, pero también muy peligrosa:
 
 ## Archivos especiales de git
 
-El archivo `.gitignore` permite ignorar archivos y directorios que no queremos añadir al repositorio.
+Archivo `.gitignore` 
 
-- Los archivos y directorios que queremos ignorar se añaden al archivo `.gitignore`
-- En caso de querer añadir una excepción a un archivo o directorio ignorado, se puede forzar su inclusión con `!` dentro del archivo `.gitignore`
-- En caso de querer añadir un archivo o directorio ignorado, se puede forzar su inclusión con `git add -f`
+- Indica los archivos y directorios que no queremos añadir al repositorio
+- Para añadir una excepción a un archivo o directorio ignorado, se puede forzar su inclusión con `!`
+- Para añadir un archivo o directorio ignorado, se puede forzar su inclusión con `git add -f`
 
-El archivo `.gitkeep` permite añadir un directorio vacío al repositorio.
+Archivo `.gitkeep`:
 
 - Git no permite añadir directorios vacíos al repositorio
 - Para añadir un directorio vacío, se crea un archivo `.gitkeep` dentro del directorio
 
 ---
 
-## Herramientas para trabajar con Git
+## Otras herramientas para trabajar con Git
 
-Algunas herramientas para trabajar con Git mediante una interfaz gráfica:
+Herramientas con interfaz gráfica:
 
 - [SourceTree](https://www.sourcetreeapp.com/)
 - [Git for Windows](https://gitforwindows.org/)
@@ -491,7 +502,7 @@ Algunas herramientas para trabajar con Git mediante una interfaz gráfica:
 - [Git Extensions](https://gitextensions.github.io/)
 - [TortoiseGit](https://tortoisegit.org/)
 
-Los IDEs más populares también tienen integración con Git.
+Los IDEs más populares (VS Code, JetBrains', etc.) tienen integración con Git
 
 ---
 
@@ -526,7 +537,7 @@ Los IDEs más populares también tienen integración con Git.
 
 1. Crear un repositorio en GitHub
 2. Clonar el repositorio en local
-3. Añadir cambios a la rama `main` añadiendo un directorio vacío y un archivo .gitignore para ignorar todos los archivos markdown excepto el README.md y el LICENSE.md
+3. Añadir cambios a la rama `main` añadiendo un directorio vacío y un archivo `.gitignore` para ignorar todos los archivos markdown excepto el `README.md` y el `LICENSE.md`
 4. Crea una rama `feature` y añade cambios a esa rama
 5. Crear dos ramas desde main, añadir cambios, fusionarlas en main y eliminarlas. Una de las ramas debe contener conflictos a resolver
 6. Hacer rebase de la rama `feature` con la rama `main`
