@@ -101,7 +101,26 @@ Alojamiento de repositorios (y más cosas) en la nube como GitHub, GitLab y Bitb
 
 Permiten a los desarrolladores alojar y colaborar en proyectos de código abierto y repositorios públicos o privados de forma remota.
 
-![width:300 float](img/GitHub-logo.png) ![width:300 float](img/gitlab-logo-100.png) ![width:380 float](img/Bitbucket-Logo-blue.svg)
+![width:300 float](img/GitHub-logo.png) ![width:300 float](img/gitlab-logo-100.png) ![width:360 float](img/Bitbucket-Logo-blue.svg)
+
+---
+
+## GitHub
+
+![bg left:25% width:300 ](img/GitHub-logo.png)
+
+- Forja donde alojar proyectos software
+- Origen en 2008 y adquirido por Microsoft en 2019
+- Basado en el SCV distribuido `git`
+
+### Servicios de GitHub
+
+- Code hosting
+- Version control
+- Releases
+- Issues, labels & milestones
+- Actions & workflows
+- Etc.
 
 ---
 
