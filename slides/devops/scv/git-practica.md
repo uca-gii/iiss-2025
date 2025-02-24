@@ -14,8 +14,13 @@ La práctica debe hacerse en parejas.
 
 ## Preparación
 
-1. Un estudiante crea un repositorio público en GitHub llamado `practica-git-colaboracion`.
-2. El estudiante creador del repositorio invita a su compañero/a como colaborador con permisos de escritura.
+1. Elegir un nombre de un grupo para la realización de las prácticas. La actividad para elección está disponible en el Campus Virtual.
+2. Añadir a los estudiantes a la organización `https://github.com/uca-iiss`: Invitar a los estudiantes a unirse a `uca-iiss` para poder gestionar permisos y el acceso a los repositorios.
+3. Gestionar los permisos de acceso: Controlar quién tiene acceso a cada repositorio, dando permisos de escritura a los estudiantes que deban colaborar en un repositorio específico.
+4. Un estudiante crea un repositorio privado en `uca-iiss` llamado `GRUPO-practica-git`, donde GRUPO es el nombre oficial de un grupo de prácticas.
+5. El profesor o el estudiante creador del repositorio puede invitar al otro compañero/a como colaborador con permisos de escritura.
+
+Los repositorios para realizar las prácticas por todos los estudiantes serán privados y deben pertentecer a la organización `uca-iiss`.
 
 ## Ejercicios
 
@@ -25,7 +30,7 @@ La práctica debe hacerse en parejas.
 
 2. Configuración inicial:
 
-   - Dentro del repositorio clonado, crear un archivo llamado _autores.txt_ donde cada estudiante escriba su nombre y su identificador UCA (v.g., u123456).
+   - Dentro del repositorio clonado, crear un archivo llamado _autores.txt_ donde cada estudiante escriba su nombre y su identificador UCA.
    - Crear un archivo .gitignore. Añadir al archivo .gitignore lo necesario para excluir archivos temporales, logs, etc.
    - Añadir los archivos autores.txt y .gitignore al repositorio local: `git add autores.txt .gitignore`.
    - Confirmar los cambios con un mensaje descriptivo: `git commit -m "Añadido autores.txt y .gitignore"`.
@@ -95,7 +100,7 @@ Si tiene alguna duda sobre el enunciado de la práctica o encuentra algún error
 
 ## Criterios de Evaluación:
 
-- [ ] Existencia del repositorio "practica-git-colaboracion" en la cuenta del primer estudiante.
+- [ ] Existencia del repositorio de prácticas en la organización, disponible para el primer estudiante.
 - [ ] El segundo estudiante figura como colaborador del repositorio.
 - [ ] Existencia del archivo autores.txt con el nombre e identificador UCA de ambos estudiantes.
 - [ ] Existencia del archivo .gitignore con exclusiones típicas (*.log, tmp/, etc.)
