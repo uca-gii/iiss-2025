@@ -17,6 +17,9 @@ h2 {
   color: darkblue;
   text-align: center;
 }
+emph {
+  color: #E87B00;
+}
 </style>
 
 # REFACTORING
@@ -33,7 +36,8 @@ Hacer _refactoring_ es hacer pequeñas transformaciones en el código que mantie
 >
 > A change made to the internal structure of the software to make it easier to understand and cheaper to modify without changing its observable behavior
 >
-> – [M. Fowler (2008): Refactoring...](bibliografia.md#refactoring)
+> — M. Fowler. <emph>Refactoring. Improving the Design of Existing Code.</emph> Addison-Wesley, 2nd Edition, 2008.
+
 
 ---
 
@@ -49,8 +53,8 @@ Hacer _refactoring_ es hacer pequeñas transformaciones en el código que mantie
 ---
 
 > __Lecturas recomendadas__
->  - Hunt & Thomas. [The Pragmatic Programmer](bibliografia.md#pragmatic), 2019. Capítulo 40: *Refactoring*
->  - McConnell. [Code Complete](bibliografia.md#codecomplete), 2004.
+> - A. Hunt & D. Thomas. <emph>The Pragmatic Programmer.</emph> Addison-Wesley, 1999. Capítulo 40: *Refactoring*
+> - Steve McConnell. <emph>Code Complete: A practical handbook of software construction</emph>, 2nd edition, 2004.
 
 ---
 
@@ -309,8 +313,8 @@ public class Autonomo extends Empleado {
 
 ## Código duplicado
 
-> **Lectura recomendada**
-> - Hunt & Thomas. [The Pragmatic Programmer](bibliografia.md#pragmatic), 1999
+> __Lectura recomendada__
+> - A. Hunt & D. Thomas. <emph>The Pragmatic Programmer.</emph> Addison-Wesley, 1999.
 > Capítulo *DRY—The Evils of Duplication*
 
 ### ¿Por qué no duplicar?
@@ -330,11 +334,11 @@ public class Autonomo extends Empleado {
 
 ### Principio DRY – *Don't Repeat Yourself!*
 
-by [Hunt & Thomas (1999)](bibliografia.md#pragmatic)
+by A. Hunt & D. Thomas. <emph>The Pragmatic Programmer.</emph> Addison-Wesley, 1999.
 
 > Copy and paste is a design error
 >
-> – McConnell (1998)
+> – Steve McConnell. <emph>Code Complete: A practical handbook of software construction</emph>, 2nd edition, 2004.
 
 ---
 
@@ -344,7 +348,7 @@ La gestión del proyecto así nos lo exige. Algunos ejemplos:
 
 - Representaciones múltiples de la información:
     - Varias implementaciones de un TAD que necesita guardar elementos de distintos tipos, cuando el lenguaje no permite genericidad
-    - El esquema de una BD configurado en la BD y en el código fuente a través de un [ORM](http://www.agiledata.org/essays/mappingObjects.html)
+    - Esquema de BD configurado en la BD y en código fuente a través de un [ORM](http://www.agiledata.org/essays/mappingObjects.html)
 - Documentación del código:
     - Código incrustado en javadocs
 - Casos de prueba:
@@ -393,7 +397,7 @@ p {
 
 - Herramientas de *property-based testing*, como [Hypothesis](https://pypi.org/project/hypothesis/) (python), [RapidCheck](https://github.com/emil-e/rapidcheck) (C++), [jqwik](https://jqwik.net/)  (Java) o [QuickCheck](https://en.wikipedia.org/wiki/QuickCheck) (originalmente para Haskell).
 
-- Leer el Consejo nº 71 del libro de [Hunt & Thomas (2020)](bibliografia.md#pragmatic2).
+- Leer el Consejo nº 71 del libro de D. Thomas & A. Hunt. <emph>The Pragmatic Programmer: your journey to mastery</emph>, 20th Anniversary Edition, 2nd Edition, Addison-Wesley Professional, 2020.
 
 ---
 
@@ -518,7 +522,8 @@ Otras veces no merece la pena violar DRY por rendimiento: ¡las cachés y los op
 
 > All services offered by a module should be available through a uniform notation, which does not betray whether they are implemented through storage or through computation
 >
-> [B. Meyer](bibliografia.md#meyer)
+> – B. Meyer. <emph>Object-Oriented Software Construction.</emph> Prentice-Hall, 2nd edition, 1997.
+
 
 Conviene aplicar el principio de acceso uniforme para que sea más fácil añadir mejoras de rendimiento (v.g. caching)
 

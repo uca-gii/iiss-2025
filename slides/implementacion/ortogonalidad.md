@@ -17,6 +17,9 @@ h2 {
   color: darkblue;
   text-align: center;
 }
+emph {
+  color: #E87B00;
+}
 </style>
 
 # ORTOGONALIDAD
@@ -87,9 +90,9 @@ La ortogonalidad es aplicable a:
 
 A nivel de _diseño_, los patrones de diseño y las arquitecturas como MVC facilitan la construcción de componentes ortogonales.
 
-
 ### Lectura recomendada
-  - Leer el [Topic 10: Orthogonality](https://learning-oreilly-com.bibezproxy.uca.es/library/view/the-pragmatic-programmer/9780135956977/f_0028.xhtml#orthogonality) de ([Hunt, 2020](bibliografia.md#pragmatic2))
+
+  - Leer el [Topic 10: Orthogonality](https://learning-oreilly-com.bibezproxy.uca.es/library/view/the-pragmatic-programmer/9780135956977/f_0028.xhtml#orthogonality) de D. Thomas & A. Hunt. <emph>The Pragmatic Programmer: your journey to mastery</emph>, 20th Anniversary Edition, 2nd Edition, Addison-Wesley Professional, 2020.
 
 ---
 
@@ -128,7 +131,8 @@ Al pedir un servicio a un objeto, el servicio debe ser realizado de parte nuestr
 __Refactorización__: definir un método `User.hasPermission()`
 
 ### Lectura recomendada
-  - Leer el [Topic 28: Decoupling](https://learning-oreilly-com.bibezproxy.uca.es/library/view/the-pragmatic-programmer/9780135956977/f_0049.xhtml#coupling) de ([Hunt, 2020](bibliografia.md#pragmatic2)).
+
+  - Leer el [Topic 28: Decoupling](https://learning-oreilly-com.bibezproxy.uca.es/library/view/the-pragmatic-programmer/9780135956977/f_0049.xhtml#coupling) de D. Thomas & A. Hunt. <emph>The Pragmatic Programmer: your journey to mastery</emph>, 20th Anniversary Edition, 2nd Edition, Addison-Wesley Professional, 2020.
 
 
 ---
