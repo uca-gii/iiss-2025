@@ -92,7 +92,7 @@ A nivel de _diseño_, los patrones de diseño y las arquitecturas como MVC facil
 
 ### Lectura recomendada
 
-  - Leer el [Topic 10: Orthogonality](https://learning-oreilly-com.bibezproxy.uca.es/library/view/the-pragmatic-programmer/9780135956977/f_0028.xhtml#orthogonality) de D. Thomas & A. Hunt. <emph>The Pragmatic Programmer: your journey to mastery</emph>, 20th Anniversary Edition, 2nd Edition, Addison-Wesley Professional, 2020.
+  - Leer el [Topic 10: Orthogonality](https://learning-oreilly-com.bibezproxy.uca.es/library/view/the-pragmatic-programmer/9780135956977/f_0028.xhtml#orthogonality) de D. Thomas & A. Hunt. <emph>The Pragmatic Programmer: your journey to mastery</emph>, 2nd Edition, Addison-Wesley, 2020.
 
 ---
 
