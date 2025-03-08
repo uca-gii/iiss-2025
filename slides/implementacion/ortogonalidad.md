@@ -2,11 +2,11 @@
 marp: true
 title: Apuntes IISS
 description: Apuntes de Implementación e Implantación de Sistemas Software
+math: mathjax
 ---
 
 <!-- size: 16:9 -->
 <!-- theme: default -->
-
 <!-- paginate: false -->
 
 <style>
@@ -16,6 +16,9 @@ h1 {
 h2 {
   color: darkblue;
   text-align: center;
+}
+emph {
+  color: #E87B00;
 }
 </style>
 
@@ -60,8 +63,8 @@ De repente estás haciendo malabares con un sistema increíblemente complejo, do
 ### Mayor productividad
 
 - Es más fácil escribir un componente pequeño y auto-contenido que un bloque muy grande de código.
-- El tiempo de desarrollo y __pruebas__ se reduce
-- Se pueden combinar unos componentes con otros más fácilmente. Mayor __reutilización__.
+- El tiempo de desarrollo y **pruebas** se reduce
+- Se pueden combinar unos componentes con otros más fácilmente. Mayor **reutilización**.
 - En teoría, si $A \perp B$, el componente A sirve para $m$ propósitos y B sirve para $n$, entonces $A \cup B$ sirve para $m \times n$ propósitos.
 - La falta de cohesión perjudica la reutilización ⟶  ¿y si hay que hacer una nueva versión gráfica de una aplicación de línea de comandos que lleva incrustada la escritura en consola con `System.out.println`? ¡Puede descohesionar!
 
@@ -70,8 +73,8 @@ De repente estás haciendo malabares con un sistema increíblemente complejo, do
 ### Menor riesgo
 
 - Defectos aislados, más fáciles de arreglar
-- Menor __fragilidad__ del sistema global. Los problemas provocados por cambios en un área se limitan a ese área
-- Más fácil de __probar__, pues será más fácil construir pruebas individuales de cada uno de sus componentes (por ejemplo, las técnicas de _[mocking](https://en.wikipedia.org/wiki/Mock_object)_ son más sencillas)
+- Menor **fragilidad** del sistema global. Los problemas provocados por cambios en un área se limitan a ese área
+- Más fácil de **probar**, pues será más fácil construir pruebas individuales de cada uno de sus componentes (por ejemplo, las técnicas de _[mocking](https://en.wikipedia.org/wiki/Mock_object)_ son más sencillas)
 
 ---
 
@@ -80,26 +83,26 @@ De repente estás haciendo malabares con un sistema increíblemente complejo, do
 La ortogonalidad es aplicable a:
 
 - el diseño
-- la codificación
+- la implementación
 - las pruebas
 - bibliotecas
 - la documentación
 
 A nivel de _diseño_, los patrones de diseño y las arquitecturas como MVC facilitan la construcción de componentes ortogonales.
 
-
 ### Lectura recomendada
-  - Leer el [Topic 10: Orthogonality](https://learning-oreilly-com.bibezproxy.uca.es/library/view/the-pragmatic-programmer/9780135956977/f_0028.xhtml#orthogonality) de ([Hunt, 2020](bibliografia.md#pragmatic2))
+
+- Leer el [Topic 10: Orthogonality](https://learning-oreilly-com.bibezproxy.uca.es/library/view/the-pragmatic-programmer/9780135956977/f_0028.xhtml#orthogonality) de D. Thomas & A. Hunt. <emph>The Pragmatic Programmer: your journey to mastery</emph>, 2nd Edition, Addison-Wesley, 2020.
 
 ---
 
-## Técnicas de codificación
+## Técnicas de implementación
 
-Técnicas de codificación para fomentar la ortogonalidad:
+Técnicas de implementación para fomentar la ortogonalidad:
 
 - Hacer **refactoring**
 - Codificar **patrones** de diseño: strategy, template method, etc.
-- Evitar datos globales y __singletons__: ¿qué pasaría si hubiera que hacer una versión *multithreaded* de una aplicación?
+- Evitar datos globales y **singletons**: ¿qué pasaría si hubiera que hacer una versión *multithreaded* de una aplicación?
 - **Inyectar**: pasar explícitamente el contexto (dependencia) como parámetro a los constructores
 - Usar **anotaciones** (Java), decoradores (TypeScript) o atributos (C#)
 - **Desacoplar**: Ley de *Demeter* — «No hables con extraños»
@@ -125,11 +128,11 @@ Al pedir un servicio a un objeto, el servicio debe ser realizado de parte nuestr
 
 ---
 
-__Refactorización__: definir un método `User.hasPermission()`
+**Refactorización**: definir un método `User.hasPermission()`
 
 ### Lectura recomendada
-  - Leer el [Topic 28: Decoupling](https://learning-oreilly-com.bibezproxy.uca.es/library/view/the-pragmatic-programmer/9780135956977/f_0049.xhtml#coupling) de ([Hunt, 2020](bibliografia.md#pragmatic2)).
 
+- Leer el [Topic 28: Decoupling](https://learning-oreilly-com.bibezproxy.uca.es/library/view/the-pragmatic-programmer/9780135956977/f_0049.xhtml#coupling) de D. Thomas & A. Hunt. <emph>The Pragmatic Programmer: your journey to mastery</emph>, 20th Anniversary Edition, 2nd Edition, Addison-Wesley Professional, 2020.
 
 ---
 
@@ -137,10 +140,10 @@ __Refactorización__: definir un método `User.hasPermission()`
 
 Los métodos de un objeto solo deben hacer llamadas a métodos...
 
-1. __propios__ 
-2. de objetos pasados como __parámetros__
-3. de objetos __creados__ por ellos mismos
-1. de objetos __declarados__ en el mismo método
+1. **propios**
+2. de objetos pasados como **parámetros**
+3. de objetos **creados** por ellos mismos
+4. de objetos **declarados** en el mismo método
 
 ---
 
@@ -227,16 +230,15 @@ Este tipo de interfaces como la del API de streams de Java se conoce como [_flue
 
   Ahora `plotDate` ⟶ `Selection`, `TimeZone`, pero se han eliminado las restantes dependencias.
 
-- Costes de espacio y ejecución de métodos *wrapper* que reenvían la petición al objeto delegado: violar la ley de Demeter para mejorar el __rendimiento__
+- Costes de espacio y ejecución de métodos *wrapper* que reenvían la petición al objeto delegado: violar la ley de Demeter para mejorar el **rendimiento**
 - Otros ejemplos de mejora del rendimiento: desnormalización de BBDD
 
 ---
 
 ## Ortogonalidad en toolkits y bibliotecas
 
-Muchas bibliotecas actuales implementan la ortogonalidad a través de metadatos, o atributos o etiquetas (`@tag`), también llamados __anotaciones__ en Java y __decoradores__ en TypeScript.
+Muchas bibliotecas actuales implementan la ortogonalidad a través de metadatos, o atributos o etiquetas (`@tag`), también llamados **anotaciones** en Java y **decoradores** en TypeScript.
 
 Los metadatos se emplean para proporcionar propósitos específicos, como v.g. persistencia de objetos, transacciones, etc. Por ejemplo, Spring o EJB utilizan anotaciones @ declarativas para expresar la transaccionalidad de una operación o la persistencia de una propiedad de una clase fuera del método que debe ejecutar dichas funcionalidades.
 
 Otro método para implementar la ortogonalidad es usar [Aspectos](aspectos.md) y _Aspect-Oriented Programming_ (AOP). Este método es empleado por el framework Spring.
-

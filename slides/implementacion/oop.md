@@ -17,6 +17,9 @@ h2 {
   color: darkblue;
   text-align: center;
 }
+emph {
+  color: #E87B00;
+}
 </style>
 
 # OBJETOS
@@ -112,7 +115,7 @@ En relación a los principios de _alta cohesión_ y _bajo acoplamiento_, critica
 
 > Cohesion refers to the degree to which the elements inside a module belong together
 > 
-> --- [E. Yourdon & L. Constantine](bibliografia.md#yourdon)
+> --- E. Yourdon & L. Constantine. <emph>Structured Design: Fundamentals of a Discipline of Computer Program and Systems Design.</emph> Prentice Hall, 2nd edition, 1986.
 
 ---
 
@@ -305,7 +308,7 @@ Los principios aplicados han sido:
 
 > Cuando los componentes están aislados, puedes cambiar uno sin preocuparte por el resto. Mientras no cambies las interfaces externas, no habrá problemas en el resto del sistema
 >
-> --- [Eric Yourdon](bibliografia.md#yourdon)
+> --- E. Yourdon & L. Constantine. <emph>Structured Design: Fundamentals of a Discipline of Computer Program and Systems Design.</emph> Prentice Hall, 2nd edition, 1986.
 
 ### Modularidad
 

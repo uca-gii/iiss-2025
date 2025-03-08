@@ -1,47 +1,12 @@
----
-marp: true
-title: Prácticas de Sistemas de Control de Versiones
-description: Asignaturas del grado en Ingeniería Informática 
----
+# Sistema de Control de Versiones (SCV)
 
-<!-- size: 16:9 -->
-<!-- theme: default -->
-
-<!-- paginate: skip -->
-<!-- headingDivider: 1 -->
+![width:200](img/Git-logo-200.png)
 
 <style>
-h1 {
-  text-align: center;
-  color: #005877;
-}
-h2 {
-  color: #E87B00;
-}
-h3 {
-  color: #005877;
-}
-
-img[alt~="center"] {
-  display: block;
-  margin: 0 auto;
-}
-img[alt~="float"] {
-  display: float;
-  margin: 8px 5px 0 5px;
-}
 emph {
   color: #E87B00;
 }
 </style>
-
-# Sistema de Control de Versiones (SCV)
-
-![width:400 center](img/Git-logo.png)
-
----
-
-<!-- paginate: true -->
 
 ## SCV
 
@@ -57,8 +22,6 @@ Lugar donde se almacenan los archivos de un proyecto, junto con el historial de 
 
 Puede estar ubicado localmente en la máquina del usuario o de forma remota en un servidor.
 
----
-
 ## SCV: Source Code Versioning
 
 ![width:1100px SCV systems](img/scv-vcs-scm.png)
@@ -71,15 +34,9 @@ Puede estar ubicado localmente en la máquina del usuario o de forma remota en u
 - Gestionar y coordinar el código fuente en equipos de desarrollo de software
 - Seguimiento de varias líneas de trabajo y ayudar a fusionar líneas
 
-<!--
-
 El código fuente es un activo vital para cualquier equipo de desarrollo de software. Las herramientas de gestión de código fuente sirven para rastrear cambios, lo que facilita la recreación de versiones anteriores del software y ver cómo se desarrolla con el tiempo.
 
 También sirven para coordinar a un equipo de programadores que trabajan en un código base común. Al registrar los cambios que cada desarrollador realiza, estos sistemas pueden hacer un seguimiento de múltiples líneas de trabajo al mismo tiempo y ayudar a los desarrolladores a fusionar estas líneas de trabajo.
-
--->
-
----
 
 ## Herramientas SCV
 
@@ -93,21 +50,17 @@ También sirven para coordinar a un equipo de programadores que trabajan en un c
 
 Git fue creado por Linus Torvalds en 2005 y se ha convertido en uno de los SCV más populares y ampliamente utilizados en la comunidad de desarrollo de software.
 
----
-
 ## Plataformas en la nube
+
+![width:960](img/combined-logos.png)
 
 Alojamiento de repositorios (y más cosas) en la nube como GitHub, GitLab y Bitbucket.
 
 Permiten a los desarrolladores alojar y colaborar en proyectos de código abierto y repositorios públicos o privados de forma remota.
 
-![width:300 float](img/GitHub-logo.png) ![width:300 float](img/gitlab-logo-100.png) ![width:360 float](img/Bitbucket-Logo-blue.svg)
-
----
-
 ## GitHub
 
-![bg left:25% width:300 ](img/GitHub-logo.png)
+![bg left:25% width:200](img/GitHub-logo-200.png)
 
 - Forja donde alojar proyectos software
 - Origen en 2008 y adquirido por Microsoft en 2019
@@ -121,8 +74,6 @@ Permiten a los desarrolladores alojar y colaborar en proyectos de código abiert
 - Issues, labels & milestones
 - Actions & workflows
 - Etc.
-
----
 
 ## Instalación de Git
 
@@ -145,8 +96,6 @@ Descarga e instala Git desde el sitio web oficial [Git for Mac](https://git-scm.
 brew install git
 ```
 
----
-
 ## Trabajando con repositorios
 
 ### Inicializar un repositorio local
@@ -161,8 +110,6 @@ git init
 - Se crea un directorio oculto llamado `.git` que contiene todos los archivos necesarios para el repositorio
 
 Sin embargo, en la mayoría de los casos, clonaremos un repositorio remoto.
-
----
 
 ### Clonar un repositorio remoto
 
@@ -183,8 +130,6 @@ Vamos a usar un repositorio público de Github:
 ```
 
 Donde `<curso_actual>` es el curso actual (por ejemplo, `24-25`).
-
----
 
 ### Actualizar un repositorio local
 
@@ -207,8 +152,6 @@ Podemos comprobar el estado del repositorio local usando el comando `git status`
 - Archivos nuevos o modificados aparecerán en rojo
 - Archivos añadidos al repositorio aparecerán en verde
 
----
-
 ### Actualizar cambios
 
 Para confirmar los cambios en el repositorio local, usamos el comando `git commit`:
@@ -220,8 +163,6 @@ git commit -m "Mensaje"
 - El mensaje debe ser descriptivo y debe indicar los cambios realizados
 - Al ejecutar `git commit`, se crea un nuevo commit en el repositorio local
 - Cada commit tiene un identificador único que se puede usar para identificarlo
-
----
 
 ### Sincronizar cambios
 
@@ -236,8 +177,6 @@ Si queremos actualizar nuestro repositorio local con los cambios del repositorio
 ```bash
 git pull
 ```
-
----
 
 ### Comprobar cambios
 
@@ -262,8 +201,6 @@ git log origin/main
 git log origin/main <file>
 ```
 
----
-
 ### Deshacer cambios
 
 Para deshacer los cambios realizados en un archivo:
@@ -286,32 +223,24 @@ git reset HEAD <file>
 
 HEAD hace referencia al último commit realizado.
 
----
-
 ## Trabajando con ramas
 
 Una rama es una línea de desarrollo independiente que permite trabajar en un conjunto de cambios sin afectar al resto del proyecto.
 
 Las ramas se pueden fusionar entre sí para combinar los cambios realizados en cada una de ellas.
 
-![width:600 center](img/Git_branch.svg)
+![width:600](img/Git_branch.svg)
 
 [Ejemplo de ramas en un repositorio de Git](https://www.atlassian.com/git/tutorials/using-branches)
 
----
-
-### Crear ramas (i)
+### Crear ramas
 
 Una rama se crea a partir de otra rama existente
 
-![width:300 center](img/Git_branch_new.png)
+![width:300](img/Git_branch_new.png)
 
 - `git branch` muestra las ramas existentes
 - Podemos ver la rama actual con `git branch` y con `git status`.
-
----
-
-### Crear ramas (ii)
 
 Para crear una nueva rama a partir de la rama actual:
 
@@ -324,8 +253,6 @@ Para crear una nueva rama a partir de la rama actual y cambiar a ella:
 ```bash
 git checkout -b <nombre_de_la_rama>
 ```
-
----
 
 ### Checkout y push de ramas
 
@@ -341,8 +268,6 @@ Subir una rama al repositorio remoto:
 git push origin <nombre_de_la_rama>
 ```
 
----
-
 ### Eliminar ramas
 
 Eliminar una rama del repositorio local (seguirá existiendo en el repositorio remoto):
@@ -357,8 +282,6 @@ Eliminar una rama del repositorio remoto (seguirá existiendo en el repositorio 
 git push origin --delete <nombre_de_la_rama>
 ```
 
----
-
 ### Stash de ramas
 
 Guardar/esconder los cambios realizados en la rama actual para poder cambiar de rama sin tener que hacer un commit
@@ -371,19 +294,13 @@ Guardar/esconder los cambios realizados en la rama actual para poder cambiar de 
 
 `git stash drop` - eliminar los cambios guardados
 
----
-
-### Fusionar ramas (i)
+### Fusionar ramas
 
 Siempre que se fusionan dos ramas, se crea en la rama actual un nuevo commit que contiene los cambios de ambas ramas:
 
-![width:700 center](img/branch-merge.png)
+![width:700](img/branch-merge.png)
 
 [Ejemplo de fusión de ramas en un repositorio de Git](https://www.atlassian.com/es/git/tutorials/using-branches/git-merge)
-
----
-
-### Fusionar ramas (ii)
 
 Para fusionar una rama con la rama actual:
 
@@ -398,8 +315,6 @@ Para resolver conflictos, se editan los archivos que los contienen y se añaden 
 
 Una vez resueltos los conflictos, se puede fusionar la rama con la rama actual.
 
----
-
 ### Ejemplo de conflicto entre ramas
 
 1. Crear una rama nueva llamada `prueba1` a partir de la rama actual y cambiar a ella
@@ -410,9 +325,7 @@ Una vez resueltos los conflictos, se puede fusionar la rama con la rama actual.
 6. Añadir el archivo al repositorio local y hacer un commit
 7. Fusionar la rama `prueba1` con la rama `main`
 
-![width:450 center](img/conflicto.png)
-
----
+![width:450](img/conflicto.png)
 
 ### Solucionar conflictos entre ramas
 
@@ -432,43 +345,22 @@ git checkout --theirs <file>
 
 Donde `ours` es la rama actual y `theirs` es la rama que estamos fusionando.
 
----
-
-### Rebase de ramas (i)
+### Rebase de ramas
 
 Rebase soluciona el mismo problema que la fusión de ramas, pero de forma muy distinta:
 
 - `merge` crea un nuevo commit que contiene los cambios de ambas ramas
 - `rebase` mueve los commits de una rama a otra
 
-![width:500 center](img/rebase.png)
+![width:500](img/rebase.png)
 
 [Ejemplo de rebase de ramas en un repositorio de Git](https://www.atlassian.com/es/git/tutorials/merging-vs-rebasing)
-
----
-
-<!-- _class: invert -->
-<style scoped>
-  section { justify-content: start; text-align: center; }
-</style>
-
-### Merge vs rebase vs cherry-pick
-
-![Conflicts](img/merge-rebase-cherry-b.png)
-
----
-
-### Rebase de ramas (ii)
 
 Para hacer un rebase de una rama con la rama actual:
 
 ```bash
 git rebase <nombre_de_la_rama>
 ```
-
----
-
-### Rebase de ramas (iii)
 
 1. Crear una rama llamada `feature_rebase` a partir de la rama actual y cambiar a ella
 2. Crea un archivo `feature_rebase.txt`
@@ -480,21 +372,15 @@ git rebase <nombre_de_la_rama>
 8. Hacer un rebase de la rama `feature_rebase` con la rama `main`
 9. Comprobar el historial de cambios con `git log`
 
----
-
-### Rebase de ramas (iv)
-
 - Rebase actualiza el historial de cambios de una rama con el historial de cambios de otra rama.
 - Es muy útil para mantener el historial de cambios de una rama "limpio" y ordenado.
 
-**Suele usarse en ramas de desarrollo que se fusionan con la rama principal del proyecto.**
+_Suele usarse en ramas de desarrollo que se fusionan con la rama principal del proyecto._
 
 Rebase es una operación muy potente, pero también muy peligrosa:
 
 - Si se hace mal, puede provocar que se pierdan commits
 - Siempre que se haga un rebase, se debe hacer en una rama que no se haya compartido con nadie
-
----
 
 ## Archivos especiales de git
 
@@ -509,8 +395,6 @@ Archivo `.gitkeep`:
 - Git no permite añadir directorios vacíos al repositorio
 - Para añadir un directorio vacío, se crea un archivo `.gitkeep` dentro del directorio
 
----
-
 ## Otras herramientas para trabajar con Git
 
 Herramientas con interfaz gráfica:
@@ -523,9 +407,7 @@ Herramientas con interfaz gráfica:
 
 Los IDEs más populares (VS Code, JetBrains', etc.) tienen integración con Git
 
----
-
-### Vocabulario git (1)
+### Vocabulario git
 
 | 📙 | Repositorios |
 ----:|:----
@@ -536,10 +418,6 @@ Los IDEs más populares (VS Code, JetBrains', etc.) tienen integración con Git
 <emph>commit</emph> | Conjunto de cambios en el código fuente que se registra en el repo
 <emph>checkout</emph> | Cambiar de rama activa en el repo local
 
----
-
-### Vocabulario git (2)
-
 | 📙 | Ramas |
 ----:|:----
 <emph>branch</emph> | Una secuencia de commits
@@ -549,8 +427,6 @@ Los IDEs más populares (VS Code, JetBrains', etc.) tienen integración con Git
 <emph>merge </emph> | Fusionar una rama con otra
 <emph>rebase </emph> | Mover commits de una rama a otra
 <emph>stash </emph> | Dejar a un lado (guardar) los cambios en la rama actual
-
----
 
 ## Tarea
 
@@ -564,12 +440,6 @@ Los IDEs más populares (VS Code, JetBrains', etc.) tienen integración con Git
 8. Fusionar la rama `feature` con la rama `main`
 9. Subir los cambios al repositorio remoto
 10. Eliminar la rama `feature`
-
----
-
-<style scoped>
-  section { text-align: center; }
-</style>
 
 ### Tutorial recomendado
 
