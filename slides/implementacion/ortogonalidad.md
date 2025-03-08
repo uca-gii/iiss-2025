@@ -83,7 +83,7 @@ De repente estás haciendo malabares con un sistema increíblemente complejo, do
 La ortogonalidad es aplicable a:
 
 - el diseño
-- la codificación
+- la implementación
 - las pruebas
 - bibliotecas
 - la documentación
@@ -96,9 +96,9 @@ A nivel de _diseño_, los patrones de diseño y las arquitecturas como MVC facil
 
 ---
 
-## Técnicas de codificación
+## Técnicas de implementación
 
-Técnicas de codificación para fomentar la ortogonalidad:
+Técnicas de implementación para fomentar la ortogonalidad:
 
 - Hacer **refactoring**
 - Codificar **patrones** de diseño: strategy, template method, etc.
