@@ -197,7 +197,7 @@ Se paga el precio de violar el principio OCP (_Open-Closed Principle_): si lanza
 #### Excepciones en otros lenguajes
 
 - C\#, C++, Python o Ruby no ofrecen excepciones _checked_.
-- Scala no usa excepciones _checked_ como Java: [Scala exception handling](https://madusudanan.com/blog/scala-tutorials-part-24-exception-handling/#Intro)
+- Scala no usa excepciones _checked_ como Java: [Scala exception handling](https://www.baeldung.com/scala/exception-handling)
 
 ---
 
