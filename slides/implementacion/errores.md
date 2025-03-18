@@ -507,7 +507,7 @@ object Demo {
 Diferencias entre [`Null`, `null`, `Nil`, `Nothing`, `None` y `Unit`](https://www.geeksforgeeks.org/scala-null-null-nil-nothing-none-and-unit/) en Scala:
 
 - `null` es como el de Java
-- `Null` es un trait, subjonjunto de todos los tipos-referencia, cuya única instancia es `null`
+- `Null` es un trait, subconjunto de todos los tipos-referencia, cuya única instancia es `null`
 - `Nothing` es un trait sin instancias; sirve para especificar el tipo de retorno en métodos que siempre elevan una excepción
 - `Unit` es análogo a `void` en Java
 - `Nil` es una lista con cero elementos (su tipo es `List[Nothing]`)
@@ -870,4 +870,4 @@ object EitherLeftRightExample extends App {
 }
 ```
 
-__Nota__: No hay implementaciones de `Either` en el JDK, pero sí en extensiones funcionales a Java (v.g. [functionaljλvλ](http://www.functionaljava.org/))
+__Nota__: No hay implementaciones de `Either` en el JDK, pero sí en extensiones funcionales a Java (v.g. [functionaljλvλ](https://github.com/functionaljava/functionaljava))
