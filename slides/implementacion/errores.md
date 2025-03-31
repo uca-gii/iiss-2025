@@ -10,6 +10,12 @@ description: Apuntes de Implementación e Implantación de Sistemas Software
 <!-- paginate: false -->
 
 <style>
+/*
+section {
+  font-family: 'Founders Grotesk', sans-serif;
+  filter: brightness(1.00001);
+}
+*/
 h1 {
   text-align: center;
 }
@@ -197,7 +203,7 @@ Se paga el precio de violar el principio OCP (_Open-Closed Principle_): si lanza
 #### Excepciones en otros lenguajes
 
 - C\#, C++, Python o Ruby no ofrecen excepciones _checked_.
-- Scala no usa excepciones _checked_ como Java: [Scala exception handling](https://madusudanan.com/blog/scala-tutorials-part-24-exception-handling/#Intro)
+- Scala no usa excepciones _checked_ como Java: [Scala exception handling](https://www.baeldung.com/scala/exception-handling)
 
 ---
 
@@ -507,7 +513,7 @@ object Demo {
 Diferencias entre [`Null`, `null`, `Nil`, `Nothing`, `None` y `Unit`](https://www.geeksforgeeks.org/scala-null-null-nil-nothing-none-and-unit/) en Scala:
 
 - `null` es como el de Java
-- `Null` es un trait, subjonjunto de todos los tipos-referencia, cuya única instancia es `null`
+- `Null` es un trait, subconjunto de todos los tipos-referencia, cuya única instancia es `null`
 - `Nothing` es un trait sin instancias; sirve para especificar el tipo de retorno en métodos que siempre elevan una excepción
 - `Unit` es análogo a `void` en Java
 - `Nil` es una lista con cero elementos (su tipo es `List[Nothing]`)
@@ -870,4 +876,4 @@ object EitherLeftRightExample extends App {
 }
 ```
 
-__Nota__: No hay implementaciones de `Either` en el JDK, pero sí en extensiones funcionales a Java (v.g. [functionaljλvλ](http://www.functionaljava.org/))
+__Nota__: No hay implementaciones de `Either` en el JDK, pero sí en extensiones funcionales a Java (v.g. [functionaljλvλ](https://github.com/functionaljava/functionaljava))
