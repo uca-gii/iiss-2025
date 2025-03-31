@@ -71,8 +71,8 @@ La __función factorizada__ (la implementación de `Comparator`) es sustituible 
 #### Ejemplo: versión con clases anónimas
 
 ```java
-Collections.sort(
-  personas, new java.util.Comparator<Persona>() {
+Collections.sort(personas, 
+  new java.util.Comparator<Persona>() {
     public int compare(Persona o1, Persona o2) {
       return o1.getIdPersona() - o2.getIdPersona();
     }
