@@ -10,6 +10,12 @@ description: Apuntes de Implementación e Implantación de Sistemas Software
 <!-- paginate: false -->
 
 <style>
+/*
+section {
+  font-family: 'Founders Grotesk', sans-serif;
+  filter: brightness(1.00001);
+}
+*/
 h1 {
   text-align: center;
 }
