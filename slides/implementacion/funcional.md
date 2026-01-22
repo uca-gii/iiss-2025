@@ -71,8 +71,8 @@ La __función factorizada__ (la implementación de `Comparator`) es sustituible 
 #### Ejemplo: versión con clases anónimas
 
 ```java
-Collections.sort(
-  personas, new java.util.Comparator<Persona>() {
+Collections.sort(personas, 
+  new java.util.Comparator<Persona>() {
     public int compare(Persona o1, Persona o2) {
       return o1.getIdPersona() - o2.getIdPersona();
     }
@@ -96,7 +96,7 @@ public class ComparatorTest {
     });
 
     System.out.println("=== Sorted Asc Lastname ===");
-    for(Person p:personList){
+    for(Person p: personList){
       p.printName();
     }
 
@@ -107,7 +107,7 @@ public class ComparatorTest {
     });
 
     System.out.println("=== Sorted Desc Lastname ===");
-    for(Person p:personList){
+    for(Person p: personList){
       p.printName();
     }
   }
@@ -430,20 +430,26 @@ std::for_each(
   end(some_list),
   [&total](int x) { total += x; }
 );
-// Computes the total of all elements in the list.
-/* Variable total is stored as a part of the lambda function's closure.
-   Since it is a reference to the stack variable total, it can change
-   its value. */
+// Calcula la suma total de los elementos de la lista.
+/* 
+   La variable total se guarda como parte de la clausura de la 
+   función lambda. Como es una referencia a la variable total de la 
+   pila de ejecución, puede cambiar su valor.
+*/
 ```
 
 ---
 
-- Una _clausura_ en C++ se expresa mediante la parte [_capture_]
+```c++
+[capture](parameters) -> return_type { body }
+```
+
+- Una _clausura_ en C++ se expresa mediante la parte `[capture]`
 - El _entorno de referencia_ se expresa por el conjunto de variables externas indicadas dentro de la clausura
 - Las variables del entorno de referencia en C++ pueden ser capturadas por copia (`[=]`) o por referencia (`[&]`)
-- Mutabilidad de variables en _body_
+- Mutabilidad de variables en `body`
   - Las variables externas capturadas son inmutables por defecto
-  - `mutable` después de los (_parameters_): permite que _body_ modifique los objetos capturados por copia
+  - `mutable` después de los (`parameters`): permite que `body` modifique los objetos capturados por copia
 
 ---
 
@@ -553,8 +559,6 @@ public interface ClaseFuncional{
 
 private String variable = "Valor de la contenedora";
 
-//...
-
 public String scopeExperiment() {
 
   ClaseFuncional unaInnerClass = new ClaseFuncional() {
@@ -567,16 +571,7 @@ public String scopeExperiment() {
   };
   String resultadoInnerClass = unaInnerClass.method("");
 
-  ClaseFuncional unaLambda = parametro -> {
-      String variable= "Valor de la lambda";
-      return this.variable; 
-        /* Con this, la clausura de la variable libre se produce
-           con el valor de ClaseFuncional::variable */
-  };
-  String resultadoLambda = unaLambda.method("");
-
-  return "resultadoInnerClass = " + resultadoInnerClass +
-    ",\nresultadoLambda = " + resultadoLambda;
+  return "resultadoInnerClass = " + resultadoInnerClass;
 }
 ```
 
@@ -585,7 +580,40 @@ public String scopeExperiment() {
 El valor será:
 
 ```text
-resultadoInnerClass  = Valor de la inner class,
+resultadoInnerClass  = Valor de la inner class
+```
+
+---
+
+En el ejemplo siguiente, ¿qué valor devuelve `scopeExperiment()`?:
+
+```java
+@FunctionalInterface
+public interface ClaseFuncional{
+  String method(String string);
+}
+
+private String variable = "Valor de la contenedora";
+
+public String scopeExperiment() {
+
+  ClaseFuncional unaLambda = parametro -> {
+      String variable= "Valor de la lambda";
+      return this.variable; 
+        /* Con this, la clausura de la variable libre se produce
+           con el valor de ClaseFuncional::variable */
+  };
+  String resultadoLambda = unaLambda.method("");
+
+  return "resultadoLambda = " + resultadoLambda;
+}
+```
+
+---
+
+El valor será:
+
+```text
 resultadoLambda = Valor de la contenedora
 ```
 
